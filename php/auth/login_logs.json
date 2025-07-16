@@ -194,5 +194,19 @@
         "username": "alekx",
         "ip": "::1",
         "extra": "Username found, password incorrect"
+    },
+    {
+        "timestamp": "2025-07-16 16:29:42",
+        "type": "failed_login",
+        "username": "alekx",
+        "ip": "::1",
+        "extra": "Username found, password incorrect"
+    },
+    {
+        "timestamp": "2025-07-16 16:29:51",
+        "type": "failed_login",
+        "username": "alekx",
+        "ip": "::1",
+        "extra": "Username found, password incorrect"
     }
 ]

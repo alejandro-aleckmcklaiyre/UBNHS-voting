@@ -8,6 +8,8 @@ body {
   background-attachment: fixed; 
   background-repeat: no-repeat;
   background-color: #DAD2D8;
+  overflow-x: hidden;
+  overflow-y: hidden; /* Remove body scroll */
 }
 
 .image-container1 {
@@ -61,7 +63,7 @@ body {
 .status-container {
   width: 90%;
   margin: 20px auto;
-  background-color: #5b88a3;
+  background-color:#fbd302;
   border-radius: 10px;
   padding: 20px;
   text-align: center;
@@ -74,26 +76,225 @@ body {
   margin: 0;
 }
 
-
 #main {
   transition: margin-left .5s;
-  padding: 16px;
+  padding: 10px;
+  height: 100vh;
+  overflow: hidden; /* Remove main scroll */
+}
+
+.content {
+  height: 100vh;
+  overflow: hidden; /* Remove content scroll */
+  position: relative; /* For absolute positioning of dashboard-container */
 }
 
 .chart-container {
-  width: 90%; 
-  height: 450px; 
-  margin: 40px auto;
-  background-color: rgba(255, 255, 255, 0.678);
-  padding: 20px; 
+  width: 100%; 
+  height: 280px; /* Fixed height to prevent overflow */
+  margin: 15px 0; /* Reduced margin */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 15px; /* Adequate padding */
   border-radius: 10px;
   border: 4px solid #A8201A;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
+  overflow: hidden; /* Prevent any overflow */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.chart-container canvas {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* New styles for improved dashboard */
+.dashboard-container {
+  max-width: 1100px;
+  width: 95%;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  height: 650px; /* Increased height */
+  max-height: 1000px; /* Increased max height */
+  overflow-y: auto; /* Add scroll when content exceeds max-height */
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the container */
+  overflow-y: auto;
+  max-height: 90vh; /* Prevent overflow beyond viewport */
+  box-sizing: border-box; /* Include padding and border in width/height calculation */
+}
+
+/* Header styles - Fixed layout for desktop */
+header {
+    background: linear-gradient(135deg, #7da2bb, #5e839c);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 15px; /* Reduced margin */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px; /* Original reduced height */
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+header h1 {
+    font-size: 2em; /* Original reduced font size */
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    text-align: center;
+}
+
+/* Logo positioning - Fixed for desktop */
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 60px; /* Original reduced size */
+    height: 60px;
+    object-fit: contain;
+}
+
+.logo2 {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 90px; /* Original reduced size */
+    height: 60px;
+    object-fit: contain;
+}
+
+.election-section {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px; /* Reduced padding */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  overflow: hidden; /* Remove election section scroll */
+  display: flex;
+  flex-direction: column;
+  min-height: 0; /* Allow shrinking */
+}
+
+.election-title {
+  text-align: center;
+  font-size: 18px; /* Reduced font size */
+  font-weight: bold;
+  color: #2C3E50;
+  margin-bottom: 15px; /* Reduced margin */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 15px; /* Reduced margin */
+  flex-shrink: 0;
+}
+
+.action-btn {
+  background-color: #34495E;
+  color: white;
+  border: none;
+  padding: 8px 16px; /* Reduced padding */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px; /* Reduced font size */
+  font-weight: bold;
+  transition: all 0.3s;
+  min-width: 110px; /* Reduced width */
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.action-btn:hover {
+  background-color: #2C3E50;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
+  .dashboard-container {
+    width: 98vw;
+    min-width: 0;
+    max-width: 100vw;
+    height: auto;
+    min-height: 0;
+    max-height: 95vh;
+    margin: 10px auto;
+    padding: 8px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+    position: static;
+    transform: none;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 1em;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+    left: 15px;
+  }
+  
+  .logo2 {
+    width: 80px;
+    height: 50px;
+    right: 15px;
+  }
+  
+  .election-title {
+    font-size: 18px;
+  }
+  
+  .chart-container {
+    width: 100%;
+    height: 180px;
+    min-height: 120px;
+    max-height: 220px;
+    margin: 10px 0;
+    padding: 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    box-sizing: border-box;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .action-btn {
+    width: 100%;
+    max-width: 200px;
+    padding: 10px 20px;
+  }
+  
   .status-container {
     width: 95%;
     padding: 15px;
@@ -102,15 +303,6 @@ body {
   
   .status-header h1 {
     font-size: 20px;
-  }
-  
-  .chart-container {
-    width: 95%;
-    height: 350px;
-    padding: 15px;
-    margin: 20px auto;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
   
   .sidebar {
@@ -128,7 +320,7 @@ body {
   }
   
   #main {
-    padding: 10px;
+    padding: 5px;
   }
   
   .position-box {
@@ -152,6 +344,61 @@ body {
 }
 
 @media screen and (max-width: 480px) {
+  .dashboard-container {
+    width: 99vw;
+    min-width: 0;
+    max-width: 100vw;
+    padding: 4px;
+    max-height: 90vh;
+    margin: 2px auto;
+    font-size: 0.95em;
+   }
+   
+  header {
+    padding: 4px;
+    min-height: 36px;
+    font-size: 0.9em;
+  }
+
+  header h1 {
+    font-size: 1em;
+    margin: 0;
+    word-break: break-word;
+    }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    left: 10px;
+  }
+  
+  .logo2 {
+    width: 60px;
+    height: 40px;
+    right: 10px;
+  }
+  
+  .election-title {
+    font-size: 16px;
+  }
+  
+  .chart-container {
+    width: 100%;
+    height: 120px;
+    min-height: 80px;
+    max-height: 140px;
+    margin: 6px 0;
+    padding: 2px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    box-sizing: border-box;
+  }
+
+  .action-btn {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+  
   .status-container {
     width: 98%;
     padding: 10px;
@@ -160,15 +407,6 @@ body {
   
   .status-header h1 {
     font-size: 18px;
-  }
-  
-  .chart-container {
-    width: 98%;
-    height: 300px;
-    padding: 10px;
-    margin: 15px auto;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
   .sidebar a {
@@ -182,7 +420,7 @@ body {
   }
   
   #main {
-    padding: 8px;
+    padding: 3px;
   }
   
   .position-box {
@@ -212,5 +450,9 @@ body {
   
   .sidebar a {
     font-size: 18px;
+  }
+  
+  .dashboard-container {
+    max-height: 95vh;
   }
 }
