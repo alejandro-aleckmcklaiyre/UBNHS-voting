@@ -22,18 +22,28 @@
 <div id="main">
   <button class="openbtn" id="openSidebarBtn" onclick="openNav()">☰</button>
   <main class="content">
-        <div class="status-container">
-          <div class="status-header">
-              <h1><b>ELECTION STATUS</b></h1>
-          </div>
+    <div class="dashboard-container">
+      <header>
+        <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
+        <img src="/ubnhs-voting/assets/images-UBNHS/El1.png" alt="Web Logo" class="logo2">
+        <h1>Election Status</h1>
+        </header>
+
+      <div class="election-section">
+        <h2 class="election-title">Voting Results</h2>
+        
+        <div class="chart-container">
+          <canvas id="positionsChart"></canvas>
         </div>
         
-        <center><div class="chart-container">
-            <canvas id="positionsChart"></canvas>
-        </div></center>
-
-        <a href="summary.php">View Voting Summary</a>
-    </main>
+        <div class="action-buttons">
+          <a href="summary.php" class="action-btn">View Voting Summary</a>
+          <button class="action-btn">Export Results</button>
+          <button class="action-btn">Reset Election</button>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
 
 <script>
@@ -73,6 +83,7 @@
       },
       options: {
           responsive: true,
+          maintainAspectRatio: false,
           scales: {
               x: {
                   beginAtZero: true,
@@ -88,6 +99,25 @@
       }
   });
 
+  // Add functionality for buttons
+  document.addEventListener('DOMContentLoaded', function() {
+    const exportBtn = document.querySelector('.action-buttons .action-btn:nth-child(2)');
+    const resetBtn = document.querySelector('.action-buttons .action-btn:last-child');
+    
+    if (exportBtn) {
+      exportBtn.addEventListener('click', function() {
+        // Add your export functionality here
+        console.log('Export results clicked');
+      });
+    }
+    
+    if (resetBtn) {
+      resetBtn.addEventListener('click', function() {
+        // Add your reset functionality here
+        console.log('Reset election clicked');
+      });
+    }
+  });
 </script>
 </body>
 </html>
