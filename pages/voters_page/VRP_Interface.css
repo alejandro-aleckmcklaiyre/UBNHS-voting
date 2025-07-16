@@ -1,0 +1,458 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-image: url("/ubnhs/assets/images-UBNHS/BG5-Blurred.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-color: #DAD2D8;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Image container styles */
+.image-container1 {
+    text-align: center;
+    background-color: rgba(218, 210, 216, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 90%;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.image-container1 img {
+    width: 50%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+/* Main content styles */
+#main {
+    transition: margin-left 0.3s, width 0.3s;
+    padding: 80px 20px 20px;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Container styles */
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styles - Fixed layout for desktop */
+header {
+    background: linear-gradient(135deg, #7da2bb, #5e839c);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    flex: 1;
+    text-align: center;
+}
+
+/* Logo positioning - Fixed for desktop */
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.logo2 {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 120px;
+    height: 80px;
+    object-fit: contain;
+}
+
+/* Table container styles */
+.table-container {
+    background-color: rgba(247, 239, 239, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(168, 32, 26, 0.1);
+}
+
+.table-container h3 {
+    color: #1d2346;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Table styles with better responsive design */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 8px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+th {
+    background: linear-gradient(135deg, #373f64, #1d2346);
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+td {
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+tr:hover td {
+    background-color: #f8f9fa;
+}
+
+tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+/* Button container styles */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Button styles */
+.container button {
+    background: linear-gradient(135deg, #f0ad4e, #ec971f);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container button:hover {
+    background: linear-gradient(135deg, #373f64, #1d2346);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-container button {
+    background: linear-gradient(135deg,  #373f64, #1d2346);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button-container button:hover {
+    background: linear-gradient(135deg, #143642, #0f2830);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* File input styles */
+input[type="file"] {
+    padding: 10px;
+    border: 2px solid #1d2346;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #143642;
+}
+
+/* Form styles */
+#uploadForm-bsit1-1 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Input field styles for table editing */
+input[type="text"], input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus {
+    outline: none;
+    border-color: #A8201A;
+    box-shadow: 0 0 5px rgba(168, 32, 26, 0.3);
+}
+
+/* Active state for navigation */
+.active {
+    background-color: #143642 !important;
+    color: #DAD2D8 !important;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 1024px) {
+    .container {
+        padding: 15px;
+        margin: 0 10px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .logo, .logo2 {
+        width: 60px;
+        height: 60px;
+    }
+    
+    table {
+        font-size: 0.85em;
+    }
+    
+    th, td {
+        padding: 10px 6px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #main {
+        padding: 70px 10px 20px;
+    }
+    
+    .container {
+        padding: 10px;
+        margin: 0 5px;
+    }
+    
+    /* Header mobile layout */
+    header {
+        flex-direction: column;
+        min-height: auto;
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+        order: 2;
+    }
+    
+    .logo, .logo2 {
+        position: static;
+        transform: none;
+        width: 50px;
+        height: 50px;
+        order: 1;
+    }
+    
+    .logo {
+        margin-right: 10px;
+    }
+    
+    .logo2 {
+        margin-left: 10px;
+    }
+    
+    /* Table mobile styles */
+    .table-container {
+        padding: 10px;
+        max-height: 60vh;
+    }
+    
+    table {
+        font-size: 0.75em;
+    }
+    
+    th, td {
+        padding: 8px 4px;
+    }
+    
+    /* Hide less important columns on mobile */
+    th:nth-child(1), td:nth-child(1) {
+        display: none;
+    }
+    
+    /* Button container mobile */
+    .button-container {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .button-container button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    #uploadForm-bsit1-1 {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+    
+    input[type="file"] {
+        width: 100%;
+    }
+    
+    /* Sidebar mobile adjustments */
+    .sidebar a {
+        font-size: 18px;
+        padding: 10px 8px 10px 25px;
+    }
+    
+    .openbtn {
+        font-size: 16px;
+        padding: 10px 12px;
+        top: 15px;
+        left: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    .logo, .logo2 {
+        width: 40px;
+        height: 40px;
+    }
+    
+    table {
+        font-size: 0.7em;
+    }
+    
+    th, td {
+        padding: 6px 3px;
+    }
+    
+    /* Hide email column on very small screens */
+    th:nth-child(5), td:nth-child(5) {
+        display: none;
+    }
+    
+    .button-container button {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    .sidebar {
+        padding-top: 15px;
+    }
+    
+    .sidebar a {
+        font-size: 16px;
+        padding: 8px 8px 8px 20px;
+    }
+    
+    .table-container {
+        max-height: 50vh;
+    }
+}
+
+/* Smooth scrolling for table container */
+.table-container {
+    scroll-behavior: smooth;
+}
+
+/* Better focus styles */
+button:focus, input:focus {
+    outline: 2px solid #A8201A;
+    outline-offset: 2px;
+}
+
+/* Loading animation for buttons */
+.button-container button:active {
+    transform: scale(0.98);
+}
+
+/* Improved hover effects */
+.sidebar a, .button-container button, .container button {
+    position: relative;
+    overflow: hidden;
+}
+
+.sidebar a::before, .button-container button::before, .container button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.sidebar a:hover::before, .button-container button:hover::before, .container button:hover::before {
+    left: 100%;
+}

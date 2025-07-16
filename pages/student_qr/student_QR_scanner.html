@@ -1,0 +1,155 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBNHS Student QR Scanner</title>
+    <link rel="stylesheet" href="pages/student_qr/SQR_Interface.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div class="header">
+                <div class="logo-container">
+                    <img src="assets/images-UBNHS/El1.png" alt="Web Logo">
+                </div>
+                <h2>QR SCANNER</h2>
+            </div>
+            
+            <div class="scanner-container">
+                <video id="scanner" width="100%" height="100%" autoplay></video>
+            </div>
+            
+            <div class="button-container">
+                <button id="startLiveScanBtn">Start Live QR Scan</button>
+                <button id="scanBtn">Scan QR Code</button>
+            </div>
+            
+            <div class="result-container">
+                <p id="result"></p>
+            </div>
+            
+            <div class="navigation">
+                <a href="index.php">Back</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const video = document.getElementById('scanner');
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        
+        function startCamera() {
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                alert("Your browser does not support accessing the camera.");
+                return;
+            }
+    
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(stream => {
+                    video.srcObject = stream;
+                    video.play();
+                    console.log("Camera started successfully.");
+                })
+                .catch(err => {
+                    console.error("Error accessing webcam: " + err);
+                    alert("Error accessing webcam: " + err);
+                });
+        }
+    
+        document.getElementById('scanBtn').onclick = function () {
+            if (video.srcObject) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+                const imageData = canvas.toDataURL('image/png');
+            
+                fetch('php/decode_qr.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ image: imageData }),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.qr_code_data) {
+                            window.location.href = 'index.php?page=voting_page';
+                        } else {
+                            alert(data.error || 'QR Code not recognized');
+                        }
+                    })
+                    .catch((error) => {
+                        alert('An error occurred: ' + error);
+                    });
+            } else {
+                alert("Please enable the camera first.");
+            }
+        };
+    
+        // Handle file input and QR code decoding
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        
+        document.getElementById('uploadBtn') && document.getElementById('uploadBtn').addEventListener('click', function() {
+            fileInput.click();
+        });
+    
+        document.getElementById('readQRBtn') && document.getElementById('readQRBtn').addEventListener('click', () => {
+            const studentNumber = document.getElementById('studentNumber').value.trim();
+        
+            if (!studentNumber) {
+                alert("Please enter a student number.");
+                return;
+            }
+        
+            fetch('/student_page/read_qr', {  // Ensure this matches your Flask route
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ student_number: studentNumber })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                } else {
+                    alert(data.error || "An unknown error occurred.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred while reading the QR code.");
+            });
+        });
+
+        document.getElementById("startLiveScanBtn").onclick = function () {
+            fetch("php/start_live_scan.php")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Failed to start live QR scanner.");
+                    }
+                    return response.text();
+                })
+                .then(message => {
+                    alert(message);
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred: " + error.message);
+                });
+        };
+
+        document.getElementById("scanner").style.display = "block";  // Show the video container
+        
+        document.addEventListener('DOMContentLoaded', startCamera);
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUPT CS El-Express Candidates</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/ubnhs/assets/styles/nav.css">
+    <link rel="stylesheet" href="/ubnhs/pages/voters_page/VRP_Interface.css">
+
+</head>
+<body>
+
+<div id="mySidebar" class="sidebar">
+
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="/ubnhs/index.php?page=admin_dashboard">Home</a>
+  <a href="/ubnhs/index.php?page=candidates">Candidates</a>
+  <a href="/ubnhs/index.php?page=voters_page" id="voters_p">Voters/Members</a>
+  <a href="/ubnhs/index.php?page=about">About Us</a>
+  <a href="/ubnhs/php/auth/logout.php">Log Out</a>
+
+</div>
+
+<div id="main">
+  <button class="openbtn" onclick="openNav()">☰</button>  
+  <main class="content">
+    
+    <center>
+    <div class="container">
+        <header>
+        <img src="/ubnhs/assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
+        <img src="/ubnhs/assets/images-UBNHS/El1.png" alt="Web Logo" class="logo2">
+        <h1>Voters Registration</h1>
+        </header>
+
+        <div class="table-container">
+            <h3>STUDENTS LIST</h3>
+            <table id="bsit1-1-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Student Number</th>
+                        <th>First Name</th>
+                        <th>Middle Name</th>
+                        <th>Last Name</th>
+                        <th>Suffix</th>
+                        <th>Section</th>
+                        <th>Email Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample data - replace with your actual data -->
+                    <tr>
+                        <td>1</td>
+                        <td>2021-00001-MN-0</td>
+                        <td>John</td>
+                        <td></td>
+                        <td> Doe</td>
+                        <td></td>
+                        <td>BSIT 3-1</td>
+                        <td>john.doe@example.com</td>
+                        <td>
+                            <button onclick="deleteStudent('2021-00001-MN-0')">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2021-00002-MN-0</td>
+                        <td>Jane</td>
+                        <td></td>
+                        <td>Smith</td>
+                        <td></td>
+                        <td>BSIT 3-2</td>
+                        <td>jane.smith@example.com</td>
+                        <td>
+                            <button onclick="deleteStudent('2021-00002-MN-0')">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+                  
+            </table>
+            <div class="button-container">
+                <button onclick="addRow('bsit1-1-table')">Add Row</button>
+                <form id="uploadForm-bsit1-1" onsubmit="submitForm(event)">
+                    <input type="file" name="file" id="fileUpload-bsit1-1" accept=".csv" required>
+                    <button type="submit">Upload CSV</button>
+                </form>
+                <button type="button" id="generateQrBtn">Generate QR</button>             
+            </div>
+        </div>
+
+    </div>
+    </center>
+
+  </main>
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.getElementById("main").style.width = "calc(100% - 250px)";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+  document.getElementById("main").style.width = "100%";
+}
+
+document.getElementById('voters_p').classList.add('active');
+
+function addRow(tableId) {
+    const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
+    const rowCount = table.rows.length;
+
+    // Create a new row and cells
+    const row = table.insertRow();
+    const indexCell = row.insertCell(0);
+    const studentNumberCell = row.insertCell(1);
+    const firstNameCell = row.insertCell(2);
+    const middleNameCell = row.insertCell(3);
+    const lastNameCell = row.insertCell(4);
+    const suffixCell = row.insertCell(5);
+    const sectionCell = row.insertCell(6);
+    const emailCell = row.insertCell(7);
+    const actionsCell = row.insertCell(8);
+
+    // Add index
+    indexCell.textContent = rowCount + 1;
+
+    // Add input fields for student number, name, and email
+    studentNumberCell.innerHTML = '<input type="text" placeholder="Student Number">';
+    firstNameCell.innerHTML = '<input type="text" placeholder=" First Name">';
+    middleNameCell.innerHTML = '<input type="text" placeholder=" Middle Name">';
+    lastNameCell.innerHTML = '<input type="text" placeholder=" Last Name">'; 
+    suffixCell.innerHTML = '<input type="text" placeholder=" Suffix">';   
+    sectionCell.innerHTML = '<input type="text" placeholder="Section">';
+    emailCell.innerHTML = '<input type="email" placeholder="Email Address">';
+
+    // Add action buttons
+    actionsCell.innerHTML = '<button onclick="confirmRow(this)">Confirm</button> <button onclick="removeRow(this)">Remove</button>';
+}
+
+function confirmRow(button) {
+    const row = button.closest('tr');
+    const inputs = row.querySelectorAll('input');
+    
+    // Convert inputs to text
+    inputs.forEach(input => {
+        const td = input.parentElement;
+        td.textContent = input.value;
+    });
+    
+    // Replace buttons with delete button
+    const actionsCell = row.cells[8];
+    const studentNumber = row.cells[1].textContent;
+    actionsCell.innerHTML = '<button onclick="deleteStudent(\'' + studentNumber + '\')">Delete</button>';
+    
+    // Show success message
+    Swal.fire({
+        icon: 'success',
+        title: 'Student added successfully!',
+        showConfirmButton: false,
+        timer: 2000
+    });
+}
+
+function removeRow(button) {
+    const row = button.closest('tr');
+    row.remove();
+    
+    // Update row numbers
+    const table = document.getElementById('bsit1-1-table');
+    const rows = table.getElementsByTagName('tbody')[0].rows;
+    for (let i = 0; i < rows.length; i++) {
+        rows[i].cells[0].textContent = i + 1;
+    }
+}
+
+function deleteStudent(studentNumber) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#A8201A',
+        cancelButtonColor: '#143642',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Find and remove the row
+            const table = document.getElementById('bsit1-1-table');
+            const rows = table.getElementsByTagName('tbody')[0].rows;
+            
+            for (let i = 0; i < rows.length; i++) {
+                if (rows[i].cells[1].textContent === studentNumber) {
+                    rows[i].remove();
+                    break;
+                }
+            }
+            
+            // Update row numbers
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].textContent = i + 1;
+            }
+            
+            Swal.fire(
+                'Deleted!',
+                'Student has been deleted.',
+                'success'
+            );
+        }
+    });
+}
+
+function submitForm(event) {
+    event.preventDefault();
+    
+    const fileInput = document.getElementById('fileUpload-bsit1-1');
+    const file = fileInput.files[0];
+    
+    if (file && file.name.endsWith('.csv')) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            const csv = e.target.result;
+            const lines = csv.split('\n');
+            const table = document.getElementById('bsit1-1-table').getElementsByTagName('tbody')[0];
+            
+            // Clear existing data (optional)
+            // table.innerHTML = '';
+            
+            // Skip header row if present
+            const startIndex = 1;
+            
+            for (let i = startIndex; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line) {
+                    const columns = line.split(',');
+                    if (columns.length >= 4) {
+                        const row = table.insertRow();
+                        row.insertCell(0).textContent = table.rows.length;
+                        row.insertCell(1).textContent = columns[0].trim();
+                        row.insertCell(2).textContent = columns[1].trim();
+                        row.insertCell(3).textContent = columns[2].trim();
+                        row.insertCell(4).textContent = columns[3].trim();
+                        row.insertCell(5).textContent = columns[4].trim();
+                        row.insertCell(6).textContent = columns[5].trim();
+                        row.insertCell(7).textContent = columns[6].trim();
+                        row.insertCell(8).innerHTML = '<button onclick="deleteStudent(\'' + columns[0].trim() + '\')">Delete</button>';
+                    }
+                }
+            }
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'CSV uploaded successfully!',
+                showConfirmButton: false,
+                timer: 2000
+            });
+            
+            // Reset form
+            fileInput.value = '';
+        };
+        
+        reader.readAsText(file);
+    } else {
+        Swal.fire({
+            icon: 'error',
+            title: 'Please select a valid CSV file',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    }
+}
+
+document.getElementById("generateQrBtn").addEventListener("click", function() {
+    // Simulate QR generation
+    Swal.fire({
+        icon: 'info',
+        title: 'Generating QR codes...',
+        showConfirmButton: false,
+        timer: 2000
+    }).then(() => {
+        Swal.fire({
+            icon: 'success',
+            title: 'QR codes generated successfully!',
+            showConfirmButton: false,
+            timer: 2000
+        });
+    });
+});
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Voters page loaded successfully');
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PUPT CS El-Express Admin Dashboard</title>
+<link rel="stylesheet" href="/ubnhs/assets/styles/nav.css">
+<link rel="stylesheet" href="/ubnhs/pages/admin_dashboard/AD_Interface.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="/ubnhs/index.php?page=admin_dashboard" id="home">Home</a>
+  <a href="/ubnhs/index.php?page=candidates">Candidates</a>
+  <a href="/ubnhs/index.php?page=voters_page">Voters/Members</a>
+  <a href="/ubnhs/index.php?page=about">About Us</a>
+  <a href="/ubnhs/php/auth/logout.php">Log Out</a>
+</div>
+
+<div id="main">
+  <button class="openbtn" id="openSidebarBtn" onclick="openNav()">☰</button>
+  <main class="content">
+        <div class="status-container">
+          <div class="status-header">
+              <h1><b>ELECTION STATUS</b></h1>
+          </div>
+        </div>
+        
+        <center><div class="chart-container">
+            <canvas id="positionsChart"></canvas>
+        </div></center>
+
+        <a href="summary.php">View Voting Summary</a>
+    </main>
+</div>
+
+<script>
+  function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    document.getElementById("openSidebarBtn").style.display = "none";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    document.getElementById("openSidebarBtn").style.display = "inline-block";
+  }
+
+  document.getElementById('home').classList.add('active');
+
+// Chart.js Script with JavaScript data
+  const ctx = document.getElementById('positionsChart').getContext('2d');
+  
+  // Static data - you can modify these arrays as needed
+  //create a get_data.php file to fetch this data dynamically
+  const committees = ['President', 'Vice President', 'Secretary', 'Treasurer'];
+  const votes = [120, 98, 87, 145];
+
+  const positionsChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: committees,
+          datasets: [{
+              label: 'Voting Results',
+              data: votes,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+          }]
+      },
+      options: {
+          responsive: true,
+          scales: {
+              x: {
+                  beginAtZero: true,
+                  ticks: {
+                      maxRotation: 45,
+                      minRotation: 45
+                  }
+              },
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+
+</script>
+</body>
+</html>

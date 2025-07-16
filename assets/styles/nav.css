@@ -1,0 +1,90 @@
+/* Sidebar styles (modular for all pages) */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: #1d2346;
+    overflow-x: hidden;
+    transition: 0.3s ease;
+    padding-top: 60px;
+}
+
+.sidebar a {
+    padding: 12px 8px 12px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #EC9A29;
+    display: block;
+    transition: 0.3s;
+    border-bottom: 1px solid rgba(236, 154, 41, 0.2);
+}
+
+.sidebar a:hover {
+    color: #DAD2D8;
+    background-color: #143642;
+}
+
+.sidebar a.active {
+    background-color: #143642;
+    color: #DAD2D8;
+    font-weight: bold;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    font-size: 36px;
+    color: #EC9A29;
+    border-bottom: none;
+    padding: 8px 16px;
+}
+
+.sidebar .closebtn:hover {
+    color: #DAD2D8;
+    background-color: transparent;
+}
+
+/* Open button styles */
+.openbtn {
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #1d2346;
+    color: white;
+    padding: 12px 16px;
+    border: 2px solid #EC9A29;
+    border-radius: 8px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.openbtn:hover {
+    background-color: #143642;
+    color: #DAD2D8;
+    transform: scale(1.05);
+}
+
+/* Animation for sidebar and buttons */
+.sidebar a, .openbtn {
+    position: relative;
+    overflow: hidden;
+}
+.sidebar a::before, .openbtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+.sidebar a:hover::before, .openbtn:hover::before {
+    left: 100%;
+}
