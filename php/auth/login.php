@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($username === '' || $password === '') {
         log_error_json('empty_fields', $username, $_SERVER['REMOTE_ADDR']);
-        header('Location: /ubnhs/pages/admin_login/admin_login.html?error=empty');
+        header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=empty');
         exit();
     }
 
@@ -40,24 +40,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($admin['password'] === $password || password_verify($password, $admin['password'])) {
                 $_SESSION['admin_logged_in'] = true;
                 $_SESSION['admin_username'] = $username;
-                header('Location: /ubnhs/pages/admin_dashboard/admin_dashboard.html');
+                header('Location: /ubnhs-voting/pages/admin_dashboard/admin_dashboard.html');
                 exit();
             } else {
                 log_error_json('failed_login', $username, $_SERVER['REMOTE_ADDR'], 'Username found, password incorrect');
-                header('Location: /ubnhs/pages/admin_login/admin_login.html?error=invalid');
+                header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=invalid');
                 exit();
             }
         } else {
             log_error_json('failed_login', $username, $_SERVER['REMOTE_ADDR'], 'Username not found');
-            header('Location: /ubnhs/pages/admin_login/admin_login.html?error=invalid');
+            header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=invalid');
             exit();
         }
     } catch (PDOException $e) {
         log_error_json('db_error', $username, $_SERVER['REMOTE_ADDR'], $e->getMessage());
-        header('Location: /ubnhs/pages/admin_login/admin_login.html?error=db');
+        header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=db');
         exit();
     }
 } else {
-    header('Location: /ubnhs/pages/admin_login/admin_login.html');
+    header('Location: /ubnhs-voting/pages/admin_login/admin_login.html');
     exit();
 }
