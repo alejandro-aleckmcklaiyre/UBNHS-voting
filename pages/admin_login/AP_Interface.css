@@ -8,7 +8,7 @@ body {
     align-items: center;
     min-height: 100vh;
     background-color: #DAD2D8;
-    background-image: url("../../assets/images-UBNHS/ADMIN_LOGIN.png");
+    background-image: url("../../assets/images-UBNHS/MAIN_ADMINL.png");
     background-size: cover;
     background-position: center; 
     background-attachment: fixed; 
@@ -19,6 +19,7 @@ body {
 .user-box {
     position: relative;
     margin-bottom: 30px;
+    width: 100%;
 }
 
 .user-box input {
@@ -33,6 +34,11 @@ body {
     font-size: 16px; 
     border-radius: 5px;
     box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.user-box input:focus {
+    background-color: rgba(119, 157, 211, 0.5);
 }
 
 .user-box label {
@@ -53,23 +59,48 @@ body {
     color: #555;
 }
 
-button {
+button, a.button-link {
     width: 100%;
     padding: 12px 0;
-    color: #0a1d30;
-    border-color: #051a30;
-    background-color: #77a7d1b4;
-    border: 2px solid;
+    color: #fff;
+    background-color: #0a1d30; /* dark blue */
+    border: 2px solid #051a30;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
     margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 0 10px rgba(10, 29, 48, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
-button:hover {
-    background-color: #143642;
-    border-color: #0b0b63;
+/* Flash + glow effect */
+button:hover, a.button-link:hover {
+    background-color: #a94442;
+    border-color: #843534;
     color: white;
+    transform: scale(1.03);
+    box-shadow: 0 0 18px red, 0 0 30px red;
+}
+
+button::before, a.button-link::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-20deg);
+    transition: left 0.4s ease;
+}
+
+button:hover::before, a.button-link:hover::before {
+    left: 125%;
 }
 
 a {
@@ -79,13 +110,13 @@ a {
     color: #666;
     margin-top: 20px;
     font-size: 14px;
+    transition: color 0.3s;
 }
 
 .box {
-    background-color: #DAD2D8;
+    background-color: #dad2d8ec;
     padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex; 
     flex-direction: column; 
     justify-content: center; 
@@ -95,6 +126,19 @@ a {
     min-height: 450px;
     position: relative;
     margin-right: 120px;
+    animation: pulseGlow 2s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(255, 0, 0, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+    }
 }
 
 .image-container1 {
@@ -115,60 +159,20 @@ a {
     color: #333;
 }
 
-/* Mobile Responsive Styles */
+/* Responsive Styles */
 @media screen and (max-width: 768px) {
     body {
         padding: 15px;
         background-attachment: scroll;
         justify-content: center;
     }
-    
+
     .box {
         padding: 30px 25px;
         width: 100%;
         max-width: 350px;
         min-height: 400px;
         margin-right: 0;
-    }
-    
-    .image-container1 {
-        margin-bottom: 25px;
-    }
-    
-    .image-container1 h2 {
-        font-size: 20px;
-        margin: 15px 0 20px 0;
-    }
-    
-    .image-container1 img {
-        width: 70%;
-        max-width: 120px;
-    }
-    
-    .user-box {
-        margin-bottom: 25px;
-    }
-    
-    .user-box input {
-        font-size: 16px;
-        padding: 12px 8px;
-    }
-    
-    .user-box label {
-        font-size: 14px;
-        margin-left: 8px;
-        padding: 12px 0;
-    }
-    
-    button {
-        padding: 14px 0;
-        font-size: 16px;
-        margin-top: 15px;
-    }
-    
-    a {
-        font-size: 14px;
-        margin-top: 15px;
     }
 }
 
@@ -177,88 +181,28 @@ a {
         padding: 10px;
         background-position: left center;
     }
-    
+
     .box {
         padding: 25px 20px;
         max-width: 300px;
         min-height: 380px;
     }
-    
-    .image-container1 {
-        margin-bottom: 20px;
-    }
-    
-    .image-container1 h2 {
-        font-size: 18px;
-        margin: 10px 0 15px 0;
-    }
-    
+
     .image-container1 img {
         width: 65%;
         max-width: 100px;
     }
-    
-    .user-box {
-        margin-bottom: 20px;
-    }
-    
-    .user-box input {
-        font-size: 14px;
-        padding: 10px 6px;
-    }
-    
-    .user-box label {
-        font-size: 12px;
-        margin-left: 6px;
-        padding: 10px 0;
-    }
-    
-    button {
-        padding: 12px 0;
-        font-size: 14px;
-        margin-top: 12px;
-    }
-    
-    a {
-        font-size: 12px;
-        margin-top: 12px;
-    }
 }
 
 @media screen and (max-width: 320px) {
-    body {
-        background-position: left center;
-    }
-    
     .box {
         padding: 20px 15px;
         max-width: 280px;
         min-height: 350px;
     }
-    
-    .image-container1 {
-        margin-bottom: 15px;
-    }
-    
-    .image-container1 h2 {
-        font-size: 16px;
-        margin: 8px 0 12px 0;
-    }
-    
+
     .image-container1 img {
         width: 60%;
         max-width: 80px;
-    }
-    
-    .user-box {
-        margin-bottom: 18px;
-    }
-    
-    button {
-        margin-top: 10px;
-    }
-    
-    a {
-        margin-top: 10px;
     }
 }

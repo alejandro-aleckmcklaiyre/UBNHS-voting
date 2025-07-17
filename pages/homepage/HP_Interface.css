@@ -1,6 +1,6 @@
 body {
-    margin: 0; 
-    height: 100vh; 
+    margin: 0;
+    height: 100vh;
     background-image: url('../../assets/images-UBNHS/BG5-Blurred.png');
     background-size: cover;
     background-position: center center;
@@ -28,54 +28,94 @@ a {
     padding: 75px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
-    width: 300px;   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
     height: 150px;
     position: relative;
 }
 
-button {
+/* Unified Button Design with Flash Glow */
+button,
+.student-button,
+.admin-button {
     display: block;
     width: 150px;
     padding: 15px;
     margin: 10px auto;
     font-size: 16px;
-    border: 2px solid;
+    border: 2px solid #c1e9f8;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.student-button {
-    color: #EC9A29;
-    border-color: #EC9A29;
-    background-color: #A8201A; 
-}
-
-.student-button:hover {
     background-color: #143642;
-    color: white;
+    color: #c1e9f8;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 4px 15px rgba(20, 54, 66, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.admin-button {
-    color: #EC9A29;
-    border-color: #EC9A29;
-    background-color: #A8201A;
+/* Glow Pulse Effect */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(120, 195, 222, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.6), 0 0 40px rgba(120, 195, 222, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.4), 0 0 20px rgba(120, 195, 222, 0.6);
+    }
 }
 
+button:hover,
+.student-button:hover,
 .admin-button:hover {
-    background-color: #143642;
-    color: white;
+    background-color: #78c3de;
+    color: #143642;
+    transform: translateY(-2px);
+    animation: pulse-glow 1s infinite;
+}
+
+button:active,
+.student-button:active,
+.admin-button:active {
+    transform: translateY(0);
+    box-shadow:
+        0 2px 8px rgba(20, 54, 66, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Flash Effect Overlay */
+button::before,
+.student-button::before,
+.admin-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+button:hover::before,
+.student-button:hover::before,
+.admin-button:hover::before {
+    left: 100%;
 }
 
 .image-container-wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #DAD2D8; 
+    background-color: #f1a1a26d;
     padding: 20px 40px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;
@@ -90,8 +130,8 @@ button {
 }
 
 .image-container1 img {
-    width: 180px;
-    max-width: 100%;
+    width: 18vw;
+    max-width: 260px;
     height: auto;
 }
 
@@ -117,21 +157,24 @@ button {
 
 .message-container {
     text-align: center;
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .welcome-message {
-    font-size: 32px;
+    font-size: 47px;
     color: #800000;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+    vertical-align: middle;
 }
 
 .destination-message {
-    font-size: 14px;
+    font-size: 16px;
     color: #800000;
     font-weight: normal;
-    margin-top: -5px;
+    margin-top: 12px;
 }
 
 /* Responsive Design */
@@ -147,11 +190,11 @@ button {
     }
 
     .image-container-wrapper {
-    padding: 10px 15px;
-    gap: 8px;
-    min-height: auto;
-    flex-direction: row;
-    justify-content: space-between;
+        padding: 10px 15px;
+        gap: 8px;
+        min-height: auto;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     .image-container1 img {
@@ -175,7 +218,9 @@ button {
         font-size: 12px;
     }
 
-    button {
+    button,
+    .student-button,
+    .admin-button {
         font-size: 14px;
         padding: 12px;
         width: 130px;
@@ -192,6 +237,7 @@ button {
     .main-content {
         padding: 10px;
     }
+
     .image-container-wrapper {
         padding: 10px 15px;
         gap: 8px;
@@ -221,7 +267,9 @@ button {
         font-size: 11px;
     }
 
-    button {
+    button,
+    .student-button,
+    .admin-button {
         font-size: 13px;
         padding: 10px;
         width: 120px;
@@ -275,11 +323,11 @@ button {
 
     .tagline {
         display: none;
-        /*font-size: 10px;
-        margin-top: 2px;*/
     }
 
-    button {
+    button,
+    .student-button,
+    .admin-button {
         font-size: 12px;
         padding: 8px;
         width: 100px;

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,15 +9,23 @@
 <body>
     <div class="container">
         <div class="box">
+            <div class="decorative-dots"></div>
+            
             <div class="header">
                 <div class="logo-container">
-                    <img src="assets/images-UBNHS/El1.png" alt="Web Logo">
+                    <img src="assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo">
                 </div>
                 <h2>QR SCANNER</h2>
             </div>
             
             <div class="scanner-container">
+                <div class="scanner-overlay">
+                    <div class="scanner-corners"></div>
+                </div>
                 <video id="scanner" width="100%" height="100%" autoplay></video>
+                <div id="placeholder" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3; font-style: italic; background: rgba(255, 255, 255, 0.9); padding: 10px 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); color: #666; font-size: 16px; text-align: center;">
+                    Position QR Code Here
+                </div>
             </div>
             
             <div class="button-container">
@@ -31,13 +40,17 @@
             <div class="navigation">
                 <a href="index.php">Back</a>
             </div>
+            
+            <div class="decorative-line"></div>
         </div>
     </div>
 
     <script>
         const video = document.getElementById('scanner');
+        const placeholder = document.getElementById('placeholder');
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
+        let cameraActive = false;
         
         function startCamera() {
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -45,20 +58,58 @@
                 return;
             }
     
-            navigator.mediaDevices.getUserMedia({ video: true })
+            navigator.mediaDevices.getUserMedia({ 
+                video: { 
+                    facingMode: 'environment' // Use back camera on mobile
+                } 
+            })
                 .then(stream => {
                     video.srcObject = stream;
                     video.play();
+                    video.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    cameraActive = true;
+                    document.getElementById('result').textContent = 'Camera started successfully. Position QR code in frame.';
                     console.log("Camera started successfully.");
+                    
+                    // Update button text
+                    document.getElementById('startLiveScanBtn').textContent = 'Stop Camera';
                 })
                 .catch(err => {
                     console.error("Error accessing webcam: " + err);
                     alert("Error accessing webcam: " + err);
+                    document.getElementById('result').textContent = 'Error accessing camera. Please check permissions.';
                 });
         }
-    
-        document.getElementById('scanBtn').onclick = function () {
+        
+        function stopCamera() {
             if (video.srcObject) {
+                const tracks = video.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+                video.srcObject = null;
+                video.style.display = 'none';
+                placeholder.style.display = 'block';
+                cameraActive = false;
+                document.getElementById('result').textContent = 'Camera stopped.';
+                document.getElementById('startLiveScanBtn').textContent = 'Start Live QR Scan';
+            }
+        }
+        
+        // Enhanced scan button functionality
+        document.getElementById('scanBtn').onclick = function () {
+            const button = this;
+            
+            if (!cameraActive || !video.srcObject) {
+                alert("Please start the camera first.");
+                return;
+            }
+            
+            // Add loading state
+            button.classList.add('loading');
+            button.textContent = 'Scanning...';
+            
+            // Ensure video is ready
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -75,80 +126,152 @@
                     .then((response) => response.json())
                     .then((data) => {
                         if (data.qr_code_data) {
-                            window.location.href = 'index.php?page=voting_page';
+                            document.getElementById('result').textContent = 'QR Code detected! Redirecting...';
+                            setTimeout(() => {
+                                window.location.href = 'index.php?page=voting_page';
+                            }, 1000);
                         } else {
+                            document.getElementById('result').textContent = data.error || 'QR Code not recognized';
                             alert(data.error || 'QR Code not recognized');
                         }
                     })
                     .catch((error) => {
+                        console.error('Scan error:', error);
+                        document.getElementById('result').textContent = 'Scan failed. Please try again.';
                         alert('An error occurred: ' + error);
+                    })
+                    .finally(() => {
+                        // Remove loading state
+                        button.classList.remove('loading');
+                        button.textContent = 'Scan QR Code';
                     });
             } else {
-                alert("Please enable the camera first.");
+                button.classList.remove('loading');
+                button.textContent = 'Scan QR Code';
+                alert("Video not ready. Please wait a moment and try again.");
+            }
+        };
+        
+        // Enhanced start/stop camera functionality
+        document.getElementById('startLiveScanBtn').onclick = function () {
+            const button = this;
+            
+            if (!cameraActive) {
+                button.classList.add('loading');
+                button.textContent = 'Starting Camera...';
+                
+                setTimeout(() => {
+                    startCamera();
+                    button.classList.remove('loading');
+                }, 500);
+            } else {
+                stopCamera();
             }
         };
     
-        // Handle file input and QR code decoding
+        // Handle file input and QR code decoding (if needed)
         const fileInput = document.createElement('input');
         fileInput.type = 'file';
         fileInput.accept = 'image/*';
         
-        document.getElementById('uploadBtn') && document.getElementById('uploadBtn').addEventListener('click', function() {
-            fileInput.click();
-        });
-    
-        document.getElementById('readQRBtn') && document.getElementById('readQRBtn').addEventListener('click', () => {
-            const studentNumber = document.getElementById('studentNumber').value.trim();
-        
-            if (!studentNumber) {
-                alert("Please enter a student number.");
-                return;
-            }
-        
-            fetch('/student_page/read_qr', {  // Ensure this matches your Flask route
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ student_number: studentNumber })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.redirect) {
-                    window.location.href = data.redirect;
-                } else {
-                    alert(data.error || "An unknown error occurred.");
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred while reading the QR code.");
+        if (document.getElementById('uploadBtn')) {
+            document.getElementById('uploadBtn').addEventListener('click', function() {
+                fileInput.click();
             });
-        });
-
-        document.getElementById("startLiveScanBtn").onclick = function () {
-            fetch("php/start_live_scan.php")
+        }
+    
+        if (document.getElementById('readQRBtn')) {
+            document.getElementById('readQRBtn').addEventListener('click', () => {
+                const studentNumber = document.getElementById('studentNumber').value.trim();
+            
+                if (!studentNumber) {
+                    alert("Please enter a student number.");
+                    return;
+                }
+            
+                fetch('/student_page/read_qr', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ student_number: studentNumber })
+                })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error("Failed to start live QR scanner.");
+                        throw new Error('Network response was not ok');
                     }
-                    return response.text();
+                    return response.json();
                 })
-                .then(message => {
-                    alert(message);
+                .then(data => {
+                    if (data.redirect) {
+                        window.location.href = data.redirect;
+                    } else {
+                        alert(data.error || "An unknown error occurred.");
+                    }
                 })
                 .catch(error => {
                     console.error("Error:", error);
-                    alert("An error occurred: " + error.message);
+                    alert("An error occurred while reading the QR code.");
                 });
-        };
+            });
+        }
 
-        document.getElementById("scanner").style.display = "block";  // Show the video container
+        // Enhanced live scan functionality
+        if (document.getElementById("startLiveScanBtn")) {
+            // Additional event handler for live scan (if different from camera start)
+            document.getElementById("startLiveScanBtn").addEventListener('dblclick', function() {
+                fetch("php/start_live_scan.php")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Failed to start live QR scanner.");
+                        }
+                        return response.text();
+                    })
+                    .then(message => {
+                        document.getElementById('result').textContent = message;
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        document.getElementById('result').textContent = "Error: " + error.message;
+                    });
+            });
+        }
+
+        // Initialize placeholder visibility
+        document.getElementById("placeholder").style.display = "block";
         
-        document.addEventListener('DOMContentLoaded', startCamera);
+        // Auto-start camera on page load (optional - remove if not desired)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Uncomment the next line if you want camera to auto-start
+            // startCamera();
+            
+            // Set initial result message
+            document.getElementById('result').textContent = 'Click "Start Live QR Scan" to begin.';
+        });
+        
+        // Clean up camera when page is unloaded
+        window.addEventListener('beforeunload', function() {
+            stopCamera();
+        });
+        
+        // Handle visibility change (when user switches tabs)
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden && cameraActive) {
+                // Optionally pause camera when tab is hidden
+                // stopCamera();
+            }
+        });
+        
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                event.preventDefault();
+                if (cameraActive) {
+                    document.getElementById('scanBtn').click();
+                }
+            } else if (event.code === 'Enter') {
+                event.preventDefault();
+                document.getElementById('startLiveScanBtn').click();
+            }
+        });
     </script>
     
 </body>
