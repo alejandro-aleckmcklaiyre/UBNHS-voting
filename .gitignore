@@ -1,0 +1,24 @@
+# Ignore Composer dependencies
+/vendor/
+
+# Ignore Composer lock file if you don't want to track it
+# composer.lock
+
+# Ignore Composer PHAR
+composer.phar
+
+# Ignore logs and other generated files
+*.log
+/pages/voters_page/voters_logs.json
+/php/voters/csv_upload.log
+/php/voters/voters.log
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore OS files
+.DS_Store
+Thumbs.db

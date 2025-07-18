@@ -60,8 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($middle_name)) $middle_name = NULL;
     if (empty($suffix)) $suffix = NULL;
 
-    // Generate a unique code for the student
-    $unique_code = bin2hex(random_bytes(8));
+    // Generate a unique code for the student: surname + random code
+    $random_code = bin2hex(random_bytes(8));
+    $unique_code = $last_name . $random_code;
 
     // Log sanitized data
     $log_data = [

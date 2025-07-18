@@ -37,6 +37,16 @@
 
         <div class="table-container">
             <h3>STUDENTS LIST</h3>
+            
+        <!-- Add filter dropdowns and pagination controls above the table -->
+        <div style="margin-bottom: 1em;">
+          <label for="filter-year">Year Level:</label>
+          <select id="filter-year"></select>
+          <label for="filter-section" style="margin-left:1em;">Section:</label>
+          <select id="filter-section"></select>
+        </div>
+        <div id="pagination-controls" style="margin-bottom: 1em;"></div>
+
             <table id="bsit1-1-table">
                 <thead>
                     <tr>
@@ -54,38 +64,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Sample data - replace with your actual data -->
-                    <tr>
-                        <td>1</td>
-                        <td>2021-00001-MN-0</td>
-                        <td>John</td>
-                        <td></td>
-                        <td> Doe</td>
-                        <td></td>
-                        <td>BSIT</td>
-                        <td>3-1</td>
-                        <td>john.doe@example.com</td>
-                        <td>
-                            <button onclick="deleteStudent('2021-00001-MN-0')">Delete</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2021-00002-MN-0</td>
-                        <td>Jane</td>
-                        <td></td>
-                        <td>Smith</td>
-                        <td></td>
-                        <td>BSIT</td>
-                        <td>3-2</td>
-                        <td>jane.smith@example.com</td>
-                        <td>
-                            <button onclick="deleteStudent('2021-00002-MN-0')">Delete</button>
-                        </td>
+                    <!--Place for the real data - inserted by voters_page.js -->
                     </tr>
                 </tbody>
-                  
             </table>
+            
             <div class="button-container">
                 <button onclick="addRow('bsit1-1-table')">Add Row</button>
                 <form id="uploadForm-bsit1-1" onsubmit="submitForm(event)">

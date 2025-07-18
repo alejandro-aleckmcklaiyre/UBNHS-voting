@@ -48,21 +48,27 @@ function addRow(tableId) {
 
 function confirmRow(button) {
     const row = button.closest('tr');
+    let student_number, first_name, middle_name, last_name, suffix, year_level, section, email;
     const inputs = row.querySelectorAll('input');
-
-    // Collect input values
-    const student_number = inputs[0].value;
-    const first_name = inputs[1].value;
-    const middle_name = inputs[2].value;
-    const last_name = inputs[3].value;
-    const suffix = inputs[4].value;
-    const year_level = inputs[5].value;
-    const section = inputs[6].value;
-    const email = inputs[7].value;
-
-    // You need to get class_group_id from year_level and section
-    // For demo, let's send year_level and section as is
-    // You should implement a lookup to get class_group_id from backend
+    if (inputs.length > 0) {
+        student_number = inputs[0].value;
+        first_name = inputs[1].value;
+        middle_name = inputs[2].value;
+        last_name = inputs[3].value;
+        suffix = inputs[4].value;
+        year_level = inputs[5].value;
+        section = inputs[6].value;
+        email = inputs[7].value;
+    } else {
+        student_number = row.cells[1].textContent;
+        first_name = row.cells[2].textContent;
+        middle_name = row.cells[3].textContent;
+        last_name = row.cells[4].textContent;
+        suffix = row.cells[5].textContent;
+        year_level = row.cells[6].textContent;
+        section = row.cells[7].textContent;
+        email = row.cells[8].textContent;
+    }
 
     $.ajax({
         url: '/ubnhs-voting/php/voters/add_voters.php',
@@ -81,13 +87,13 @@ function confirmRow(button) {
         },
         success: function(response) {
             if (response.success) {
-                // Convert inputs to text
-                inputs.forEach(input => {
-                    const td = input.parentElement;
-                    td.textContent = input.value;
-                });
-                // Replace buttons with delete button
-                const actionsCell = row.cells[9];
+                if (inputs.length > 0) {
+                    inputs.forEach(input => {
+                        const td = input.parentElement;
+                        td.textContent = input.value;
+                    });
+                }
+                const actionsCell = row.cells[row.cells.length - 1];
                 const studentNumber = row.cells[1].textContent;
                 actionsCell.innerHTML = '<button onclick="deleteStudent(\'' + studentNumber + '\')">Delete</button>';
                 Swal.fire({
@@ -166,7 +172,6 @@ function deleteStudent(studentNumber) {
         }
     });
 }
-
 function submitForm(event) {
     event.preventDefault();
     
@@ -175,48 +180,75 @@ function submitForm(event) {
     
     if (file && file.name.endsWith('.csv')) {
         const reader = new FileReader();
-        
+
         reader.onload = function(e) {
             const csv = e.target.result;
             const lines = csv.split('\n');
             const table = document.getElementById('bsit1-1-table').getElementsByTagName('tbody')[0];
-            
+
             // Clear existing data (optional)
             // table.innerHTML = '';
-            
-            // Skip header row if present
+
+            // Parse header
+            const header = lines[0].split(',').map(h => h.trim());
             const startIndex = 1;
-            
+
             for (let i = startIndex; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (line) {
-                    const columns = line.split(',');
-                    if (columns.length >= 4) {
+                    const columns = line.split(',').map(col => col.trim());
+                    
+                    // Check if we have the expected number of columns (8 for our CSV format)
+                    // student_number,first_name,middle_name,last_name,suffix,email,year_level,section
+                    if (columns.length === 8) {
                         const row = table.insertRow();
                         row.insertCell(0).textContent = table.rows.length;
-                        row.insertCell(1).textContent = columns[0].trim();
-                        row.insertCell(2).textContent = columns[1].trim();
-                        row.insertCell(3).textContent = columns[2].trim();
-                        row.insertCell(4).textContent = columns[3].trim();
-                        row.insertCell(5).textContent = columns[4].trim();
-                        row.insertCell(6).textContent = columns[5].trim();
-                        row.insertCell(7).textContent = columns[6].trim();
-                        row.insertCell(8).innerHTML = '<button onclick="deleteStudent(\'' + columns[0].trim() + '\')">Delete</button>';
+                        for (let j = 0; j < columns.length; j++) {
+                            row.insertCell(j + 1).textContent = columns[j];
+                        }
+                        row.insertCell(columns.length + 1).innerHTML = '<button onclick="confirmRow(this)">Confirm</button> <button onclick="removeRow(this)">Remove</button>';
+                    }
+                    // Handle case where Excel might have added an extra index column
+                    else if (columns.length === 9 && !isNaN(columns[0])) {
+                        const row = table.insertRow();
+                        row.insertCell(0).textContent = table.rows.length;
+                        // Skip the first column (Excel index) and use the rest
+                        for (let j = 1; j < columns.length; j++) {
+                            row.insertCell(j).textContent = columns[j];
+                        }
+                        row.insertCell(columns.length).innerHTML = '<button onclick="confirmRow(this)">Confirm</button> <button onclick="removeRow(this)">Remove</button>';
+                    }
+                    // Original logic for backwards compatibility
+                    else if (columns.length === header.length) {
+                        const row = table.insertRow();
+                        row.insertCell(0).textContent = table.rows.length;
+                        for (let j = 0; j < columns.length; j++) {
+                            row.insertCell(j + 1).textContent = columns[j];
+                        }
+                        row.insertCell(header.length + 1).innerHTML = '<button onclick="confirmRow(this)">Confirm</button> <button onclick="removeRow(this)">Remove</button>';
+                    }
+                    else if (columns.length === header.length + 1 && !isNaN(columns[0])) {
+                        const row = table.insertRow();
+                        row.insertCell(0).textContent = table.rows.length;
+                        for (let j = 1; j < columns.length; j++) {
+                            row.insertCell(j).textContent = columns[j];
+                        }
+                        row.insertCell(header.length + 1).innerHTML = '<button onclick="confirmRow(this)">Confirm</button> <button onclick="removeRow(this)">Remove</button>';
                     }
                 }
             }
-            
+
             Swal.fire({
                 icon: 'success',
                 title: 'CSV uploaded successfully!',
                 showConfirmButton: false,
                 timer: 2000
             });
-            
+
             // Reset form
             fileInput.value = '';
         };
-        
+
         reader.readAsText(file);
     } else {
         Swal.fire({
@@ -227,7 +259,6 @@ function submitForm(event) {
         });
     }
 }
-
 document.getElementById("generateQrBtn").addEventListener("click", function() {
     // Simulate QR generation
     Swal.fire({
@@ -245,7 +276,101 @@ document.getElementById("generateQrBtn").addEventListener("click", function() {
     });
 });
 
-// Initialize page
+// Pagination and filtering variables
+let currentPage = 1;
+let studentsData = [];
+let rowsPerPage = 25;
+let filterYear = '';
+let filterSection = '';
+
+function renderTablePage() {
+    const tableBody = document.getElementById('bsit1-1-table').getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = '';
+    let filtered = studentsData;
+    if (filterYear) filtered = filtered.filter(s => s.year_level == filterYear);
+    if (filterSection) filtered = filtered.filter(s => s.section == filterSection);
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    filtered.slice(start, end).forEach((student, idx) => {
+        const row = tableBody.insertRow();
+        row.insertCell(0).textContent = start + idx + 1;
+        row.insertCell(1).textContent = student.student_number;
+        row.insertCell(2).textContent = student.first_name;
+        row.insertCell(3).textContent = student.middle_name || '';
+        row.insertCell(4).textContent = student.last_name;
+        row.insertCell(5).textContent = student.suffix || '';
+        row.insertCell(6).textContent = student.year_level;
+        row.insertCell(7).textContent = student.section;
+        row.insertCell(8).textContent = student.email;
+        row.insertCell(9).innerHTML = '<button onclick="deleteStudent(\'' + student.student_number + '\')">Delete</button>';
+    });
+    renderPagination(filtered.length);
+}
+
+function renderPagination(totalRows) {
+    const paginationDiv = document.getElementById('pagination-controls');
+    if (!paginationDiv) return;
+    paginationDiv.innerHTML = '';
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+    for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.className = (i === currentPage) ? 'active' : '';
+        btn.onclick = function() {
+            currentPage = i;
+            renderTablePage();
+        };
+        paginationDiv.appendChild(btn);
+    }
+}
+
+function loadVotersTable() {
+    fetch('/ubnhs-voting/php/voters/display_voter.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && Array.isArray(data.students)) {
+                studentsData = data.students;
+                populateFilterOptions();
+                currentPage = 1;
+                renderTablePage();
+            }
+        });
+}
+
+function populateFilterOptions() {
+    const yearSet = new Set();
+    const sectionSet = new Set();
+    studentsData.forEach(s => {
+        if (s.year_level) yearSet.add(s.year_level);
+        if (s.section) sectionSet.add(s.section);
+    });
+    const yearSelect = document.getElementById('filter-year');
+    const sectionSelect = document.getElementById('filter-section');
+    if (yearSelect) {
+        yearSelect.innerHTML = '<option value="">All Years</option>';
+        Array.from(yearSet).sort().forEach(y => {
+            yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
+        });
+    }
+    if (sectionSelect) {
+        sectionSelect.innerHTML = '<option value="">All Sections</option>';
+        Array.from(sectionSet).sort().forEach(s => {
+            sectionSelect.innerHTML += `<option value="${s}">${s}</option>`;
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    loadVotersTable();
+    document.getElementById('filter-year').addEventListener('change', function() {
+        filterYear = this.value;
+        currentPage = 1;
+        renderTablePage();
+    });
+    document.getElementById('filter-section').addEventListener('change', function() {
+        filterSection = this.value;
+        currentPage = 1;
+        renderTablePage();
+    });
     console.log('Voters page loaded successfully');
 });
