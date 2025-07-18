@@ -1,0 +1,1 @@
+[2025-07-17 18:52:57] ERROR: Student number already exists | POST: {"student_number":"123456789012","first_name":"Alekx","middle_name":"","last_name":"Alejandro","suffix":"","email":"aleck.bizz@gmail.com","year_level":"10","section":"B","status_id":"1"}
