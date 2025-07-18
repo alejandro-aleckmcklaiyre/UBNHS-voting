@@ -31,10 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    try {
-        $stmt = $pdo->prepare("SELECT password FROM admin WHERE username = :username LIMIT 1");
-        $stmt->execute(['username' => $username]);
-        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+    // Use mysqli prepared statement
+    $stmt = $conn->prepare("SELECT password FROM admin WHERE username = ? LIMIT 1");
+    if ($stmt) {
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $admin = $result->fetch_assoc();
 
         if ($admin) {
             if ($admin['password'] === $password || password_verify($password, $admin['password'])) {
@@ -52,8 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=invalid');
             exit();
         }
-    } catch (PDOException $e) {
-        log_error_json('db_error', $username, $_SERVER['REMOTE_ADDR'], $e->getMessage());
+        $stmt->close();
+    } else {
+        log_error_json('db_error', $username, $_SERVER['REMOTE_ADDR'], $conn->error);
         header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=db');
         exit();
     }

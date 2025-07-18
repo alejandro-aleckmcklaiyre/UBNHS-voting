@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2025 at 12:43 PM
+-- Generation Time: Jul 18, 2025 at 07:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -57,6 +57,54 @@ CREATE TABLE `candidate` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `class_group`
+--
+
+CREATE TABLE `class_group` (
+  `id` int(11) NOT NULL,
+  `year_level` varchar(50) NOT NULL,
+  `section` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `class_group`
+--
+
+INSERT INTO `class_group` (`id`, `year_level`, `section`) VALUES
+(16, '10', 'A'),
+(17, '10', 'B'),
+(18, '10', 'C'),
+(19, '10', 'D'),
+(20, '10', 'E'),
+(21, '11', 'A'),
+(22, '11', 'B'),
+(23, '11', 'C'),
+(24, '11', 'D'),
+(25, '11', 'E'),
+(26, '12', 'A'),
+(27, '12', 'B'),
+(28, '12', 'C'),
+(29, '12', 'D'),
+(30, '12', 'E'),
+(1, '7', 'A'),
+(2, '7', 'B'),
+(3, '7', 'C'),
+(4, '7', 'D'),
+(5, '7', 'E'),
+(6, '8', 'A'),
+(7, '8', 'B'),
+(8, '8', 'C'),
+(9, '8', 'D'),
+(10, '8', 'E'),
+(11, '9', 'A'),
+(12, '9', 'B'),
+(13, '9', 'C'),
+(14, '9', 'D'),
+(15, '9', 'E');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `qr_scan_logs`
 --
 
@@ -79,11 +127,42 @@ CREATE TABLE `student` (
   `middle_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) NOT NULL,
   `suffix` varchar(10) DEFAULT NULL,
-  `year_level` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `unique_code` varchar(255) NOT NULL,
-  `has_voted` tinyint(1) NOT NULL DEFAULT 0
+  `has_voted` tinyint(1) NOT NULL DEFAULT 0,
+  `class_group_id` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `suffix`, `email`, `unique_code`, `has_voted`, `class_group_id`, `status_id`) VALUES
+(1, '123456789012', 'Aleck', 'Rivera', 'Alejandro', NULL, 'aleck.alejandro04@gmail.com', '64c7c69e5d35b692', 0, 26, 1),
+(2, '123456789011', 'Alekx', NULL, 'Alejandro', NULL, 'aleck.bizz@gmail.com', 'db19c54f112c3d9f', 0, 22, 1),
+(7, '202412345008', 'Robert', 'James', 'Wilson', 'Sr.', 'robert.wilson@university.edu', 'Wilson38863a561dbfa128', 0, 8, 1),
+(8, '202412345007', 'Jennifer', 'Marie', 'Davis', NULL, 'jennifer.davis@university.edu', 'Davisc06ead22d5f9e8c7', 0, 2, 1),
+(9, '202412345006', 'Michael', 'David', 'Brown', 'III', 'michael.brown@university.edu', 'Brown349958db02726b1f', 0, 26, 1),
+(10, '202412345002', 'John', 'Michael', 'Thompson', 'Jr.', 'john.thompson@university.edu', 'Thompsonf30efbc98a4fb9e5', 0, 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_status`
+--
+
+CREATE TABLE `student_status` (
+  `id` int(11) NOT NULL,
+  `status_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_status`
+--
+
+INSERT INTO `student_status` (`id`, `status_name`) VALUES
+(1, 'Active');
 
 -- --------------------------------------------------------
 
@@ -127,6 +206,13 @@ ALTER TABLE `candidate`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `class_group`
+--
+ALTER TABLE `class_group`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `year_level` (`year_level`,`section`);
+
+--
 -- Indexes for table `qr_scan_logs`
 --
 ALTER TABLE `qr_scan_logs`
@@ -140,7 +226,16 @@ ALTER TABLE `student`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `student_number` (`student_number`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `unique_code` (`unique_code`);
+  ADD UNIQUE KEY `unique_code` (`unique_code`),
+  ADD KEY `fk_status_id` (`status_id`),
+  ADD KEY `fk_class_group` (`class_group_id`);
+
+--
+-- Indexes for table `student_status`
+--
+ALTER TABLE `student_status`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `status_name` (`status_name`);
 
 --
 -- Indexes for table `votelog`
@@ -173,6 +268,12 @@ ALTER TABLE `candidate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `class_group`
+--
+ALTER TABLE `class_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
 -- AUTO_INCREMENT for table `qr_scan_logs`
 --
 ALTER TABLE `qr_scan_logs`
@@ -182,7 +283,13 @@ ALTER TABLE `qr_scan_logs`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `student_status`
+--
+ALTER TABLE `student_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `votelog`
@@ -205,6 +312,13 @@ ALTER TABLE `votingtime`
 --
 ALTER TABLE `qr_scan_logs`
   ADD CONSTRAINT `qr_scan_logs_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`);
+
+--
+-- Constraints for table `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `fk_class_group` FOREIGN KEY (`class_group_id`) REFERENCES `class_group` (`id`),
+  ADD CONSTRAINT `fk_status_id` FOREIGN KEY (`status_id`) REFERENCES `student_status` (`id`);
 
 --
 -- Constraints for table `votelog`

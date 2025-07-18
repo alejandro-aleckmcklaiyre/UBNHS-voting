@@ -1,0 +1,11 @@
+student_number,first_name,middle_name,last_name,suffix,year_level,section,email
+202412345001,Maria,Santos,Rodriguez,,7,A,maria.rodriguez@university.edu
+202412345002,John,Michael,Thompson,Jr.,8,B,john.thompson@university.edu
+202412345003,Anna,Grace,Williams,,9,C,anna.williams@university.edu
+202412345004,Carlos,Jose,Martinez,,10,D,carlos.martinez@university.edu
+202412345005,Sarah,Elizabeth,Johnson,,11,E,sarah.johnson@university.edu
+202412345006,Michael,David,Brown,III,12,A,michael.brown@university.edu
+202412345007,Jennifer,Marie,Davis,,7,B,jennifer.davis@university.edu
+202412345008,Robert,James,Wilson,Sr.,8,C,robert.wilson@university.edu
+202412345009,Lisa,Ann,Garcia,,9,D,lisa.garcia@university.edu
+202412345010,Christopher,Paul,Miller,,10,E,christopher.miller@university.edu
