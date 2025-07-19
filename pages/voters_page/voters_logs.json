@@ -414,5 +414,181 @@
     {
         "timestamp": "2025-07-19 16:48:43",
         "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "post": {
+            "student_number": "202412345009",
+            "first_name": "Lisa",
+            "middle_name": "Ann",
+            "last_name": "Garcia",
+            "suffix": "",
+            "email": "lisa.garcia@university.edu",
+            "year_level": "9",
+            "section": "D",
+            "status_id": "1"
+        },
+        "step": "initial_post_received"
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202412345009",
+            "first_name": "Lisa",
+            "middle_name": "Ann",
+            "last_name": "Garcia",
+            "suffix": null,
+            "email": "lisa.garcia@university.edu",
+            "year_level": "9",
+            "section": "D",
+            "status_id": 1,
+            "unique_code": "Garcia9119a7e7d5207b20"
+        }
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "9",
+            "section": "D"
+        }
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "class_group_found",
+        "class_group_id": 14
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "202412345009",
+            "first_name": "Lisa",
+            "middle_name": "Ann",
+            "last_name": "Garcia",
+            "suffix": null,
+            "email": "lisa.garcia@university.edu",
+            "unique_code": "Garcia9119a7e7d5207b20",
+            "class_group_id": 14,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "insert_successful",
+        "student_id": 22
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Garcia-9-D-202412345009.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Garcia-9-D-202412345009.png",
+        "file_size": 2410
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 22
+    },
+    {
+        "timestamp": "2025-07-19 16:56:40",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "post": {
+            "student_number": "202412345010",
+            "first_name": "Christopher",
+            "middle_name": "Paul",
+            "last_name": "Miller",
+            "suffix": "",
+            "email": "christopher.miller@university.edu",
+            "year_level": "10",
+            "section": "E",
+            "status_id": "1"
+        },
+        "step": "initial_post_received"
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202412345010",
+            "first_name": "Christopher",
+            "middle_name": "Paul",
+            "last_name": "Miller",
+            "suffix": null,
+            "email": "christopher.miller@university.edu",
+            "year_level": "10",
+            "section": "E",
+            "status_id": 1,
+            "unique_code": "Millerd27edbace97c25f8"
+        }
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "10",
+            "section": "E"
+        }
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "class_group_found",
+        "class_group_id": 20
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "202412345010",
+            "first_name": "Christopher",
+            "middle_name": "Paul",
+            "last_name": "Miller",
+            "suffix": null,
+            "email": "christopher.miller@university.edu",
+            "unique_code": "Millerd27edbace97c25f8",
+            "class_group_id": 20,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "insert_successful",
+        "student_id": 23
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Miller-10-E-202412345010.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Miller-10-E-202412345010.png",
+        "file_size": 2517
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 23
+    },
+    {
+        "timestamp": "2025-07-19 17:04:46",
+        "step": "script_completed_successfully"
     }
 ]
