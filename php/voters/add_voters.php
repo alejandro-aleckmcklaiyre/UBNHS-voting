@@ -69,6 +69,124 @@ function log_voter_event($data) {
     }
 }
 
+// Function to create QR code with student details
+function createQRWithDetails($unique_code, $file_path, $student_details) {
+    global $qr_library_available;
+    
+    // First, try to generate QR code (either advanced or simple)
+    $temp_qr_path = $file_path . '_temp.png';
+    $qr_generated = false;
+    
+    if ($qr_library_available) {
+        $qr_generated = generateQRCodeAdvanced($unique_code, $temp_qr_path);
+    }
+    
+    if (!$qr_generated) {
+        $qr_generated = generateSimpleQR($unique_code, $temp_qr_path);
+    }
+    
+    if (!$qr_generated) {
+        return false;
+    }
+    
+    // Now create composite image with student details
+    $result = addStudentDetailsToQR($temp_qr_path, $file_path, $student_details);
+    
+    // Clean up temporary QR file
+    if (file_exists($temp_qr_path)) {
+        unlink($temp_qr_path);
+    }
+    
+    return $result;
+}
+
+// Function to add student details to QR code image
+function addStudentDetailsToQR($qr_path, $output_path, $student_details) {
+    // Check if GD extension is available
+    if (!extension_loaded('gd')) {
+        // If GD is not available, just copy the QR code
+        return copy($qr_path, $output_path);
+    }
+    
+    try {
+        // Load the QR code image
+        $qr_image = imagecreatefrompng($qr_path);
+        if (!$qr_image) {
+            return false;
+        }
+        
+        $qr_width = imagesx($qr_image);
+        $qr_height = imagesy($qr_image);
+        
+        // Calculate dimensions for the final image
+        $text_height = 80; // Space for text at bottom
+        $padding = 10;
+        $final_width = max($qr_width, 300) + ($padding * 2);
+        $final_height = $qr_height + $text_height + ($padding * 3);
+        
+        // Create new image with white background
+        $final_image = imagecreatetruecolor($final_width, $final_height);
+        $white = imagecolorallocate($final_image, 255, 255, 255);
+        $black = imagecolorallocate($final_image, 0, 0, 0);
+        
+        // Fill background with white
+        imagefill($final_image, 0, 0, $white);
+        
+        // Center the QR code horizontally
+        $qr_x = ($final_width - $qr_width) / 2;
+        $qr_y = $padding;
+        
+        // Copy QR code to final image
+        imagecopy($final_image, $qr_image, $qr_x, $qr_y, 0, 0, $qr_width, $qr_height);
+        
+        // Prepare text details
+        $name_line = trim($student_details['last_name'] . ', ' . $student_details['first_name'] . 
+                    ($student_details['middle_name'] ? ' ' . $student_details['middle_name'] : '') .
+                    ($student_details['suffix'] ? ' ' . $student_details['suffix'] : ''));
+        $class_line = $student_details['year_level'] . ' - ' . $student_details['section'];
+        $student_number_line = $student_details['student_number'];
+        
+        // Text positioning
+        $text_start_y = $qr_y + $qr_height + $padding + 15;
+        $text_x = $final_width / 2;
+        
+        // Try to use a built-in font, fall back to default if needed
+        $font_size = 3; // Built-in font size (1-5)
+        
+        // Add text lines (centered)
+        $name_width = imagefontwidth($font_size) * strlen($name_line);
+        $class_width = imagefontwidth($font_size) * strlen($class_line);
+        $number_width = imagefontwidth($font_size) * strlen($student_number_line);
+        
+        // Center text horizontally
+        imagestring($final_image, $font_size, 
+                   ($final_width - $name_width) / 2, 
+                   $text_start_y, $name_line, $black);
+        
+        imagestring($final_image, $font_size, 
+                   ($final_width - $class_width) / 2, 
+                   $text_start_y + 20, $class_line, $black);
+        
+        imagestring($final_image, $font_size, 
+                   ($final_width - $number_width) / 2, 
+                   $text_start_y + 40, $student_number_line, $black);
+        
+        // Save the final image
+        $result = imagepng($final_image, $output_path);
+        
+        // Clean up memory
+        imagedestroy($qr_image);
+        imagedestroy($final_image);
+        
+        return $result;
+        
+    } catch (Exception $e) {
+        error_log("QR Details Addition Error: " . $e->getMessage());
+        // Fall back to copying just the QR code
+        return copy($qr_path, $output_path);
+    }
+}
+
 // Improved QR Code generation with version compatibility
 function generateQRCodeAdvanced($unique_code, $file_path) {
     global $qr_library_available;
@@ -182,7 +300,7 @@ function generateSimpleQR($unique_code, $file_path) {
 }
 
 // Main QR generation function with multiple fallbacks
-function generateQRCode($unique_code, $file_path) {
+function generateQRCode($unique_code, $file_path, $student_details = null) {
     // Create QR code directory if it doesn't exist
     $qr_dir = dirname($file_path);
     if (!file_exists($qr_dir)) {
@@ -196,6 +314,12 @@ function generateQRCode($unique_code, $file_path) {
         return false;
     }
     
+    // If student details are provided, create QR with details
+    if ($student_details !== null) {
+        return createQRWithDetails($unique_code, $file_path, $student_details);
+    }
+    
+    // Otherwise, use the original method
     // Try advanced QR generation first
     if (generateQRCodeAdvanced($unique_code, $file_path)) {
         return true;
@@ -538,17 +662,29 @@ $file_name = sprintf(
 $qr_dir_path = __DIR__ . '/../../assets/qr_code';
 $file_path = $qr_dir_path . DIRECTORY_SEPARATOR . $file_name;
 
+// Prepare student details for QR code
+$student_details = [
+    'first_name' => $first_name,
+    'middle_name' => $middle_name,
+    'last_name' => $last_name,
+    'suffix' => $suffix,
+    'year_level' => $year_level,
+    'section' => $section,
+    'student_number' => $student_number
+];
+
 // Log QR generation start
 $qr_log = [
     'timestamp' => date('Y-m-d H:i:s'),
     'step' => 'qr_generation_start',
     'file_path' => $file_path,
-    'qr_library_available' => $qr_library_available
+    'qr_library_available' => $qr_library_available,
+    'gd_extension_loaded' => extension_loaded('gd')
 ];
 log_voter_event($qr_log);
 
-// Try to generate QR code
-$qr_success = generateQRCode($unique_code, $file_path);
+// Try to generate QR code with student details
+$qr_success = generateQRCode($unique_code, $file_path, $student_details);
 
 if ($qr_success) {
     $qr_success_log = [

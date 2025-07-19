@@ -134,7 +134,10 @@ function confirmRow(button) {
             button.disabled = false;
             button.textContent = 'Confirm';
             
-            if (response && response.success) {
+            console.log('Server response:', response); // Debug log
+            
+            // Check if response exists and has success property
+            if (response && response.success === true) {
                 // Convert inputs to text content
                 if (inputs.length > 0) {
                     inputs.forEach(input => {
@@ -148,18 +151,24 @@ function confirmRow(button) {
                 const studentNumber = row.cells[1].textContent;
                 actionsCell.innerHTML = '<button onclick="deleteStudent(\'' + studentNumber + '\')">Delete</button>';
                 
-                // Show success message with QR status
+                // Prepare success message with QR status
+                let successTitle = 'Success!';
                 let successMessage = 'Student added successfully!';
+                let iconType = 'success';
+                
+                // Handle QR generation status
                 if (response.qr_generated === false) {
-                    successMessage += '\n\nNote: QR code could not be generated at this time but can be created later.';
+                    successTitle = 'Student Added (QR Issue)';
+                    successMessage = 'Student was added successfully, but QR code could not be generated at this time. The QR code can be created later.';
+                    iconType = 'warning';
                 }
                 
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
+                    icon: iconType,
+                    title: successTitle,
                     text: successMessage,
                     showConfirmButton: true,
-                    timer: 3000
+                    timer: iconType === 'success' ? 3000 : 5000 // Longer timer for warning
                 });
 
                 // Log additional info if available
@@ -169,6 +178,9 @@ function confirmRow(button) {
                 if (response.unique_code) {
                     console.log('Unique code generated:', response.unique_code);
                 }
+                if (response.qr_generated !== undefined) {
+                    console.log('QR code generated:', response.qr_generated);
+                }
                 
                 // Refresh the table to get latest data
                 if (typeof loadVotersTable === 'function') {
@@ -176,8 +188,10 @@ function confirmRow(button) {
                 }
                 
             } else {
-                // Handle success=false case
+                // Handle success=false case or malformed response
                 const errorMessage = response && response.message ? response.message : 'Failed to add student.';
+                console.error('Server returned error:', response);
+                
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
@@ -192,6 +206,15 @@ function confirmRow(button) {
             
             let errorMsg = 'Failed to add student.';
             let errorDetails = '';
+            
+            console.error('AJAX Error Details:', {
+                status: xhr.status,
+                statusText: xhr.statusText,
+                responseText: xhr.responseText,
+                responseJSON: xhr.responseJSON,
+                error: error,
+                readyState: xhr.readyState
+            });
             
             // Try to parse JSON response first
             if (xhr.responseJSON) {
@@ -208,23 +231,41 @@ function confirmRow(button) {
                     if (parsed.message) {
                         errorMsg = parsed.message;
                     }
+                    if (parsed.success === true) {
+                        // This means the server actually succeeded but jQuery treated it as error
+                        // This can happen with malformed JSON or HTTP status issues
+                        console.warn('Server succeeded but AJAX treated as error:', parsed);
+                        
+                        // Handle as success
+                        this.success(parsed);
+                        return;
+                    }
                 } catch (e) {
-                    // If not JSON, show HTTP status info
-                    errorMsg = `Server error (${xhr.status}): ${xhr.statusText || 'Unknown error'}`;
+                    // If not JSON, check for common server errors
+                    if (xhr.status >= 500) {
+                        errorMsg = `Server error (${xhr.status}): The server encountered an internal error.`;
+                    } else if (xhr.status === 404) {
+                        errorMsg = 'The add_voters.php file could not be found.';
+                    } else if (xhr.status === 403) {
+                        errorMsg = 'Access denied to add_voters.php';
+                    } else if (xhr.status >= 400) {
+                        errorMsg = `Client error (${xhr.status}): ${xhr.statusText || 'Bad request'}`;
+                    } else {
+                        errorMsg = `HTTP error (${xhr.status}): ${xhr.statusText || 'Unknown error'}`;
+                    }
                 }
             } else {
                 // Network or other error
-                errorMsg = `Network error: ${error || 'Unable to connect to server'}`;
+                if (status === 'timeout') {
+                    errorMsg = 'Request timed out. Please try again.';
+                } else if (status === 'error') {
+                    errorMsg = 'Network error: Unable to connect to server.';
+                } else if (status === 'abort') {
+                    errorMsg = 'Request was cancelled.';
+                } else {
+                    errorMsg = `Network error: ${error || 'Unable to connect to server'}`;
+                }
             }
-            
-            // Log detailed error for debugging
-            console.error('Add Voter Error Details:', {
-                status: xhr.status,
-                statusText: xhr.statusText,
-                responseText: xhr.responseText,
-                responseJSON: xhr.responseJSON,
-                error: error
-            });
             
             Swal.fire({
                 icon: 'error',
@@ -233,7 +274,7 @@ function confirmRow(button) {
                 footer: errorDetails ? `Details: ${errorDetails}` : ''
             });
         },
-        timeout: 30000 // 30 second timeout
+        timeout: 60000 // Increased to 60 seconds for QR generation
     });
 }
 
@@ -400,33 +441,80 @@ function submitForm(event) {
     }
 }
 
+// Enhanced QR Generation function
 document.getElementById("generateQrBtn")?.addEventListener("click", function() {
     // Show loading state
     const btn = this;
     const originalText = btn.textContent;
     btn.disabled = true;
-    btn.textContent = 'Generating...';
+    btn.textContent = 'Generating QR Codes...';
     
-    // TODO: Implement actual QR generation for all students
-    // For now, simulate the process
+    // Show progress dialog
     Swal.fire({
-        icon: 'info',
-        title: 'Generating QR codes...',
-        text: 'This may take a few moments...',
+        title: 'Generating QR Codes',
+        html: 'Processing students... This may take several minutes for large numbers of students.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
         showConfirmButton: false,
-        timer: 2000,
-        allowOutsideClick: false
-    }).then(() => {
-        Swal.fire({
-            icon: 'success',
-            title: 'QR codes generated successfully!',
-            showConfirmButton: false,
-            timer: 2000
-        });
-        
-        // Reset button
-        btn.disabled = false;
-        btn.textContent = originalText;
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+    
+    // Call the QR generation endpoint
+    $.ajax({
+        url: '/ubnhs-voting/php/voters/generate_all_qr.php', // You'll need to create this endpoint
+        type: 'POST',
+        dataType: 'json',
+        timeout: 300000, // 5 minutes timeout for bulk operations
+        success: function(response) {
+            btn.disabled = false;
+            btn.textContent = originalText;
+            
+            if (response && response.success) {
+                const successCount = response.success_count || 0;
+                const failCount = response.fail_count || 0;
+                const totalCount = successCount + failCount;
+                
+                let message = `Successfully generated ${successCount} QR codes.`;
+                if (failCount > 0) {
+                    message += ` ${failCount} QR codes failed to generate.`;
+                }
+                
+                Swal.fire({
+                    icon: successCount > 0 ? 'success' : 'warning',
+                    title: 'QR Code Generation Complete',
+                    html: message,
+                    showConfirmButton: true
+                });
+                
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'QR Generation Failed',
+                    text: response?.message || 'Failed to generate QR codes. Please try again.',
+                    showConfirmButton: true
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+            btn.disabled = false;
+            btn.textContent = originalText;
+            
+            console.error('QR Generation Error:', {status, error, responseText: xhr.responseText});
+            
+            let errorMsg = 'Failed to generate QR codes.';
+            if (status === 'timeout') {
+                errorMsg = 'QR generation timed out. Please try again or generate QR codes in smaller batches.';
+            }
+            
+            Swal.fire({
+                icon: 'error',
+                title: 'QR Generation Error',
+                text: errorMsg,
+                showConfirmButton: true
+            });
+        }
     });
 });
 
@@ -498,6 +586,8 @@ function loadVotersTable() {
             return response.json();
         })
         .then(data => {
+            console.log('Received data:', data); // Debug log
+            
             if (data && data.success && Array.isArray(data.students)) {
                 studentsData = data.students;
                 populateFilterOptions();
@@ -505,7 +595,7 @@ function loadVotersTable() {
                 renderTablePage();
                 console.log('Loaded', studentsData.length, 'students');
             } else {
-                console.warn('No students data received or invalid format');
+                console.warn('No students data received or invalid format:', data);
                 studentsData = [];
                 renderTablePage();
             }
@@ -553,19 +643,19 @@ document.addEventListener('DOMContentLoaded', function() {
         loadVotersTable();
         
         // Add event listeners with error handling
-        const filterYear = document.getElementById('filter-year');
-        const filterSection = document.getElementById('filter-section');
+        const filterYearElement = document.getElementById('filter-year');
+        const filterSectionElement = document.getElementById('filter-section');
         
-        if (filterYear) {
-            filterYear.addEventListener('change', function() {
+        if (filterYearElement) {
+            filterYearElement.addEventListener('change', function() {
                 filterYear = this.value;
                 currentPage = 1;
                 renderTablePage();
             });
         }
         
-        if (filterSection) {
-            filterSection.addEventListener('change', function() {
+        if (filterSectionElement) {
+            filterSectionElement.addEventListener('change', function() {
                 filterSection = this.value;
                 currentPage = 1;
                 renderTablePage();
