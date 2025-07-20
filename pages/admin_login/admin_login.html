@@ -5,10 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/ubnhs-voting/pages/admin_login/AP_Interface.css">
+    <style>
+        /* Container for the login form and mesh */
+        .box {
+            position: relative;
+            overflow: hidden; /* Clips canvas inside */
+        }
+
+        /* Mesh canvas styling */
+        #network-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Ensure login content is above the mesh */
+        .image-container1,
+        .image-container1 form,
+        .image-container1 h2,
+        .button-link {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
 
 <div class="box">
+    <!-- Mesh only appears inside this box -->
+    <canvas id="network-mesh"></canvas>
+
     <div class="image-container1">
         <img src="/ubnhs-voting/assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo">
         <h2><b>USER LOGIN</b></h2>
@@ -27,6 +57,67 @@
         <a href="index.php" class="button-link"><b>Back</b></a>
     </div>
 </div>
+
+<!-- Network mesh script -->
+<script>
+    const canvas = document.getElementById("network-mesh");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const points = [];
+    const numPoints = 100;
+
+    for (let i = 0; i < numPoints; i++) {
+        points.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 1,
+            vy: (Math.random() - 0.5) * 1,
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let p of points) {
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = "#c26b6b"; // soft but visible red
+            ctx.fill();
+        }
+
+        for (let i = 0; i < points.length; i++) {
+            for (let j = i + 1; j < points.length; j++) {
+                const dx = points[i].x - points[j].x;
+                const dy = points[i].y - points[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(points[i].x, points[i].y);
+                    ctx.lineTo(points[j].x, points[j].y);
+                    ctx.strokeStyle = `rgba(194, 107, 107, ${1 - dist / 100})`;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
 
 <script src="/ubnhs-voting/pages/admin_login/admin_login.js"></script>
 </body>

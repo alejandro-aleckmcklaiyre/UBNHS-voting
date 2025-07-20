@@ -1,90 +1,350 @@
-/* Sidebar styles (modular for all pages) */
-.sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    background-color: #1d2346;
-    overflow-x: hidden;
-    transition: 0.3s ease;
-    padding-top: 60px;
+/* ========== Network Mesh Background ========== */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 50px 100px, rgba(220, 38, 38, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 150px 50px, rgba(220, 38, 38, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 250px 150px, rgba(220, 38, 38, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 100px 200px, rgba(220, 38, 38, 0.4) 2px, transparent 3px);
+  background-size: 200px 150px, 200px 150px, 200px 150px, 200px 150px;
+  animation: networkFloat 30s linear infinite;
+  pointer-events: none;
+  z-index: 1;
 }
 
+@keyframes networkFloat {
+  0% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-10px) translateX(5px); }
+  50% { transform: translateY(-5px) translateX(-3px); }
+  75% { transform: translateY(-15px) translateX(8px); }
+  100% { transform: translateY(0px) translateX(0px); }
+}
+
+/* ========== Moving Particles ========== */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20px 80px, rgba(220, 38, 38, 0.9) 2px, transparent 3px),
+    radial-gradient(circle at 80px 20px, rgba(239, 68, 68, 0.8) 2px, transparent 3px),
+    radial-gradient(circle at 40px 30px, rgba(220, 38, 38, 0.7) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 90px 70px, rgba(239, 68, 68, 0.9) 2px, transparent 3px),
+    radial-gradient(circle at 130px 40px, rgba(220, 38, 38, 0.8) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 160px 90px, rgba(239, 68, 68, 0.7) 2px, transparent 3px),
+    radial-gradient(circle at 30px 120px, rgba(220, 38, 38, 0.9) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 110px 140px, rgba(239, 68, 68, 0.8) 2px, transparent 3px),
+    radial-gradient(circle at 180px 60px, rgba(220, 38, 38, 0.7) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 60px 160px, rgba(239, 68, 68, 0.9) 2px, transparent 3px),
+    radial-gradient(circle at 140px 100px, rgba(220, 38, 38, 0.8) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 200px 120px, rgba(239, 68, 68, 0.7) 2px, transparent 3px),
+    radial-gradient(circle at 50px 180px, rgba(220, 38, 38, 0.9) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 120px 200px, rgba(239, 68, 68, 0.8) 2px, transparent 3px),
+    radial-gradient(circle at 170px 180px, rgba(220, 38, 38, 0.7) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 25px 50px, rgba(239, 68, 68, 0.8) 2px, transparent 3px),
+    radial-gradient(circle at 75px 100px, rgba(220, 38, 38, 0.9) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 125px 25px, rgba(239, 68, 68, 0.7) 2px, transparent 3px),
+    radial-gradient(circle at 175px 125px, rgba(220, 38, 38, 0.8) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 45px 175px, rgba(239, 68, 68, 0.9) 2px, transparent 3px),
+    radial-gradient(circle at 95px 225px, rgba(220, 38, 38, 0.7) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 145px 75px, rgba(239, 68, 68, 0.8) 2px, transparent 3px),
+    radial-gradient(circle at 195px 175px, rgba(220, 38, 38, 0.9) 1.5px, transparent 2.5px),
+    radial-gradient(circle at 65px 25px, rgba(239, 68, 68, 0.7) 2px, transparent 3px),
+    radial-gradient(circle at 115px 125px, rgba(220, 38, 38, 0.8) 1.5px, transparent 2.5px);
+  background-size: 100px 100px, 120px 120px, 80px 80px, 140px 140px, 90px 90px, 110px 110px, 130px 130px, 150px 150px, 70px 70px, 160px 160px, 105px 105px, 115px 115px, 135px 135px, 125px 125px, 145px 145px, 85px 85px, 95px 95px, 155px 155px, 75px 75px, 165px 165px, 185px 185px, 65px 65px, 175px 175px, 195px 195px, 55px 55px;
+  animation: particleFloat 25s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+}
+
+@keyframes particleFloat {
+  0% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+  25% { 
+    transform: translateY(-15px) translateX(8px) rotate(90deg);
+    opacity: 1;
+  }
+  50% { 
+    transform: translateY(-8px) translateX(-5px) rotate(180deg);
+    opacity: 0.6;
+  }
+  75% { 
+    transform: translateY(-20px) translateX(12px) rotate(270deg);
+    opacity: 0.9;
+  }
+  100% { 
+    transform: translateY(0px) translateX(0px) rotate(360deg);
+    opacity: 0.8;
+  }
+}
+
+/* ========== Sidebar Container ========== */
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background: #7f1d1d;
+  animation: gradientShift 12s ease infinite;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  padding-top: 120px;
+  box-shadow: 
+    0 0 60px rgba(127, 29, 29, 0.4),
+    inset 0 0 80px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border-right: 2px solid rgba(220, 38, 38, 0.3);
+}
+
+/* Make sidebar narrower when open to prevent overlap */
+.sidebar.open {
+  width: 240px;
+}
+
+@keyframes gradientShift {
+  0% { opacity: 0.9; }
+  50% { opacity: 1; }
+  100% { opacity: 0.9; }
+}
+
+/* ========== Sidebar Links ========== */
 .sidebar a {
-    padding: 12px 8px 12px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #EC9A29;
-    display: block;
-    transition: 0.3s;
-    border-bottom: 1px solid rgba(236, 154, 41, 0.2);
+  padding: 24px 35px;
+  margin: 10px 20px;
+  display: block;
+  font-size: 18px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 500;
+  border-radius: 12px;
+  background: rgba(127, 29, 29, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.sidebar a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.25), 
+    transparent);
+  transition: left 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: -1;
+}
+
+.sidebar a::after {
+  display: none;
 }
 
 .sidebar a:hover {
-    color: #DAD2D8;
-    background-color: #143642;
+  background: rgba(185, 28, 28, 0.4);
+  color: #ffffff;
+  text-shadow: 0 2px 12px rgba(220, 38, 38, 0.5);
+  transform: translateX(8px) scale(1.02);
+  box-shadow: 
+    inset 0 0 20px rgba(220, 38, 38, 0.2),
+    0 5px 20px rgba(185, 28, 28, 0.3);
+  border-color: rgba(220, 38, 38, 0.5);
+}
+
+.sidebar a:hover::before {
+  left: 100%;
+}
+
+.sidebar a:hover::after {
+  display: none;
 }
 
 .sidebar a.active {
-    background-color: #143642;
-    color: #DAD2D8;
-    font-weight: bold;
+  background: rgba(185, 28, 28, 0.5);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 
+    inset 0 0 30px rgba(220, 38, 38, 0.3),
+    0 0 25px rgba(185, 28, 28, 0.5);
+  border: 2px solid rgba(220, 38, 38, 0.8);
 }
 
+.sidebar a.active::after {
+  display: none;
+}
+
+/* ========== Close Button ========== */
 .sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 15px;
-    font-size: 36px;
-    color: #EC9A29;
-    border-bottom: none;
-    padding: 8px 16px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  border: none;
+  cursor: pointer;
+  background: rgba(185, 28, 28, 0.15);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 10;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  line-height: 1;
+  margin-bottom: 10px;
 }
 
 .sidebar .closebtn:hover {
-    color: #DAD2D8;
-    background-color: transparent;
+  color: #ffffff;
+  background: rgba(185, 28, 28, 0.5);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+  border-color: rgba(220, 38, 38, 0.6);
 }
 
-/* Open button styles */
+/* ========== Open Button ========== */
 .openbtn {
-    font-size: 18px;
-    cursor: pointer;
-    background-color: #1d2346;
-    color: white;
-    padding: 12px 16px;
-    border: 2px solid #EC9A29;
-    border-radius: 8px;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 999;
-    transition: all 0.3s ease;
+  font-size: 18px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #7f1d1d, #b91c1c);
+  color: white;
+  padding: 14px 24px;
+  border: 2px solid rgba(220, 38, 38, 0.4);
+  border-radius: 12px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 999;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 8px 25px rgba(127, 29, 29, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+}
+
+.openbtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.25), 
+    transparent);
+  transition: left 0.5s ease;
 }
 
 .openbtn:hover {
-    background-color: #143642;
-    color: #DAD2D8;
-    transform: scale(1.05);
+  background: linear-gradient(135deg, #b91c1c, #dc2626);
+  color: #ffffff;
+  border-color: rgba(220, 38, 38, 0.8);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 12px 35px rgba(185, 28, 28, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Animation for sidebar and buttons */
-.sidebar a, .openbtn {
-    position: relative;
-    overflow: hidden;
+.openbtn:hover::before {
+  left: 100%;
 }
-.sidebar a::before, .openbtn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+
+.openbtn:active {
+  transform: translateY(-1px) scale(1.02);
 }
-.sidebar a:hover::before, .openbtn:hover::before {
-    left: 100%;
+
+/* ========== Enhanced Glow Effects ========== */
+.sidebar a:hover,
+.sidebar .closebtn:hover,
+.openbtn:hover {
+  animation: pulseGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+  0% {
+    filter: brightness(1) saturate(1);
+  }
+  100% {
+    filter: brightness(1.1) saturate(1.2);
+  }
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 768px) {
+  .sidebar.open {
+    width: 200px;
+  }
+  
+  .sidebar a {
+    padding: 15px 20px;
+    font-size: 15px;
+    margin: 5px 12px;
+  }
+  
+  .openbtn {
+    padding: 12px 20px;
+    font-size: 16px;
+    top: 15px;
+    left: 15px;
+  }
+  
+  .sidebar .closebtn {
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    right: 12px;
+    top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar.open {
+    width: 180px;
+  }
+  
+  .sidebar a {
+    padding: 12px 15px;
+    font-size: 14px;
+    margin: 4px 10px;
+  }
+  
+  .openbtn {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+  
+  .sidebar .closebtn {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
 }
