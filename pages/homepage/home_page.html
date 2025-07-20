@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<!-- Canvas for network mesh -->
+<canvas id="network-mesh"></canvas>
+
 <div class="image-container-wrapper">
     <div class="image-container3">
         <img src="assets/images-UBNHS/UBNHS-LOGO.png" alt="UBNHS Logo">
@@ -38,6 +41,73 @@
         </form>
     </div>
 </div>
+
+<!-- Network mesh script -->
+<script>
+    const canvas = document.getElementById("network-mesh");
+    const ctx = canvas.getContext("2d");
+    canvas.style.position = "fixed";
+    canvas.style.top = 0;
+    canvas.style.left = 0;
+    canvas.style.zIndex = "-1";
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const points = [];
+    const numPoints = 150; // Increased number of dots
+
+    for (let i = 0; i < numPoints; i++) {
+        points.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 1.2, // slightly faster motion
+            vy: (Math.random() - 0.5) * 1.2,
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < points.length; i++) {
+            const p = points[i];
+            p.x += p.vx;
+            p.y += p.vy;
+
+            if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = "#aaa";
+            ctx.fill();
+        }
+
+        for (let i = 0; i < points.length; i++) {
+            for (let j = i + 1; j < points.length; j++) {
+                const dx = points[i].x - points[j].x;
+                const dy = points[i].y - points[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 100) {
+                    ctx.beginPath();
+                    ctx.moveTo(points[i].x, points[i].y);
+                    ctx.lineTo(points[j].x, points[j].y);
+                    ctx.strokeStyle = `rgba(170, 170, 170, ${1 - dist / 100})`;
+                    ctx.stroke();
+                }
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    draw();
+</script>
 
 </body>
 </html>

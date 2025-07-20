@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   height: 100vh; 
-  background-image: url("/ubnhs-voting/assets/images-UBNHS/MAIN-B-1.png");
+  background-image: url("/ubnhs-voting/assets/images-UBNHS/CANDIDATE_BG.png");
   background-size: cover; 
   background-position: 0px 0px; 
   background-attachment: fixed; 
@@ -19,7 +19,7 @@ body {
     border-radius: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     margin-top: 20px; 
-    max-width: 1000px; 
+    max-width: 658px; 
     margin-left: auto;
     margin-right: auto;
 }
