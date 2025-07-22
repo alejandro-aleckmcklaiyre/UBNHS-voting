@@ -1,64 +1,23 @@
 <?php
 session_start();
 require_once '../config/db_config.php';
-
-function log_error_json($type, $username, $ip, $extra = '') {
-    $log_file = __DIR__ . '/login_logs.json';
-    $date = date('Y-m-d H:i:s');
-    $entry = [
-        'timestamp' => $date,
-        'type' => $type,
-        'username' => $username,
-        'ip' => $ip,
-        'extra' => $extra
-    ];
-    $logs = [];
-    if (file_exists($log_file)) {
-        $logs = json_decode(file_get_contents($log_file), true);
-        if (!is_array($logs)) $logs = [];
-    }
-    $logs[] = $entry;
-    file_put_contents($log_file, json_encode($logs, JSON_PRETTY_PRINT));
-}
+require_once '../config/session_config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
 
     if ($username === '' || $password === '') {
-        log_error_json('empty_fields', $username, $_SERVER['REMOTE_ADDR']);
         header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=empty');
         exit();
     }
 
-    // Use mysqli prepared statement
-    $stmt = $conn->prepare("SELECT password FROM admin WHERE username = ? LIMIT 1");
-    if ($stmt) {
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $admin = $result->fetch_assoc();
-
-        if ($admin) {
-            if ($admin['password'] === $password || password_verify($password, $admin['password'])) {
-                $_SESSION['admin_logged_in'] = true;
-                $_SESSION['admin_username'] = $username;
-                header('Location: /ubnhs-voting/pages/admin_dashboard/admin_dashboard.html');
-                exit();
-            } else {
-                log_error_json('failed_login', $username, $_SERVER['REMOTE_ADDR'], 'Username found, password incorrect');
-                header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=invalid');
-                exit();
-            }
-        } else {
-            log_error_json('failed_login', $username, $_SERVER['REMOTE_ADDR'], 'Username not found');
-            header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=invalid');
-            exit();
-        }
-        $stmt->close();
+    // Use session_config's loginAdmin function
+    if (loginAdmin($username, $password)) {
+        header('Location: /ubnhs-voting/pages/admin_dashboard/admin_dashboard.html');
+        exit();
     } else {
-        log_error_json('db_error', $username, $_SERVER['REMOTE_ADDR'], $conn->error);
-        header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=db');
+        header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=invalid');
         exit();
     }
 } else {
