@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2025 at 07:40 PM
+-- Generation Time: Jul 22, 2025 at 08:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `ubnhs-voting`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `active_sessions`
+--
+
+CREATE TABLE `active_sessions` (
+  `id` int(11) NOT NULL,
+  `session_id` varchar(128) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_type` enum('admin','student') NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `user_agent` text DEFAULT NULL,
+  `login_time` datetime NOT NULL DEFAULT current_timestamp(),
+  `last_activity` datetime NOT NULL DEFAULT current_timestamp(),
+  `is_active` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -105,14 +123,68 @@ INSERT INTO `class_group` (`id`, `year_level`, `section`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `login_attempts`
+--
+
+CREATE TABLE `login_attempts` (
+  `id` int(11) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `user_type` enum('admin','student') NOT NULL,
+  `attempt_time` datetime NOT NULL DEFAULT current_timestamp(),
+  `success` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `qr_scan_logs`
 --
 
 CREATE TABLE `qr_scan_logs` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
+  `unique_code` varchar(255) NOT NULL,
   `scan_time` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `qr_scan_logs`
+--
+
+INSERT INTO `qr_scan_logs` (`id`, `student_id`, `unique_code`, `scan_time`) VALUES
+(1, 23, 'Millerd27edbace97c25f8', '2025-07-23 00:37:48'),
+(2, 24, 'Rodriguezd3071269cb16e702', '2025-07-23 00:50:03');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `session_logs`
+--
+
+CREATE TABLE `session_logs` (
+  `id` int(11) NOT NULL,
+  `session_id` varchar(128) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `user_type` enum('admin','student') DEFAULT NULL,
+  `username` varchar(100) DEFAULT NULL,
+  `action` varchar(50) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `user_agent` text DEFAULT NULL,
+  `success` tinyint(1) NOT NULL,
+  `error_message` text DEFAULT NULL,
+  `timestamp` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `session_logs`
+--
+
+INSERT INTO `session_logs` (`id`, `session_id`, `user_id`, `user_type`, `username`, `action`, `ip_address`, `user_agent`, `success`, `error_message`, `timestamp`) VALUES
+(1, 'hti66am8o36ml65kf5r8ds1lqu', 1, 'admin', 'alekx', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 1, NULL, '2025-07-22 19:31:30'),
+(2, 'hti66am8o36ml65kf5r8ds1lqu', 28, 'student', '123456789013', 'login', '::1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36', 1, NULL, '2025-07-22 23:56:44'),
+(3, 'ac522s6t4pdbvtcmjl2n5n1fe0', 23, 'student', '202412345010', 'login', '::1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36', 1, NULL, '2025-07-23 00:37:48'),
+(4, 'ac522s6t4pdbvtcmjl2n5n1fe0', 24, 'student', '202412345001', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 1, NULL, '2025-07-23 00:50:03');
 
 -- --------------------------------------------------------
 
@@ -144,7 +216,16 @@ INSERT INTO `student` (`id`, `student_number`, `first_name`, `middle_name`, `las
 (7, '202412345008', 'Robert', 'James', 'Wilson', 'Sr.', 'robert.wilson@university.edu', 'Wilson38863a561dbfa128', 0, 8, 1),
 (8, '202412345007', 'Jennifer', 'Marie', 'Davis', NULL, 'jennifer.davis@university.edu', 'Davisc06ead22d5f9e8c7', 0, 2, 1),
 (9, '202412345006', 'Michael', 'David', 'Brown', 'III', 'michael.brown@university.edu', 'Brown349958db02726b1f', 0, 26, 1),
-(10, '202412345002', 'John', 'Michael', 'Thompson', 'Jr.', 'john.thompson@university.edu', 'Thompsonf30efbc98a4fb9e5', 0, 7, 1);
+(10, '202412345002', 'John', 'Michael', 'Thompson', 'Jr.', 'john.thompson@university.edu', 'Thompsonf30efbc98a4fb9e5', 0, 7, 1),
+(20, '123456789010', 'Aleck', NULL, 'Rivera', NULL, 'alejandro.aleck@gmail.com', 'Riveracbcc58a622ebd0a6', 0, 27, 1),
+(21, '012345678910', 'Jalen', NULL, 'Avelino', NULL, 'jalen@gmail.com', 'Avelino03403c7589a2e99f', 0, 26, 1),
+(22, '202412345009', 'Lisa', 'Ann', 'Garcia', NULL, 'lisa.garcia@university.edu', 'Garcia9119a7e7d5207b20', 0, 14, 1),
+(23, '202412345010', 'Christopher', 'Paul', 'Miller', NULL, 'christopher.miller@university.edu', 'Millerd27edbace97c25f8', 0, 20, 2),
+(24, '202412345001', 'Maria', 'Santos', 'Rodriguez', NULL, 'maria.rodriguez@university.edu', 'Rodriguezd3071269cb16e702', 0, 1, 2),
+(25, '202412345003', 'Anna', 'Grace', 'Williams', NULL, 'anna.williams@university.edu', 'Williamsec99bebc472a15fa', 0, 13, 1),
+(26, '202412345004', 'Carlos', 'Jose', 'Martinez', NULL, 'carlos.martinez@university.edu', 'Martinezc4bc8465baa20fb3', 0, 19, 1),
+(27, '123456789111', 'Geralt', NULL, 'Rivia', NULL, 'geralt.rivia@gmail.com', 'Riviad91a195e59624cf8', 0, 21, 1),
+(28, '123456789013', 'Adie', NULL, 'Rivera', NULL, 'adie.test@gmail.com', 'Rivera8fc6e710d870c686', 0, 26, 2);
 
 -- --------------------------------------------------------
 
@@ -162,7 +243,8 @@ CREATE TABLE `student_status` (
 --
 
 INSERT INTO `student_status` (`id`, `status_name`) VALUES
-(1, 'Active');
+(1, 'Active'),
+(2, 'Used');
 
 -- --------------------------------------------------------
 
@@ -193,6 +275,15 @@ CREATE TABLE `votingtime` (
 --
 
 --
+-- Indexes for table `active_sessions`
+--
+ALTER TABLE `active_sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `session_id` (`session_id`),
+  ADD KEY `user_lookup` (`user_id`,`user_type`),
+  ADD KEY `cleanup_index` (`is_active`,`last_activity`);
+
+--
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
@@ -213,11 +304,29 @@ ALTER TABLE `class_group`
   ADD UNIQUE KEY `year_level` (`year_level`,`section`);
 
 --
+-- Indexes for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `security_index` (`ip_address`,`attempt_time`),
+  ADD KEY `username_index` (`username`,`attempt_time`);
+
+--
 -- Indexes for table `qr_scan_logs`
 --
 ALTER TABLE `qr_scan_logs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `student_id` (`student_id`);
+
+--
+-- Indexes for table `session_logs`
+--
+ALTER TABLE `session_logs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_lookup` (`user_id`,`user_type`),
+  ADD KEY `session_lookup` (`session_id`),
+  ADD KEY `activity_index` (`action`,`timestamp`),
+  ADD KEY `ip_index` (`ip_address`,`timestamp`);
 
 --
 -- Indexes for table `student`
@@ -256,6 +365,12 @@ ALTER TABLE `votingtime`
 --
 
 --
+-- AUTO_INCREMENT for table `active_sessions`
+--
+ALTER TABLE `active_sessions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
@@ -274,22 +389,34 @@ ALTER TABLE `class_group`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
+-- AUTO_INCREMENT for table `login_attempts`
+--
+ALTER TABLE `login_attempts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `qr_scan_logs`
 --
 ALTER TABLE `qr_scan_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `session_logs`
+--
+ALTER TABLE `session_logs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `student_status`
 --
 ALTER TABLE `student_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `votelog`
