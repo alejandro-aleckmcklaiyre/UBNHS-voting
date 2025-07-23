@@ -1,0 +1,196 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../../assets/images-UBNHS/MAIN-BG-3.png");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: relative;
+    padding: 20px;
+    text-align: center;
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 90px;
+}
+
+.logo2 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 90px;
+}
+
+.voting-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-box {
+    text-align: center;
+    display: inline-block;
+    margin: 10px;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.candidate-box:hover {
+    border-color: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.candidate-box input[type="radio"]:checked + label {
+    background-color: #007bff;
+    color: white;
+}
+
+.candidate-box img {
+    display: block;
+    margin: 0 auto 10px;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.candidate-box label {
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.candidate-box input[type="radio"] {
+    margin-right: 8px;
+}
+
+.committee {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.committee h2 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.candidates-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.buttons-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.buttons-container button {
+    margin: 0 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttons-container button:first-child {
+    background-color: #6c757d;
+    color: white;
+}
+
+.buttons-container button:first-child:hover {
+    background-color: #545b62;
+}
+
+.buttons-container button:last-child {
+    background-color: #007bff;
+    color: white;
+}
+
+.buttons-container button:last-child:hover {
+    background-color: #0056b3;
+}
+
+#submit-summary {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#summary-container {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+#summary-container p {
+    font-size: 1.1em;
+    margin: 10px 0;
+    padding: 8px;
+    background-color: white;
+    border-radius: 5px;
+    border-left: 4px solid #007bff;
+}
+
+#thank-you {
+    display: none;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#thank-you h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#thank-you h2 {
+    font-size: 1.8em;
+    color: #555;
+    font-style: italic;
+}
+
+#thank-you p {
+    margin-top: 30px;
+    font-size: 1.2em;
+    color: #666;
+}
+
+#thank-you a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#thank-you a:hover {
+    background-color: #0056b3;
+}
