@@ -45,7 +45,6 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Sample row (you can add more with JavaScript) -->
               <tr>
                 <td>VP FINANCE</td>
                 <td>John Doe</td>
@@ -107,65 +106,6 @@
     </center>
   </main>
 </div>
-
-<script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-  document.getElementById("main").style.width = "calc(100% - 250px)";
-}
-
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-  document.getElementById("main").style.width = "100%";
-}
-
-document.getElementById('candi').classList.add('active');
-
-document.getElementById('addCandidateForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const committee = document.getElementById('committee').value;
-  const candidateName = document.getElementById('candidateName').value;
-  const candidatePic = document.getElementById('candidatePic').files[0];
-
-  const tableBody = document.querySelector('#candidateTable tbody');
-  const row = document.createElement('tr');
-
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const imageUrl = e.target.result;
-
-    row.innerHTML = `
-      <td>${committee}</td>
-      <td>${candidateName}</td>
-      <td><img src="${imageUrl}" alt="Candidate" class="candidate-pic"></td>
-      <td><button class="delete-btn">Delete</button></td>
-    `;
-    tableBody.appendChild(row);
-
-    row.querySelector('.delete-btn').addEventListener('click', function () {
-      row.remove();
-    });
-
-    document.getElementById('addCandidateForm').reset();
-  };
-
-  reader.readAsDataURL(candidatePic);
-});
-
-document.querySelectorAll('.delete-btn').forEach(button => {
-  button.addEventListener('click', function () {
-    this.closest('tr').remove();
-  });
-});
-
-document.getElementById('votingDurationForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const votingDuration = document.getElementById('votingDuration').value;
-  alert("Voting will end at: " + votingDuration);
-});
-</script>
-
+<script src="/ubnhs-voting/pages/candidates/cp_script.js"></script>
 </body>
 </html>
