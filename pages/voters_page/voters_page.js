@@ -295,40 +295,35 @@ function removeRow(button) {
 function deleteStudent(studentNumber) {
     Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        text: "This will remove the voter from the list.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#A8201A',
         cancelButtonColor: '#143642',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Yes, remove it!'
     }).then((result) => {
         if (result.isConfirmed) {
-            // TODO: Add actual database deletion via AJAX
-            // For now, just remove from table
-            
-            // Find and remove the row
-            const table = document.getElementById('bsit1-1-table');
-            if (table) {
-                const rows = table.getElementsByTagName('tbody')[0].rows;
-                
-                for (let i = 0; i < rows.length; i++) {
-                    if (rows[i].cells[1].textContent === studentNumber) {
-                        rows[i].remove();
-                        break;
+            // AJAX call to soft delete
+            $.ajax({
+                url: '/ubnhs-voting/php/voters/remove_voter.php',
+                type: 'POST',
+                dataType: 'json',
+                data: { student_number: studentNumber },
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire('Removed!', 'Voter has been removed.', 'success');
+                        // Optionally refresh the table
+                        if (typeof loadVotersTable === 'function') {
+                            loadVotersTable();
+                        }
+                    } else {
+                        Swal.fire('Error', response.message || 'Failed to remove voter.', 'error');
                     }
+                },
+                error: function() {
+                    Swal.fire('Error', 'Failed to communicate with server.', 'error');
                 }
-                
-                // Update row numbers
-                for (let i = 0; i < rows.length; i++) {
-                    rows[i].cells[0].textContent = i + 1;
-                }
-            }
-            
-            Swal.fire(
-                'Deleted!',
-                'Student has been deleted.',
-                'success'
-            );
+            });
         }
     });
 }
