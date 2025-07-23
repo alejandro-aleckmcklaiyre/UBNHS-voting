@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2025 at 08:31 PM
+-- Generation Time: Jul 23, 2025 at 06:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -69,7 +69,8 @@ CREATE TABLE `candidate` (
   `committee` varchar(100) NOT NULL,
   `name` varchar(100) NOT NULL,
   `picture` varchar(255) NOT NULL,
-  `votes` int(11) DEFAULT 0
+  `votes` int(11) DEFAULT 0,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -184,7 +185,8 @@ INSERT INTO `session_logs` (`id`, `session_id`, `user_id`, `user_type`, `usernam
 (1, 'hti66am8o36ml65kf5r8ds1lqu', 1, 'admin', 'alekx', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 1, NULL, '2025-07-22 19:31:30'),
 (2, 'hti66am8o36ml65kf5r8ds1lqu', 28, 'student', '123456789013', 'login', '::1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36', 1, NULL, '2025-07-22 23:56:44'),
 (3, 'ac522s6t4pdbvtcmjl2n5n1fe0', 23, 'student', '202412345010', 'login', '::1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36', 1, NULL, '2025-07-23 00:37:48'),
-(4, 'ac522s6t4pdbvtcmjl2n5n1fe0', 24, 'student', '202412345001', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 1, NULL, '2025-07-23 00:50:03');
+(4, 'ac522s6t4pdbvtcmjl2n5n1fe0', 24, 'student', '202412345001', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 1, NULL, '2025-07-23 00:50:03'),
+(5, 'ho2n34qreimm4o4ecnf0mr6gln', 1, 'admin', 'alekx', 'login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 1, NULL, '2025-07-23 20:49:41');
 
 -- --------------------------------------------------------
 
@@ -203,29 +205,30 @@ CREATE TABLE `student` (
   `unique_code` varchar(255) NOT NULL,
   `has_voted` tinyint(1) NOT NULL DEFAULT 0,
   `class_group_id` int(11) NOT NULL,
-  `status_id` int(11) NOT NULL
+  `status_id` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `student`
 --
 
-INSERT INTO `student` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `suffix`, `email`, `unique_code`, `has_voted`, `class_group_id`, `status_id`) VALUES
-(1, '123456789012', 'Aleck', 'Rivera', 'Alejandro', NULL, 'aleck.alejandro04@gmail.com', '64c7c69e5d35b692', 0, 26, 1),
-(2, '123456789011', 'Alekx', NULL, 'Alejandro', NULL, 'aleck.bizz@gmail.com', 'db19c54f112c3d9f', 0, 22, 1),
-(7, '202412345008', 'Robert', 'James', 'Wilson', 'Sr.', 'robert.wilson@university.edu', 'Wilson38863a561dbfa128', 0, 8, 1),
-(8, '202412345007', 'Jennifer', 'Marie', 'Davis', NULL, 'jennifer.davis@university.edu', 'Davisc06ead22d5f9e8c7', 0, 2, 1),
-(9, '202412345006', 'Michael', 'David', 'Brown', 'III', 'michael.brown@university.edu', 'Brown349958db02726b1f', 0, 26, 1),
-(10, '202412345002', 'John', 'Michael', 'Thompson', 'Jr.', 'john.thompson@university.edu', 'Thompsonf30efbc98a4fb9e5', 0, 7, 1),
-(20, '123456789010', 'Aleck', NULL, 'Rivera', NULL, 'alejandro.aleck@gmail.com', 'Riveracbcc58a622ebd0a6', 0, 27, 1),
-(21, '012345678910', 'Jalen', NULL, 'Avelino', NULL, 'jalen@gmail.com', 'Avelino03403c7589a2e99f', 0, 26, 1),
-(22, '202412345009', 'Lisa', 'Ann', 'Garcia', NULL, 'lisa.garcia@university.edu', 'Garcia9119a7e7d5207b20', 0, 14, 1),
-(23, '202412345010', 'Christopher', 'Paul', 'Miller', NULL, 'christopher.miller@university.edu', 'Millerd27edbace97c25f8', 0, 20, 2),
-(24, '202412345001', 'Maria', 'Santos', 'Rodriguez', NULL, 'maria.rodriguez@university.edu', 'Rodriguezd3071269cb16e702', 0, 1, 2),
-(25, '202412345003', 'Anna', 'Grace', 'Williams', NULL, 'anna.williams@university.edu', 'Williamsec99bebc472a15fa', 0, 13, 1),
-(26, '202412345004', 'Carlos', 'Jose', 'Martinez', NULL, 'carlos.martinez@university.edu', 'Martinezc4bc8465baa20fb3', 0, 19, 1),
-(27, '123456789111', 'Geralt', NULL, 'Rivia', NULL, 'geralt.rivia@gmail.com', 'Riviad91a195e59624cf8', 0, 21, 1),
-(28, '123456789013', 'Adie', NULL, 'Rivera', NULL, 'adie.test@gmail.com', 'Rivera8fc6e710d870c686', 0, 26, 2);
+INSERT INTO `student` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `suffix`, `email`, `unique_code`, `has_voted`, `class_group_id`, `status_id`, `deleted`) VALUES
+(1, '123456789012', 'Aleck', 'Rivera', 'Alejandro', NULL, 'aleck.alejandro04@gmail.com', '64c7c69e5d35b692', 0, 26, 1, 0),
+(2, '123456789011', 'Alekx', NULL, 'Alejandro', NULL, 'aleck.bizz@gmail.com', 'db19c54f112c3d9f', 0, 22, 1, 0),
+(7, '202412345008', 'Robert', 'James', 'Wilson', 'Sr.', 'robert.wilson@university.edu', 'Wilson38863a561dbfa128', 0, 8, 1, 0),
+(8, '202412345007', 'Jennifer', 'Marie', 'Davis', NULL, 'jennifer.davis@university.edu', 'Davisc06ead22d5f9e8c7', 0, 2, 1, 0),
+(9, '202412345006', 'Michael', 'David', 'Brown', 'III', 'michael.brown@university.edu', 'Brown349958db02726b1f', 0, 26, 1, 0),
+(10, '202412345002', 'John', 'Michael', 'Thompson', 'Jr.', 'john.thompson@university.edu', 'Thompsonf30efbc98a4fb9e5', 0, 7, 1, 0),
+(20, '123456789010', 'Aleck', NULL, 'Rivera', NULL, 'alejandro.aleck@gmail.com', 'Riveracbcc58a622ebd0a6', 0, 27, 1, 0),
+(21, '012345678910', 'Jalen', NULL, 'Avelino', NULL, 'jalen@gmail.com', 'Avelino03403c7589a2e99f', 0, 26, 1, 0),
+(22, '202412345009', 'Lisa', 'Ann', 'Garcia', NULL, 'lisa.garcia@university.edu', 'Garcia9119a7e7d5207b20', 0, 14, 1, 0),
+(23, '202412345010', 'Christopher', 'Paul', 'Miller', NULL, 'christopher.miller@university.edu', 'Millerd27edbace97c25f8', 0, 20, 2, 1),
+(24, '202412345001', 'Maria', 'Santos', 'Rodriguez', NULL, 'maria.rodriguez@university.edu', 'Rodriguezd3071269cb16e702', 0, 1, 2, 1),
+(25, '202412345003', 'Anna', 'Grace', 'Williams', NULL, 'anna.williams@university.edu', 'Williamsec99bebc472a15fa', 0, 13, 1, 0),
+(26, '202412345004', 'Carlos', 'Jose', 'Martinez', NULL, 'carlos.martinez@university.edu', 'Martinezc4bc8465baa20fb3', 0, 19, 1, 0),
+(27, '123456789111', 'Geralt', NULL, 'Rivia', NULL, 'geralt.rivia@gmail.com', 'Riviad91a195e59624cf8', 0, 21, 1, 0),
+(28, '123456789013', 'Adie', NULL, 'Rivera', NULL, 'adie.test@gmail.com', 'Rivera8fc6e710d870c686', 0, 26, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -380,7 +383,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `candidate`
 --
 ALTER TABLE `candidate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `class_group`
@@ -404,7 +407,7 @@ ALTER TABLE `qr_scan_logs`
 -- AUTO_INCREMENT for table `session_logs`
 --
 ALTER TABLE `session_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `student`
