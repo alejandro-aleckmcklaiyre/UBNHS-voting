@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Voting Page - PUP University Elections</title>
+        <link rel="stylesheet" href="/ubnhs-voting/pages/voting_page/vp_interface.css">
+    </head>
+    <body>
+    
+        <header>
+            <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
+            <img src="/ubnhs-voting/assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
+            <h1>Your Voice, Your Choice, Your Future</h1>
+            <p>Please select your preferred candidate for each committee.</p>
+        </header>
+        
+        <section class="voting-container">
+            <form action="#" method="POST">
+                <!-- President Committee -->
+                <div id="committee0" class="committee" style="display: block;">
+                    <h2>President</h2>
+                    <div class="candidates-row">
+                        <div class="candidate-box">
+                            <img src="/ubnhs-voting/assets/ubnhs-candidates/john_doe.jpg" alt="John Doe">
+                            <label>
+                                <input type="radio" name="President" value="John Doe"> John Doe
+                            </label>
+                        </div>
+                        <div class="candidate-box">
+                            <img src="/ubnhs-voting/assets/ubnhs-candidates/jane_smith.jpg" alt="Jane Smith">
+                            <label>
+                                <input type="radio" name="President" value="Jane Smith"> Jane Smith
+                            </label>
+                        </div>
+                    </div>
+                    <div class="buttons-container">
+                        <button type="button" onclick="previousCommittee(0)" style="display: none;">Back</button>
+                        <button type="button" onclick="nextCommittee(0)">Next</button>
+                    </div>
+                </div>
+
+                <!-- Vice President Committee -->
+                <div id="committee1" class="committee" style="display: none;">
+                    <h2>Vice President</h2>
+                    <div class="candidates-row">
+                        <div class="candidate-box">
+                            <img src="images/candidate3.jpg" alt="Mike Johnson">
+                            <label>
+                                <input type="radio" name="Vice President" value="Mike Johnson"> Mike Johnson
+                            </label>
+                        </div>
+                        <div class="candidate-box">
+                            <img src="images/candidate4.jpg" alt="Sarah Wilson">
+                            <label>
+                                <input type="radio" name="Vice President" value="Sarah Wilson"> Sarah Wilson
+                            </label>
+                        </div>
+                    </div>
+                    <div class="buttons-container">
+                        <button type="button" onclick="previousCommittee(1)">Back</button>
+                        <button type="button" onclick="nextCommittee(1)">Next</button>
+                    </div>
+                </div>
+
+                <!-- Secretary Committee -->
+                <div id="committee2" class="committee" style="display: none;">
+                    <h2>Secretary</h2>
+                    <div class="candidates-row">
+                        <div class="candidate-box">
+                            <img src="images/candidate5.jpg" alt="Emily Davis">
+                            <label>
+                                <input type="radio" name="Secretary" value="Emily Davis"> Emily Davis
+                            </label>
+                        </div>
+                        <div class="candidate-box">
+                            <img src="images/candidate6.jpg" alt="David Brown">
+                            <label>
+                                <input type="radio" name="Secretary" value="David Brown"> David Brown
+                            </label>
+                        </div>
+                    </div>
+                    <div class="buttons-container">
+                        <button type="button" onclick="previousCommittee(2)">Back</button>
+                        <button type="button" onclick="nextCommittee(2)">Next</button>
+                    </div>
+                </div>
+
+                <!-- Submit Vote Button (Always Hidden Until End) -->
+                <div id="submit-vote-container" class="buttons-container" style="display: none;">
+                    <button type="button" onclick="submitVote()">Review and Submit Vote</button>
+                </div>
+            </form>
+        </section>
+    
+        <!-- Submit Summary -->
+        <div id="submit-summary" class="voting-container">
+            <h2>Review Your Voting Choices:</h2>
+            <div id="summary-container"></div>
+            <div class="buttons-container">
+                <button type="button" onclick="goBackToVoting()">Back to Voting</button>
+                <button type="button" onclick="finalizeVote()">Submit Vote</button>
+            </div>
+        </div>
+
+        <!-- Thank You Section -->
+        <div id="thank-you" class="voting-container">
+            <h1>Thank You for Voting!</h1>
+            <h2>"The Future You Voted For Starts Now!"</h2>
+            <p>
+                Stay tuned as we embark on this journey together towards a brighter tomorrow!
+            </p>
+            <a href="index.html">Back to Home</a>
+        </div>
+
+        <script src="/ubnhs-voting/pages/voting-page/vp_script.js"></script>
+    </body>
+</html>

@@ -158,7 +158,7 @@ sendResponse(
     true,
     'Login successful! Welcome, ' . $_SESSION['student_name'],
     $student_data,
-    'index.php?page=voting_page'
+    'index.php?page=voting_page' // <-- use this for redirect
 );
 
 $conn->close();

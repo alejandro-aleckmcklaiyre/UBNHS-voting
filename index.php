@@ -9,7 +9,8 @@ $allowed_pages = [
     'home' => 'homepage/home_page.html',
     'admin_login' => 'admin_login/admin_login.html',
     'student_qr' => 'student_qr/student_QR_scanner.html',
-    'voters_page' => 'voters_page/voters_page.html',
+    'voters_page' => 'voters_page/voters_page.html',      // voters_page.html
+    'voting_page' => 'voting_page/voting_page.html',      // voting_page.html
     'admin_dashboard' => 'admin_dashboard/admin_dashboard.html',
     'candidates' => 'candidates/candidates_page.html',
     // Add more pages here as you build them
