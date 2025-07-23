@@ -179,5 +179,21 @@
         "timestamp": "2025-07-22 18:58:41",
         "error": "Invalid or already used QR code.",
         "details": null
+    },
+    {
+        "timestamp": "2025-07-23 19:05:15",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Rivia",
+            "unique_code": "Riviad91a195e59624cf8"
+        }
+    },
+    {
+        "timestamp": "2025-07-23 19:41:15",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Martinez",
+            "unique_code": "Martinezc4bc8465baa20fb3"
+        }
     }
 ]

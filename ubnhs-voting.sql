@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2025 at 06:22 PM
+-- Generation Time: Jul 23, 2025 at 06:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,6 +72,14 @@ CREATE TABLE `candidate` (
   `votes` int(11) DEFAULT 0,
   `deleted` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `candidate`
+--
+
+INSERT INTO `candidate` (`id`, `committee`, `name`, `picture`, `votes`, `deleted`) VALUES
+(2, 'PRESIDENT', 'Dyanna Pineda', 'assets/ubnhs-candidates/cand_68811072c01c36.44088684.jpg', 0, 0),
+(3, 'PRESIDENT', 'John Doe', 'assets/ubnhs-candidates/cand_6881108199f8e3.80239686.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -383,7 +391,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `candidate`
 --
 ALTER TABLE `candidate`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `class_group`
