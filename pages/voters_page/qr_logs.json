@@ -89,5 +89,31 @@
         "step": "qr_generation_successful",
         "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Benedict-12-D-136887070704.png",
         "file_size": 2357
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Slim-11-B-136887071004.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Slim-11-B-136887071004.png",
+        "file_size": 2446
+    },
+    {
+        "timestamp": "2025-07-24 14:32:32",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Slim-11-B-136887071010.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-07-24 14:32:33",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Slim-11-B-136887071010.png",
+        "file_size": 2419
     }
 ]

@@ -7,3 +7,5 @@
 [2025-07-19 16:06:38] ERROR: Student number already exists | POST: {"student_number":"123456789010","first_name":"Aleck","middle_name":"Alejandro","last_name":"Rivera","suffix":"","email":"alejandro.aleck@gmail.com","year_level":"12","section":"B","status_id":"1"}
 [2025-07-19 16:11:02] ERROR: Fatal error: Call to undefined method Endroid\QrCode\QrCode::create()
 [2025-07-20 11:00:46] ERROR: Student number already exists | POST: {"student_number":"202412345001","first_name":"Maria","middle_name":"Santos","last_name":"Rodriguez","suffix":"","email":"maria.rodriguez@university.edu","year_level":"7","section":"A","status_id":"1"}
+[2025-07-24 14:31:57] ERROR: Student number already exists | POST: {"student_number":"136887071004","first_name":"Dynasty","middle_name":"","last_name":"Slim","suffix":"","email":"dyanstyslim17@gmail.com","year_level":"11","section":"B","status_id":"1"}
+[2025-07-24 14:32:15] ERROR: Email already exists | POST: {"student_number":"136887071010","first_name":"Dynasty","middle_name":"","last_name":"Slim","suffix":"","email":"dyanstyslim17@gmail.com","year_level":"11","section":"B","status_id":"1"}

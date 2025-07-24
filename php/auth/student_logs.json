@@ -234,5 +234,21 @@
         "timestamp": "2025-07-24 14:20:19",
         "error": "Invalid or already used QR code.",
         "details": null
+    },
+    {
+        "timestamp": "2025-07-24 14:33:43",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Slim",
+            "unique_code": "Slime3d4392c65058439"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:37:49",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Slim",
+            "unique_code": "Slima842f2c4de4c9e33"
+        }
     }
 ]
