@@ -179,5 +179,18 @@
         "timestamp": "2025-07-22 18:58:41",
         "error": "Invalid or already used QR code.",
         "details": null
+    },
+    {
+        "timestamp": "2025-07-24 10:37:29",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Rivera",
+            "unique_code": "Rivera8fc6e710d870c686"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 10:37:29",
+        "error": "Invalid or already used QR code.",
+        "details": null
     }
 ]

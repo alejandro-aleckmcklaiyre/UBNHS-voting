@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUPT CS El-Express Candidates</title>
+    <title>UBNHSelect Voters</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
@@ -30,7 +30,7 @@
     <center>
     <div class="container">
         <header>
-        <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
+        <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS-LOGO.png" alt="UBNHS Logo" class="logo">
         <img src="/ubnhs-voting/assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
         <h1>Voters Registration</h1>
         </header>
@@ -41,9 +41,13 @@
         <!-- Add filter dropdowns and pagination controls above the table -->
         <div style="margin-bottom: 1em;">
           <label for="filter-year">Year Level:</label>
-          <select id="filter-year"></select>
+          <div class="select-wrapper">
+            <select id="filter-year"></select>
+          </div>
           <label for="filter-section" style="margin-left:1em;">Section:</label>
-          <select id="filter-section"></select>
+          <div class="select-wrapper">
+            <select id="filter-section"></select>
+          </div>
         </div>
         <div id="pagination-controls" style="margin-bottom: 1em;"></div>
 
