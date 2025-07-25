@@ -1030,155 +1030,218 @@
         "step": "script_completed_successfully"
     },
     {
-        "timestamp": "2025-07-24 14:01:55",
+        "timestamp": "2025-07-23 20:14:17",
         "post": {
-            "student_number": "136887101008",
-            "first_name": "Dyanna",
-            "middle_name": "Dunan",
-            "last_name": "Pineda",
+            "student_number": "202512345678",
+            "first_name": "Aleck",
+            "middle_name": "",
+            "last_name": "Alejanro",
             "suffix": "",
-            "email": "dyannamay10@gmail.com",
+            "email": "aleck.alejandro04@gmail.com",
             "year_level": "12",
-            "section": "D",
+            "section": "A",
             "status_id": "1"
         },
         "step": "initial_post_received",
         "is_ajax": true
     },
     {
-        "timestamp": "2025-07-24 14:01:55",
+        "timestamp": "2025-07-23 20:14:17",
         "step": "data_sanitized",
         "sanitized_data": {
-            "student_number": "136887101008",
-            "first_name": "Dyanna",
-            "middle_name": "Dunan",
-            "last_name": "Pineda",
+            "student_number": "202512345678",
+            "first_name": "Aleck",
+            "middle_name": null,
+            "last_name": "Alejanro",
             "suffix": null,
-            "email": "dyannamay10@gmail.com",
+            "email": "aleck.alejandro04@gmail.com",
             "year_level": "12",
-            "section": "D",
+            "section": "A",
             "status_id": 1,
-            "unique_code": "Pineda9350ecd5cb1a57ee"
+            "unique_code": "Alejanrocf1cac6847c263c9"
         }
     },
     {
-        "timestamp": "2025-07-24 14:01:56",
+        "timestamp": "2025-07-23 20:14:17",
         "step": "before_class_group_lookup",
         "lookup_params": {
             "year_level": "12",
-            "section": "D"
+            "section": "A"
         }
     },
     {
-        "timestamp": "2025-07-24 14:01:56",
+        "timestamp": "2025-07-23 20:14:17",
         "step": "class_group_found",
-        "class_group_id": 29
+        "class_group_id": 26
     },
     {
-        "timestamp": "2025-07-24 14:01:57",
+        "timestamp": "2025-07-23 20:14:18",
         "step": "before_insert",
         "insert_data": {
-            "student_number": "136887101008",
-            "first_name": "Dyanna",
-            "middle_name": "Dunan",
-            "last_name": "Pineda",
+            "student_number": "202512345678",
+            "first_name": "Aleck",
+            "middle_name": null,
+            "last_name": "Alejanro",
             "suffix": null,
-            "email": "dyannamay10@gmail.com",
-            "unique_code": "Pineda9350ecd5cb1a57ee",
-            "class_group_id": 29,
+            "email": "aleck.alejandro04@gmail.com",
+            "unique_code": "Alejanrocf1cac6847c263c9",
+            "class_group_id": 26,
             "status_id": 1
         }
     },
     {
-        "timestamp": "2025-07-24 14:01:57",
+        "timestamp": "2025-07-23 20:14:18",
         "step": "insert_successful",
         "student_id": 29
     },
     {
-        "timestamp": "2025-07-24 14:02:00",
+        "timestamp": "2025-07-23 20:14:19",
         "step": "success_response_sent",
         "qr_generated": true,
         "message": "Voter added successfully!",
         "student_id": 29
     },
     {
-        "timestamp": "2025-07-24 14:02:00",
+        "timestamp": "2025-07-23 20:14:19",
         "step": "script_completed_successfully"
     },
     {
-        "timestamp": "2025-07-24 14:18:05",
+        "timestamp": "2025-07-23 20:21:37",
         "post": {
-            "student_number": "136887070704",
-            "first_name": "John",
+            "student_number": "202512345671",
+            "first_name": "Aleck",
             "middle_name": "",
-            "last_name": "Benedict",
+            "last_name": "Alejandro",
             "suffix": "",
-            "email": "JohnBenedict07@gmail.com",
+            "email": "aleck.alejandro04@gmail.com",
             "year_level": "12",
-            "section": "D",
+            "section": "A",
             "status_id": "1"
         },
         "step": "initial_post_received",
         "is_ajax": true
     },
     {
-        "timestamp": "2025-07-24 14:18:05",
+        "timestamp": "2025-07-23 20:21:37",
         "step": "data_sanitized",
         "sanitized_data": {
-            "student_number": "136887070704",
-            "first_name": "John",
+            "student_number": "202512345671",
+            "first_name": "Aleck",
             "middle_name": null,
-            "last_name": "Benedict",
+            "last_name": "Alejandro",
             "suffix": null,
-            "email": "JohnBenedict07@gmail.com",
+            "email": "aleck.alejandro04@gmail.com",
             "year_level": "12",
-            "section": "D",
+            "section": "A",
             "status_id": 1,
-            "unique_code": "Benedict428693b3db9dda03"
+            "unique_code": "Alejandroacdd096d8152e802"
         }
     },
     {
-        "timestamp": "2025-07-24 14:18:05",
+        "timestamp": "2025-07-23 20:21:37",
         "step": "before_class_group_lookup",
         "lookup_params": {
             "year_level": "12",
-            "section": "D"
+            "section": "A"
         }
     },
     {
-        "timestamp": "2025-07-24 14:18:05",
+        "timestamp": "2025-07-23 20:21:37",
         "step": "class_group_found",
-        "class_group_id": 29
+        "class_group_id": 26
     },
     {
-        "timestamp": "2025-07-24 14:18:05",
+        "timestamp": "2025-07-23 20:21:37",
+        "error": "Email already exists",
+        "step": "duplicate_email",
+        "email": "aleck.alejandro04@gmail.com",
+        "existing_id": 29,
+        "post": {
+            "student_number": "202512345671",
+            "first_name": "Aleck",
+            "middle_name": "",
+            "last_name": "Alejandro",
+            "suffix": "",
+            "email": "aleck.alejandro04@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-07-23 20:22:12",
+        "post": {
+            "student_number": "202512345671",
+            "first_name": "Aleck",
+            "middle_name": "",
+            "last_name": "Alejandro",
+            "suffix": "",
+            "email": "aleck.alejandro04@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-23 20:22:12",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202512345671",
+            "first_name": "Aleck",
+            "middle_name": null,
+            "last_name": "Alejandro",
+            "suffix": null,
+            "email": "aleck.alejandro04@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Alejandrocdbd9000edc0ab1e"
+        }
+    },
+    {
+        "timestamp": "2025-07-23 20:22:13",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-23 20:22:13",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-23 20:22:13",
         "step": "before_insert",
         "insert_data": {
-            "student_number": "136887070704",
-            "first_name": "John",
+            "student_number": "202512345671",
+            "first_name": "Aleck",
             "middle_name": null,
-            "last_name": "Benedict",
+            "last_name": "Alejandro",
             "suffix": null,
-            "email": "JohnBenedict07@gmail.com",
-            "unique_code": "Benedict428693b3db9dda03",
-            "class_group_id": 29,
+            "email": "aleck.alejandro04@gmail.com",
+            "unique_code": "Alejandrocdbd9000edc0ab1e",
+            "class_group_id": 26,
             "status_id": 1
         }
     },
     {
-        "timestamp": "2025-07-24 14:18:05",
+        "timestamp": "2025-07-23 20:22:13",
         "step": "insert_successful",
         "student_id": 30
     },
     {
-        "timestamp": "2025-07-24 14:18:06",
+        "timestamp": "2025-07-23 20:22:13",
         "step": "success_response_sent",
         "qr_generated": true,
         "message": "Voter added successfully!",
         "student_id": 30
     },
     {
-        "timestamp": "2025-07-24 14:18:06",
+        "timestamp": "2025-07-23 20:22:13",
         "step": "script_completed_successfully"
     }
 ]

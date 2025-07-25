@@ -194,3 +194,38 @@ header {
 #thank-you a:hover {
     background-color: #0056b3;
 }
+
+.review-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.review-table th, .review-table td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+.review-table th {
+    background: #f5f5f5;
+}
+
+.review-table img {
+    display: block;
+    margin: 0 auto;
+}
+
+.change-btn {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.change-btn:hover {
+    background: #800000;
+}
