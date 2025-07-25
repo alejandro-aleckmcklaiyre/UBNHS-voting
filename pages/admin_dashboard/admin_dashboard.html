@@ -7,16 +7,27 @@
 <link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
 <link rel="stylesheet" href="/ubnhs-voting/pages/admin_dashboard/AD_Interface.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="/ubnhs-voting/index.php?page=admin_dashboard" id="home">Home</a>
-  <a href="/ubnhs-voting/index.php?page=candidates">Candidates</a>
-  <a href="/ubnhs-voting/index.php?page=voters_page">Voters/Members</a>
-  <a href="/ubnhs-voting/index.php?page=about">About Us</a>
-  <a href="/ubnhs-voting/php/auth/logout.php">Log Out</a>
+  <a href="/ubnhs-voting/index.php?page=admin_dashboard" id="home">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <a href="/ubnhs-voting/index.php?page=candidates">
+    <i class="fas fa-users"></i> Candidates
+  </a>
+  <a href="/ubnhs-voting/index.php?page=voters_page">
+    <i class="fas fa-vote-yea"></i> Voters/Members
+  </a>
+  <a href="/ubnhs-voting/index.php?page=about">
+    <i class="fas fa-info-circle"></i> About Us
+  </a>
+  <a href="/ubnhs-voting/php/auth/logout.php">
+    <i class="fas fa-sign-out-alt"></i> Log Out
+  </a>
 </div>
 
 <div id="main">
@@ -26,21 +37,81 @@
       <header>
         <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
         <img src="/ubnhs-voting/assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
-        <h1>Election Status</h1>
-        </header>
+        <h1><i class="fas fa-chart-bar"></i> Election Status</h1>
+        <div class="header-decoration"></div>
+      </header>
+
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-vote-yea"></i>
+          </div>
+          <div class="stat-info">
+            <h3>450</h3>
+            <p>Total Votes</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-info">
+            <h3>12</h3>
+            <p>Candidates</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-percentage"></i>
+          </div>
+          <div class="stat-info">
+            <h3>87%</h3>
+            <p>Turnout</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Live</h3>
+            <p>Status</p>
+          </div>
+        </div>
+      </div>
 
       <div class="election-section">
-        <h2 class="election-title">Voting Results</h2>
+        <h2 class="election-title">
+          <i class="fas fa-chart-line"></i> Voting Results
+        </h2>
         
-        <div class="chart-container">
-          <canvas id="positionsChart"></canvas>
+        <div class="chart-wrapper">
+          <div class="chart-container">
+            <canvas id="positionsChart"></canvas>
+          </div>
         </div>
         
         <div class="action-buttons">
-          <a href="summary.php" class="action-btn">View Voting Summary</a>
-          <button class="action-btn">Export Results</button>
-          <button class="action-btn">Reset Election</button>
+          <a href="summary.php" class="action-btn primary">
+            <i class="fas fa-file-alt"></i> View Summary
+          </a>
+          <button class="action-btn secondary">
+            <i class="fas fa-download"></i> Export Results
+          </button>
+          <button class="action-btn danger">
+            <i class="fas fa-redo"></i> Reset Election
+          </button>
         </div>
+      </div>
+
+      <!-- Floating particles for decoration -->
+      <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
       </div>
     </div>
   </main>
@@ -76,47 +147,112 @@
           datasets: [{
               label: 'Voting Results',
               data: votes,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1
+              backgroundColor: [
+                'rgba(168, 32, 26, 0.8)',
+                'rgba(20, 54, 66, 0.8)',
+                'rgba(251, 211, 2, 0.8)',
+                'rgba(125, 162, 187, 0.8)'
+              ],
+              borderColor: [
+                'rgba(168, 32, 26, 1)',
+                'rgba(20, 54, 66, 1)',
+                'rgba(251, 211, 2, 1)',
+                'rgba(125, 162, 187, 1)'
+              ],
+              borderWidth: 2,
+              borderRadius: 8,
+              borderSkipped: false,
           }]
       },
       options: {
           responsive: true,
           maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
           scales: {
               x: {
                   beginAtZero: true,
                   ticks: {
                       maxRotation: 45,
-                      minRotation: 45
+                      minRotation: 45,
+                      color: '#2C3E50',
+                      font: {
+                        weight: 'bold'
+                      }
+                  },
+                  grid: {
+                    display: false
                   }
               },
               y: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  ticks: {
+                    color: '#2C3E50',
+                    font: {
+                      weight: 'bold'
+                    }
+                  },
+                  grid: {
+                    color: 'rgba(0,0,0,0.1)'
+                  }
               }
+          },
+          animation: {
+            duration: 2000,
+            easing: 'easeInOutQuart'
           }
       }
   });
 
   // Add functionality for buttons
   document.addEventListener('DOMContentLoaded', function() {
-    const exportBtn = document.querySelector('.action-buttons .action-btn:nth-child(2)');
-    const resetBtn = document.querySelector('.action-buttons .action-btn:last-child');
+    const exportBtn = document.querySelector('.action-buttons .action-btn.secondary');
+    const resetBtn = document.querySelector('.action-buttons .action-btn.danger');
     
     if (exportBtn) {
       exportBtn.addEventListener('click', function() {
         // Add your export functionality here
         console.log('Export results clicked');
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Exporting...';
+        setTimeout(() => {
+          this.innerHTML = '<i class="fas fa-download"></i> Export Results';
+        }, 2000);
       });
     }
     
     if (resetBtn) {
       resetBtn.addEventListener('click', function() {
         // Add your reset functionality here
-        console.log('Reset election clicked');
+        if (confirm('Are you sure you want to reset the election? This action cannot be undone.')) {
+          console.log('Reset election clicked');
+          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
+          setTimeout(() => {
+            this.innerHTML = '<i class="fas fa-redo"></i> Reset Election';
+          }, 2000);
+        }
       });
     }
+
+    // Add live updating effect for stats
+    setInterval(() => {
+      const statNumbers = document.querySelectorAll('.stat-info h3');
+      statNumbers.forEach(stat => {
+        if (stat.textContent === 'Live') return;
+        
+        const current = parseInt(stat.textContent) || 0;
+        const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+        const newValue = Math.max(0, current + variation);
+        
+        if (stat.textContent.includes('%')) {
+          stat.textContent = Math.min(100, newValue) + '%';
+        } else {
+          stat.textContent = newValue;
+        }
+      });
+    }, 5000);
   });
 </script>
 </body>
