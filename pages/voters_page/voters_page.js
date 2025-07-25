@@ -701,32 +701,90 @@ function sendQrEmail(studentNumber, btn) {
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
+            const originalText = btn.textContent;
             btn.disabled = true;
             btn.textContent = 'Sending...';
+            
             fetch('/ubnhs-voting/php/voters/send_qr_email.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'student_number=' + encodeURIComponent(studentNumber)
             })
-            .then(res => res.json())
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                
+                // Check if response is ok first
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                return response.text().then(text => {
+                    console.log('Raw response text:', text);
+                    
+                    // Try to parse as JSON
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error('Failed to parse JSON:', e);
+                        console.error('Response text was:', text);
+                        throw new Error('Server returned invalid JSON response');
+                    }
+                });
+            })
             .then(data => {
-                btn.textContent = 'Send Email';
+                console.log('Parsed response data:', data);
+                
                 btn.disabled = false;
-                if (data.success) {
-                    Swal.fire('Success', data.message, 'success');
-                    // Update only the status column (11th cell, index 10)
-                    const row = btn.closest('tr');
-                    if (row) {
-                        row.cells[10].textContent = 'Email Sent';
+                btn.textContent = originalText;
+                
+                if (data && data.success === true) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: data.message || 'Email sent successfully!',
+                        showConfirmButton: true,
+                        timer: 3000
+                    });
+                    
+                    // Update button state
+                    btn.disabled = true;
+                    btn.textContent = 'Email Sent';
+                    
+                    // Refresh table to get updated status
+                    if (typeof loadVotersTable === 'function') {
+                        setTimeout(() => loadVotersTable(), 1000);
                     }
                 } else {
-                    Swal.fire('Error', data.message, 'error');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Email Failed',
+                        text: data?.message || 'Failed to send email. Please try again.',
+                        showConfirmButton: true
+                    });
                 }
             })
-            .catch(() => {
-                Swal.fire('Error', 'Failed to send email.', 'error');
-                btn.textContent = 'Send Email';
+            .catch(error => {
+                console.error('Email sending error:', error);
+                
                 btn.disabled = false;
+                btn.textContent = originalText;
+                
+                let errorMessage = 'Failed to send email. ';
+                if (error.message.includes('HTTP')) {
+                    errorMessage += 'Server error occurred.';
+                } else if (error.message.includes('JSON')) {
+                    errorMessage += 'Server response was invalid.';
+                } else {
+                    errorMessage += 'Network error occurred.';
+                }
+                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Email Error',
+                    text: errorMessage,
+                    showConfirmButton: true
+                });
             });
         }
     });

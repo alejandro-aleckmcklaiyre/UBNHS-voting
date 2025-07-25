@@ -152,5 +152,40 @@
         "message": "Email sent",
         "email": "aleck.alejandro04@gmail.com",
         "timestamp": "2025-07-23 21:20:19"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-25 15:50:28"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-25 15:51:50"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-25 15:54:56"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-25 16:01:08"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-25 16:17:56"
     }
 ]
