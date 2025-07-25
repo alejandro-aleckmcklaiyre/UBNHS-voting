@@ -236,8 +236,28 @@ function confirmRow(button) {
                         // This can happen with malformed JSON or HTTP status issues
                         console.warn('Server succeeded but AJAX treated as error:', parsed);
                         
-                        // Handle as success
-                        this.success(parsed);
+                        // Manually call the success handler logic
+                        if (inputs.length > 0) {
+                            inputs.forEach(input => {
+                                const td = input.parentElement;
+                                td.textContent = input.value || '';
+                            });
+                        }
+                        const actionsCell = row.cells[row.cells.length - 1];
+                        const studentNumber = row.cells[1].textContent;
+                        actionsCell.innerHTML = '<button onclick="deleteStudent(\'' + studentNumber + '\')">Delete</button>';
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Student added successfully!',
+                            showConfirmButton: true,
+                            timer: 3000
+                        });
+
+                        if (typeof loadVotersTable === 'function') {
+                            setTimeout(() => loadVotersTable(), 1000);
+                        }
                         return;
                     }
                 } catch (e) {
@@ -545,7 +565,15 @@ function renderTablePage() {
         row.insertCell(6).textContent = student.year_level || '';
         row.insertCell(7).textContent = student.section || '';
         row.insertCell(8).textContent = student.email || '';
-        row.insertCell(9).innerHTML = '<button onclick="deleteStudent(\'' + (student.student_number || '') + '\')">Delete</button>';
+        // Actions column
+        row.insertCell(9).innerHTML = `
+            <button onclick="deleteStudent('${student.student_number}')">Delete</button>
+            <button onclick="sendQrEmail('${student.student_number}', this)" ${student.qr_email_sent == 1 ? 'disabled' : ''}>
+                ${student.qr_email_sent == 1 ? 'Email Sent' : 'Send Email'}
+            </button>
+        `;
+        // Status column
+        row.insertCell(10).textContent = student.status_name || '';
     });
     
     renderPagination(filtered.length);
@@ -662,3 +690,44 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Error initializing voters page:', error);
     }
 });
+
+function sendQrEmail(studentNumber, btn) {
+    Swal.fire({
+        title: 'Send QR Code?',
+        text: "This will email the QR code to the voter's email address.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Send',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            fetch('/ubnhs-voting/php/voters/send_qr_email.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'student_number=' + encodeURIComponent(studentNumber)
+            })
+            .then(res => res.json())
+            .then(data => {
+                btn.textContent = 'Send Email';
+                btn.disabled = false;
+                if (data.success) {
+                    Swal.fire('Success', data.message, 'success');
+                    // Update only the status column (11th cell, index 10)
+                    const row = btn.closest('tr');
+                    if (row) {
+                        row.cells[10].textContent = 'Email Sent';
+                    }
+                } else {
+                    Swal.fire('Error', data.message, 'error');
+                }
+            })
+            .catch(() => {
+                Swal.fire('Error', 'Failed to send email.', 'error');
+                btn.textContent = 'Send Email';
+                btn.disabled = false;
+            });
+        }
+    });
+}

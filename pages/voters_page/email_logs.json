@@ -1,0 +1,156 @@
+[
+    {
+        "status": "script_start",
+        "message": "Script execution started",
+        "timestamp": "2025-07-23 20:50:16"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Processing request for student",
+        "timestamp": "2025-07-23 20:50:16"
+    },
+    {
+        "status": "script_start",
+        "message": "Script execution started",
+        "timestamp": "2025-07-23 20:56:11"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Processing request for student",
+        "timestamp": "2025-07-23 20:56:11"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Database connection verified",
+        "timestamp": "2025-07-23 20:56:11"
+    },
+    {
+        "status": "fatal_error",
+        "message": "Uncaught mysqli_sql_exception: Unknown column 'year_level' in 'field list' in C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php:158\nStack trace:\n#0 C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php(158): mysqli->prepare('SELECT id, firs...')\n#1 {main}\n  thrown",
+        "file": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php",
+        "line": 158,
+        "timestamp": "2025-07-23 20:56:11"
+    },
+    {
+        "status": "script_start",
+        "message": "Script execution started",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Processing request for student",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Database connection verified",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Database query prepared successfully",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Student found",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "QR code file found",
+        "qr_path": "..\/..\/assets\/qr_code\/Alejandro-12-A-202512345671.png",
+        "file_size": 2430,
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Starting email configuration",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "SMTP configuration complete",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Email prepared, attempting to send",
+        "timestamp": "2025-07-23 21:00:43"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "info",
+        "message": "Email sent successfully, updating database",
+        "timestamp": "2025-07-23 21:00:47"
+    },
+    {
+        "student_number": "202512345671",
+        "email": "aleck.alejandro04@gmail.com",
+        "status": "success",
+        "message": "Email sent successfully",
+        "qr_filename": "Alejandro-12-A-202512345671.png",
+        "timestamp": "2025-07-23 21:00:47"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:11:54"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:12:11"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:15:18"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:19:49"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:19:56"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:20:13"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-07-23 21:20:19"
+    }
+]
