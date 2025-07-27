@@ -89,5 +89,18 @@
         "step": "qr_generation_successful",
         "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Alejandro-12-A-202512345671.png",
         "file_size": 2430
+    },
+    {
+        "timestamp": "2025-07-27 15:38:52",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Arquines-12-A-123456789026.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-07-27 15:38:55",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Arquines-12-A-123456789026.png",
+        "file_size": 2437
     }
 ]

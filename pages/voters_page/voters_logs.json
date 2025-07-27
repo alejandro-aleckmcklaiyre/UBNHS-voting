@@ -1243,5 +1243,485 @@
     {
         "timestamp": "2025-07-23 20:22:13",
         "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "post": {
+            "student_number": "136887071004",
+            "first_name": "Dynasty",
+            "middle_name": "",
+            "last_name": "Slim",
+            "suffix": "",
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "136887071004",
+            "first_name": "Dynasty",
+            "middle_name": null,
+            "last_name": "Slim",
+            "suffix": null,
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": 1,
+            "unique_code": "Slime3d4392c65058439"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "B"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "class_group_found",
+        "class_group_id": 22
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "136887071004",
+            "first_name": "Dynasty",
+            "middle_name": null,
+            "last_name": "Slim",
+            "suffix": null,
+            "email": "dyanstyslim17@gmail.com",
+            "unique_code": "Slime3d4392c65058439",
+            "class_group_id": 22,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "insert_successful",
+        "student_id": 31
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 31
+    },
+    {
+        "timestamp": "2025-07-24 14:31:47",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-24 14:31:57",
+        "post": {
+            "student_number": "136887071004",
+            "first_name": "Dynasty",
+            "middle_name": "",
+            "last_name": "Slim",
+            "suffix": "",
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-24 14:31:57",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "136887071004",
+            "first_name": "Dynasty",
+            "middle_name": null,
+            "last_name": "Slim",
+            "suffix": null,
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": 1,
+            "unique_code": "Slim22841998ec4a926e"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:31:57",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "B"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:31:57",
+        "step": "class_group_found",
+        "class_group_id": 22
+    },
+    {
+        "timestamp": "2025-07-24 14:31:57",
+        "error": "Student number already exists",
+        "step": "duplicate_student_number",
+        "student_number": "136887071004",
+        "existing_id": 31,
+        "post": {
+            "student_number": "136887071004",
+            "first_name": "Dynasty",
+            "middle_name": "",
+            "last_name": "Slim",
+            "suffix": "",
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:32:15",
+        "post": {
+            "student_number": "136887071010",
+            "first_name": "Dynasty",
+            "middle_name": "",
+            "last_name": "Slim",
+            "suffix": "",
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-24 14:32:15",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "136887071010",
+            "first_name": "Dynasty",
+            "middle_name": null,
+            "last_name": "Slim",
+            "suffix": null,
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": 1,
+            "unique_code": "Slim8299944a2ed9a053"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:32:15",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "B"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:32:15",
+        "step": "class_group_found",
+        "class_group_id": 22
+    },
+    {
+        "timestamp": "2025-07-24 14:32:15",
+        "error": "Email already exists",
+        "step": "duplicate_email",
+        "email": "dyanstyslim17@gmail.com",
+        "existing_id": 31,
+        "post": {
+            "student_number": "136887071010",
+            "first_name": "Dynasty",
+            "middle_name": "",
+            "last_name": "Slim",
+            "suffix": "",
+            "email": "dyanstyslim17@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:32:32",
+        "post": {
+            "student_number": "136887071010",
+            "first_name": "Dynasty",
+            "middle_name": "",
+            "last_name": "Slim",
+            "suffix": "",
+            "email": "dyanstyslim07@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-24 14:32:32",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "136887071010",
+            "first_name": "Dynasty",
+            "middle_name": null,
+            "last_name": "Slim",
+            "suffix": null,
+            "email": "dyanstyslim07@gmail.com",
+            "year_level": "11",
+            "section": "B",
+            "status_id": 1,
+            "unique_code": "Slima842f2c4de4c9e33"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:32:32",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "B"
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:32:32",
+        "step": "class_group_found",
+        "class_group_id": 22
+    },
+    {
+        "timestamp": "2025-07-24 14:32:32",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "136887071010",
+            "first_name": "Dynasty",
+            "middle_name": null,
+            "last_name": "Slim",
+            "suffix": null,
+            "email": "dyanstyslim07@gmail.com",
+            "unique_code": "Slima842f2c4de4c9e33",
+            "class_group_id": 22,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-24 14:32:32",
+        "step": "insert_successful",
+        "student_id": 32
+    },
+    {
+        "timestamp": "2025-07-24 14:32:33",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 32
+    },
+    {
+        "timestamp": "2025-07-24 14:32:33",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-27 15:37:55",
+        "post": {
+            "student_number": "123456789013",
+            "first_name": "Vhon",
+            "middle_name": "",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-27 15:37:56",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "123456789013",
+            "first_name": "Vhon",
+            "middle_name": null,
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Arquines61443f77deb2a2ea"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:37:56",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:37:56",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-27 15:37:56",
+        "error": "Student number already exists",
+        "step": "duplicate_student_number",
+        "student_number": "123456789013",
+        "existing_id": 28,
+        "post": {
+            "student_number": "123456789013",
+            "first_name": "Vhon",
+            "middle_name": "",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:38:52",
+        "post": {
+            "student_number": "123456789026",
+            "first_name": "Vhon",
+            "middle_name": "",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-27 15:38:52",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "123456789026",
+            "first_name": "Vhon",
+            "middle_name": null,
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Arquines8d3933d73754302e"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:38:52",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:38:52",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-27 15:38:52",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "123456789026",
+            "first_name": "Vhon",
+            "middle_name": null,
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "annaydmaypineda15@gmail.com",
+            "unique_code": "Arquines8d3933d73754302e",
+            "class_group_id": 26,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:38:52",
+        "step": "insert_successful",
+        "student_id": 29
+    },
+    {
+        "timestamp": "2025-07-27 15:38:55",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 29
+    },
+    {
+        "timestamp": "2025-07-27 15:38:55",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "post": {
+            "student_number": "202412345001",
+            "first_name": "Maria",
+            "middle_name": "Santos",
+            "last_name": "Rodriguez",
+            "suffix": "",
+            "email": "maria.rodriguez@university.edu",
+            "year_level": "7",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202412345001",
+            "first_name": "Maria",
+            "middle_name": "Santos",
+            "last_name": "Rodriguez",
+            "suffix": null,
+            "email": "maria.rodriguez@university.edu",
+            "year_level": "7",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Rodriguezb8a5da3a0bad5b56"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "7",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "step": "class_group_found",
+        "class_group_id": 1
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "error": "Student number already exists",
+        "step": "duplicate_student_number",
+        "student_number": "202412345001",
+        "existing_id": 24,
+        "post": {
+            "student_number": "202412345001",
+            "first_name": "Maria",
+            "middle_name": "Santos",
+            "last_name": "Rodriguez",
+            "suffix": "",
+            "email": "maria.rodriguez@university.edu",
+            "year_level": "7",
+            "section": "A",
+            "status_id": "1"
+        }
     }
 ]
