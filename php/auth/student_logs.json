@@ -181,74 +181,19 @@
         "details": null
     },
     {
-        "timestamp": "2025-07-24 10:37:29",
+        "timestamp": "2025-07-23 19:05:15",
         "error": "Debug QR",
         "details": {
-            "surname": "Rivera",
-            "unique_code": "Rivera8fc6e710d870c686"
+            "surname": "Rivia",
+            "unique_code": "Riviad91a195e59624cf8"
         }
     },
     {
-        "timestamp": "2025-07-24 10:37:29",
-        "error": "Invalid or already used QR code.",
-        "details": null
-    },
-    {
-        "timestamp": "2025-07-24 14:10:04",
+        "timestamp": "2025-07-23 19:41:15",
         "error": "Debug QR",
         "details": {
-            "surname": "Pineda",
-            "unique_code": "Pineda9350ecd5cb1a57ee"
-        }
-    },
-    {
-        "timestamp": "2025-07-24 14:15:19",
-        "error": "Debug QR",
-        "details": {
-            "surname": "Pineda",
-            "unique_code": "Pineda9350ecd5cb1a57ee"
-        }
-    },
-    {
-        "timestamp": "2025-07-24 14:15:19",
-        "error": "Invalid or already used QR code.",
-        "details": null
-    },
-    {
-        "timestamp": "2025-07-24 14:19:22",
-        "error": "Debug QR",
-        "details": {
-            "surname": "Benedict",
-            "unique_code": "Benedict428693b3db9dda03"
-        }
-    },
-    {
-        "timestamp": "2025-07-24 14:20:19",
-        "error": "Debug QR",
-        "details": {
-            "surname": "Benedict",
-            "unique_code": "Benedict428693b3db9dda03"
-        }
-    },
-    {
-        "timestamp": "2025-07-24 14:20:19",
-        "error": "Invalid or already used QR code.",
-        "details": null
-    },
-    {
-        "timestamp": "2025-07-24 14:33:43",
-        "error": "Debug QR",
-        "details": {
-            "surname": "Slim",
-            "unique_code": "Slime3d4392c65058439"
-        }
-    },
-    {
-        "timestamp": "2025-07-24 14:37:49",
-        "error": "Debug QR",
-        "details": {
-            "surname": "Slim",
-            "unique_code": "Slima842f2c4de4c9e33"
+            "surname": "Martinez",
+            "unique_code": "Martinezc4bc8465baa20fb3"
         }
     }
 ]

@@ -10,8 +10,23 @@ composer.phar
 # Ignore logs and other generated files
 *.log
 /pages/voters_page/voters_logs.json
+/pages/voters_page/email_logs.json
 /php/voters/csv_upload.log
 /php/voters/voters.log
+/php/email/email.log
+
+# Ignore all log files in PHP directory
+/php/auth/login_logs.json
+/php/config/session_logs.json
+
+# Ignore configuration files with sensitive data
+/php/config/email_config.php
+/php/config/db_config.php
+
+# Ignore environment files
+.env
+.env.local
+.env.production
 
 # Ignore IDE/editor files
 .vscode/
@@ -22,3 +37,25 @@ composer.phar
 # Ignore OS files
 .DS_Store
 Thumbs.db
+
+# Ignore backup files
+*.bak
+*.backup
+*~
+
+# Ignore temporary files
+tmp/
+temp/
+
+# Ignore generated QR codes (if they shouldn't be tracked)
+/assets/qr_code/*.png
+/assets/qr_code/*.jpg
+/assets/qr_code/*.jpeg
+
+# Ignore any uploaded files
+uploads/
+/assets/uploads/
+
+# Ignore any cache files
+cache/
+*.cache

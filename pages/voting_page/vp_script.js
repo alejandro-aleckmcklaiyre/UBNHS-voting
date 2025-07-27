@@ -3,74 +3,148 @@ let currentCommitteeIndex = 0;
 const totalCommittees = 3; // Update this number based on your committees
 
 function nextCommittee(currentIndex) {
-    // Hide the current committee
     var currentCommittee = document.getElementById("committee" + currentIndex);
     currentCommittee.style.display = "none";
-    
-    // Show the next committee
-    var nextCommittee = document.getElementById("committee" + (currentIndex + 1));
-    if (nextCommittee) {
-        nextCommittee.style.display = "block";
-        currentCommitteeIndex = currentIndex + 1;
-    }
 
-    // Check if it's the last committee
-    if (currentIndex === totalCommittees - 1) {
-        // Directly skip to the review page
+    if (currentIndex + 1 < window.totalCommittees) {
+        var nextCommittee = document.getElementById("committee" + (currentIndex + 1));
+        if (nextCommittee) {
+            nextCommittee.style.display = "block";
+            currentCommitteeIndex = currentIndex + 1;
+        }
+    } else {
+        // Last committee, show review/submit
         submitVote();
     }
 }
 
 function previousCommittee(currentIndex) {
-    // Hide the current committee
     var currentCommittee = document.getElementById("committee" + currentIndex);
     currentCommittee.style.display = "none";
-    
-    // Show the previous committee
-    var previousCommittee = document.getElementById("committee" + (currentIndex - 1));
-    if (previousCommittee) {
-        previousCommittee.style.display = "block";
-        currentCommitteeIndex = currentIndex - 1;
+
+    if (currentIndex - 1 >= 0) {
+        var previousCommittee = document.getElementById("committee" + (currentIndex - 1));
+        if (previousCommittee) {
+            previousCommittee.style.display = "block";
+            currentCommitteeIndex = currentIndex - 1;
+        }
     }
-    
-    // Hide the "Submit Vote" button if going back before the last committee
     document.getElementById("submit-vote-container").style.display = "none";
 }
 
 function submitVote() {
     // Gather selected candidates
-    const committees = ['President', 'Vice President', 'Secretary'];
-    
-    committees.forEach(function(committeeName) {
-        var selectedCandidate = document.querySelector('input[name="' + committeeName + '"]:checked');
+    let selected = {};
+    // Dynamically get all committee names from the DOM
+    document.querySelectorAll('.committee').forEach(committeeDiv => {
+        const committeeName = committeeDiv.querySelector('h2').textContent;
+        const selectedCandidate = committeeDiv.querySelector('input[type="radio"]:checked');
         if (selectedCandidate) {
-            selectedCandidates[committeeName] = selectedCandidate.value;
+            selected[committeeName] = selectedCandidate.value;
         }
     });
-    
-    // Display the voting summary before submitting
+    selectedCandidates = selected;
+
+    // Display the voting summary in a table
     var summaryContainer = document.getElementById("summary-container");
     summaryContainer.innerHTML = ''; // Clear any previous summaries
-    
-    for (let committeeName in selectedCandidates) {
-        var candidateName = selectedCandidates[committeeName];
-        var committeeSummary = document.createElement("p");
-        committeeSummary.innerHTML = "<strong>" + committeeName + ":</strong> " + candidateName;
-        summaryContainer.appendChild(committeeSummary);
-    }
-    
+
+    // Build table
+    const table = document.createElement('table');
+    table.className = 'review-table';
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Committee</th>
+            <th>Candidate Name</th>
+            <th>Picture</th>
+            <th>Actions</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+
+    // For each selected committee, find candidate info from DOM
+    Object.keys(selectedCandidates).forEach((committeeName, idx) => {
+        const candidateName = selectedCandidates[committeeName];
+        // Find the candidate's image src from the original committee div
+        let imgSrc = '';
+        document.querySelectorAll('.committee').forEach(committeeDiv => {
+            if (committeeDiv.querySelector('h2').textContent === committeeName) {
+                committeeDiv.querySelectorAll('.candidate-box').forEach(box => {
+                    const radio = box.querySelector('input[type="radio"]');
+                    if (radio && radio.value === candidateName) {
+                        imgSrc = box.querySelector('img').src;
+                    }
+                });
+            }
+        });
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${committeeName}</td>
+            <td>${candidateName}</td>
+            <td><img src="${imgSrc}" alt="${candidateName}" style="height:48px;max-width:64px;border-radius:6px;"></td>
+            <td>
+                <button type="button" class="change-btn" data-committee-index="${idx}">Change</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    table.appendChild(tbody);
+    summaryContainer.appendChild(table);
+
     // Hide the voting section and show the submit summary
     document.querySelector(".voting-container").style.display = "none";
     document.getElementById("submit-summary").style.display = "block";
+
+    // Add event listeners for change buttons
+    document.querySelectorAll('.change-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Find the committee name from the row
+            const row = this.closest('tr');
+            const committeeName = row.children[0].textContent;
+            // Find the committee index by searching for the committee div
+            let targetIndex = -1;
+            document.querySelectorAll('.committee').forEach((div, idx) => {
+                if (div.querySelector('h2').textContent === committeeName) {
+                    targetIndex = idx;
+                }
+            });
+            // Hide summary, show voting, show the correct committee
+            document.getElementById("submit-summary").style.display = "none";
+            document.querySelector(".voting-container").style.display = "block";
+            document.querySelectorAll('.committee').forEach((div, idx) => {
+                div.style.display = (idx === targetIndex) ? 'block' : 'none';
+            });
+            currentCommitteeIndex = targetIndex;
+            updateButtonVisibility();
+        });
+    });
 }
 
 function finalizeVote() {
-    // Here you could add AJAX call to submit data to server
-    console.log('Final vote data:', selectedCandidates);
-    
-    // Hide everything and show the thank you page
-    document.getElementById("submit-summary").style.display = "none";
-    document.getElementById("thank-you").style.display = "block";
+    // Send selectedCandidates to the backend
+    fetch('/ubnhs-voting/php/voting/submit_vote.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ votes: Object.values(selectedCandidates) })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            // Hide everything and show the thank you page
+            document.getElementById("submit-summary").style.display = "none";
+            document.getElementById("thank-you").style.display = "block";
+        } else {
+            alert('Failed to submit votes: ' + data.message);
+        }
+    })
+    .catch(() => {
+        alert('An error occurred while submitting your vote.');
+    });
 }
 
 function goBackToVoting() {
@@ -111,7 +185,66 @@ function updateButtonVisibility() {
     }
 }
 
-// Initialize button visibility on page load
+// Add this at the top or after your variable declarations
+
 document.addEventListener('DOMContentLoaded', function() {
+    loadCandidatesFromDB();
     updateButtonVisibility();
 });
+
+function loadCandidatesFromDB() {
+    fetch('/ubnhs-voting/php/candidate/display_candidate.php')
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                // Group candidates by committee
+                const committees = {};
+                data.candidates.forEach(candidate => {
+                    if (!committees[candidate.committee]) {
+                        committees[candidate.committee] = [];
+                    }
+                    committees[candidate.committee].push(candidate);
+                });
+
+                // Remove existing committee sections
+                document.querySelectorAll('.committee').forEach(el => el.remove());
+
+                // Render committees dynamically
+                const votingContainer = document.querySelector('.voting-container form');
+                let idx = 0;
+                Object.keys(committees).forEach(committeeName => {
+                    const committeeDiv = document.createElement('div');
+                    committeeDiv.id = 'committee' + idx;
+                    committeeDiv.className = 'committee';
+                    committeeDiv.style.display = idx === 0 ? 'block' : 'none';
+                    committeeDiv.innerHTML = `
+                        <h2>${committeeName}</h2>
+                        <div class="candidates-row"></div>
+                        <div class="buttons-container">
+                            <button type="button" onclick="previousCommittee(${idx})" style="display: ${idx === 0 ? 'none' : 'inline-block'};">Back</button>
+                            <button type="button" onclick="nextCommittee(${idx})">${idx === Object.keys(committees).length - 1 ? 'Review' : 'Next'}</button>
+                        </div>
+                    `;
+                    // Add candidates
+                    const candidatesRow = committeeDiv.querySelector('.candidates-row');
+                    committees[committeeName].forEach(candidate => {
+                        const candidateBox = document.createElement('div');
+                        candidateBox.className = 'candidate-box';
+                        candidateBox.innerHTML = `
+                            <img src="/ubnhs-voting/${candidate.picture}" alt="${candidate.name}">
+                            <label>
+                                <input type="radio" name="${committeeName}" value="${candidate.name}"> ${candidate.name}
+                            </label>
+                        `;
+                        candidatesRow.appendChild(candidateBox);
+                    });
+                    votingContainer.appendChild(committeeDiv);
+                    idx++;
+                });
+
+                // Update totalCommittees and button visibility
+                window.totalCommittees = Object.keys(committees).length;
+                updateButtonVisibility();
+            }
+        });
+}
