@@ -202,5 +202,43 @@
         "status": "require_error",
         "message": "email_config.php not found at ..\/config\/email_config.php",
         "timestamp": "2025-07-27 16:41:45"
+    },
+    {
+        "status": "require_error",
+        "message": "email_config.php not found at ..\/config\/email_config.php",
+        "timestamp": "2025-07-27 16:44:15"
+    },
+    {
+        "status": "require_error",
+        "message": "email_config.php not found at ..\/config\/email_config.php",
+        "timestamp": "2025-07-27 16:57:00"
+    },
+    {
+        "status": "fatal_error",
+        "message": "Uncaught Error: Class \"PHPMailer\\PHPMailer\\PHPMailer\" not found in C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php:145\nStack trace:\n#0 {main}\n  thrown",
+        "file": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php",
+        "line": 145,
+        "timestamp": "2025-07-27 17:02:39"
+    },
+    {
+        "status": "fatal_error",
+        "message": "Uncaught mysqli_sql_exception: Unknown column 'qr_email_sent' in 'field list' in C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php:163\nStack trace:\n#0 C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php(163): mysqli->prepare('UPDATE student ...')\n#1 {main}\n  thrown",
+        "file": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\\send_qr_email.php",
+        "line": 163,
+        "timestamp": "2025-07-27 17:10:04"
+    },
+    {
+        "student_number": "202400123261",
+        "status": "success",
+        "message": "Email sent",
+        "email": "annaydmaypineda15@gmail.com",
+        "timestamp": "2025-07-28 07:18:08"
+    },
+    {
+        "student_number": "202400123263",
+        "status": "success",
+        "message": "Email sent",
+        "email": "pinedaharvie32@gmail.com",
+        "timestamp": "2025-07-28 07:20:15"
     }
 ]
