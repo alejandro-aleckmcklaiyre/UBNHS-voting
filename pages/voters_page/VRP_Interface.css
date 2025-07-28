@@ -47,10 +47,10 @@ body {
     min-height: 100vh;
 }
 
-/* Container styles with enhanced backdrop */
+/* Container styles with enhanced backdrop - Made wider */
 .container {
     padding: 30px;
-    max-width: 1200px;
+    max-width: 1400px; /* Increased from 1200px */
     margin: 0 auto;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -145,7 +145,7 @@ header h1 {
     transform: translateY(-50%) scale(1.05);
 }
 
-/* Enhanced table container */
+/* Enhanced table container - Made wider */
 .table-container {
     background: rgba(247, 239, 239, 0.95);
     backdrop-filter: blur(5px);
@@ -156,6 +156,15 @@ header h1 {
     overflow-y: auto;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(168, 32, 26, 0.1);
+    width: 100%; /* Ensure full width usage */
+}
+
+/* Table scroll wrapper for horizontal scrolling */
+.table-scroll-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
 .table-container h3 {
@@ -275,9 +284,10 @@ header h1 {
     box-shadow: 0 0 0 3px rgba(55, 63, 100, 0.1);
 }
 
-/* Enhanced table styles */
+/* Enhanced table styles with minimum width for horizontal scroll */
 table {
     width: 100%;
+    min-width: 1200px; /* Minimum width to ensure horizontal scroll on smaller screens */
     border-collapse: collapse;
     margin-bottom: 20px;
     font-size: 0.9em;
@@ -293,6 +303,7 @@ th, td {
     text-align: center;
     vertical-align: middle;
     transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 th {
@@ -320,6 +331,48 @@ tr:hover td {
 
 tr:nth-child(even) td {
     background-color: #f9f9f9;
+}
+
+/* Action buttons inside table cells - Made smaller with spacing */
+td button {
+    padding: 8px 16px; /* Slightly reduced size but still readable */
+    margin: 3px 5px; /* Added margin for spacing between buttons */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85em; /* Readable font size */
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    min-width: 80px; /* Minimum width for consistency */
+    display: inline-block;
+    white-space: nowrap;
+    /* Keep original button styling - no color changes */
+    background: linear-gradient(135deg, #f0ad4e, #ec971f);
+    color: white;
+    box-shadow: 0 3px 10px rgba(236, 151, 31, 0.4);
+}
+
+td button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+td button:hover::before {
+    left: 100%;
+}
+
+td button:hover {
+    background: linear-gradient(135deg, #373f64, #1d2346);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(29, 35, 70, 0.6);
 }
 
 /* Enhanced button container */
@@ -518,11 +571,31 @@ input[type="text"]:focus, input[type="email"]:focus {
     margin: 0 10px;
 }
 
+/* Custom scrollbar for table wrapper */
+.table-scroll-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-track {
+    background: rgba(240, 240, 240, 0.5);
+    border-radius: 4px;
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #373f64, #1d2346);
+    border-radius: 4px;
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #1d2346, #373f64);
+}
+
 /* Responsive styles */
 @media screen and (max-width: 1024px) {
     .container {
         padding: 20px;
         margin: 0 10px;
+        max-width: 95%; /* Adjust for smaller screens */
     }
     
     header h1 {
@@ -536,6 +609,7 @@ input[type="text"]:focus, input[type="email"]:focus {
     
     table {
         font-size: 0.85em;
+        min-width: 1000px; /* Adjust minimum width for tablets */
     }
     
     th, td {
@@ -544,6 +618,14 @@ input[type="text"]:focus, input[type="email"]:focus {
     
     .button-container {
         gap: 15px;
+    }
+    
+    /* Action buttons on tablets */
+    td button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+        min-width: 70px;
+        margin: 2px 3px;
     }
 }
 
@@ -556,6 +638,7 @@ input[type="text"]:focus, input[type="email"]:focus {
         padding: 15px;
         margin: 0 5px;
         border-radius: 15px;
+        max-width: 98%;
     }
     
     /* Header mobile layout */
@@ -616,15 +699,19 @@ input[type="text"]:focus, input[type="email"]:focus {
     
     table {
         font-size: 0.75em;
+        min-width: 800px; /* Smaller minimum width for mobile */
     }
     
     th, td {
         padding: 10px 6px;
     }
     
-    /* Hide less important columns on mobile */
-    th:nth-child(1), td:nth-child(1) {
-        display: none;
+    /* Action buttons on mobile */
+    td button {
+        padding: 5px 10px;
+        font-size: 0.75em;
+        min-width: 60px;
+        margin: 2px;
     }
     
     /* Button container mobile */
@@ -669,15 +756,19 @@ input[type="text"]:focus, input[type="email"]:focus {
     
     table {
         font-size: 0.7em;
+        min-width: 600px; /* Even smaller for very small screens */
     }
     
     th, td {
         padding: 8px 4px;
     }
     
-    /* Hide email column on very small screens */
-    th:nth-child(5), td:nth-child(5) {
-        display: none;
+    /* Action buttons for very small screens */
+    td button {
+        padding: 4px 8px;
+        font-size: 0.7em;
+        min-width: 55px;
+        margin: 1px 2px;
     }
     
     .button-container button {
@@ -703,6 +794,10 @@ input[type="text"]:focus, input[type="email"]:focus {
 
 /* Smooth scrolling and animations */
 .table-container {
+    scroll-behavior: smooth;
+}
+
+.table-scroll-wrapper {
     scroll-behavior: smooth;
 }
 
