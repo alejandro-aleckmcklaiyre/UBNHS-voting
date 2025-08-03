@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UBNHSelect Admin Dashboard</title>
-<link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
-<link rel="stylesheet" href="/ubnhs-voting/pages/admin_dashboard/AD_Interface.css">
+<link rel="stylesheet" href="../../assets/styles/nav.css">
+<link rel="stylesheet" href="AD_Interface.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -13,6 +13,22 @@
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+  <a href="../../index.php?page=admin_dashboard" id="home">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <a href="../../index.php?page=candidates">
+    <i class="fas fa-users"></i> Candidates
+  </a>
+  <a href="../../index.php?page=voters_page">
+    <i class="fas fa-vote-yea"></i> Voters/Members
+  </a>
+  <a href="../../index.php?page=about">
+    <i class="fas fa-info-circle"></i> About Us
+  </a>
+  <a href="../../php/auth/logout.php">
+    <i class="fas fa-sign-out-alt"></i> Log Out
+  </a>
   <a href="/ubnhs-voting/index.php?page=admin_dashboard" id="home">
     <i class="fas fa-home"></i> Home
   </a>
@@ -35,11 +51,11 @@
   <main class="content">
     <div class="dashboard-container">
       <header>
-        <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
-        <img src="/ubnhs-voting/assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
-        <h1><i class="fas fa-chart-bar"></i> Election Status</h1>
-        <div class="header-decoration"></div>
-      </header>
+
+        <img src="../../assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
+        <img src="../../assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
+        <h1>Election Status</h1>
+        </header>
 
       <!-- Stats Cards -->
       <div class="stats-grid">
@@ -80,6 +96,7 @@
           </div>
         </div>
       </div>
+
 
       <div class="election-section">
         <h2 class="election-title">

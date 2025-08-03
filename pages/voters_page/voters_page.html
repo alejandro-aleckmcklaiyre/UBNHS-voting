@@ -7,27 +7,26 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
-    <link rel="stylesheet" href="/ubnhs-voting/pages/voters_page/VRP_Interface.css">
-
+    <link rel="stylesheet" href="assets/styles/nav.css">
+    <link rel="stylesheet" href="pages/voters_page/VRP_Interface.css">
 </head>
 <body>
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="/ubnhs-voting/index.php?page=admin_dashboard">
+  <a href="index.php?page=admin_dashboard">
     <i class="fas fa-home"></i> Home
   </a>
-  <a href="/ubnhs-voting/index.php?page=candidates">
+  <a href="index.php?page=candidates">
     <i class="fas fa-users"></i> Candidates
   </a>
-  <a href="/ubnhs-voting/index.php?page=voters_page" id="voters_p">
+  <a href="index.php?page=voters_page" id="voters_p">
     <i class="fas fa-vote-yea"></i> Voters/Members
   </a>
-  <a href="/ubnhs-voting/index.php?page=about">
+  <a href="index.php?page=about">
     <i class="fas fa-info-circle"></i> About Us
   </a>
-  <a href="/ubnhs-voting/php/auth/logout.php">
+  <a href="php/auth/logout.php">L
     <i class="fas fa-sign-out-alt"></i> Log Out
   </a>
 </div>
@@ -39,8 +38,9 @@
     <center>
     <div class="container">
         <header>
-        <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS-LOGO.png" alt="UBNHS Logo" class="logo">
-        <img src="/ubnhs-voting/assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
+        <img src="assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
+        <img src="assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
+
         <h1>Voters Registration</h1>
         </header>
 
@@ -95,7 +95,6 @@
     </center>
   </main>
 </div>
-
 <script>
   function openNav() {
     document.getElementById("mySidebar").style.width = "250px";
@@ -111,7 +110,7 @@
 
   // Set active state for current page
   document.getElementById('voters_p').classList.add('active');
-</script>
-<script src="/ubnhs-voting/pages/voters_page/voters_page.js"></script>
+
+<script src="pages/voters_page/voters_page.js"></script>
 </body>
 </html>
