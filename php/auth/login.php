@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Use session_config's loginAdmin function
     if (loginAdmin($username, $password)) {
-        header('Locatio n: /ubnhs-voting/pages/admin_dashboard/admin_dashboard.html');
+        header('Location: /ubnhs-voting/pages/admin_dashboard/admin_dashboard.html');
         exit();
     } else {
         header('Location: /ubnhs-voting/pages/admin_login/admin_login.html?error=invalid');
