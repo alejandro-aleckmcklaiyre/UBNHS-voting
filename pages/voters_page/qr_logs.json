@@ -89,5 +89,44 @@
         "step": "qr_generation_successful",
         "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Alejandro-12-A-202512345671.png",
         "file_size": 2430
+    },
+    {
+        "timestamp": "2025-08-03 19:30:23",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Dean-11-A-123456789011.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-08-03 19:30:24",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Dean-11-A-123456789011.png",
+        "file_size": 2373
+    },
+    {
+        "timestamp": "2025-08-03 19:32:04",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Hepburn-11-A-123456789012.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-08-03 19:32:05",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Hepburn-11-A-123456789012.png",
+        "file_size": 2442
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Grace-11-a-123456789014.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Grace-11-a-123456789014.png",
+        "file_size": 2425
     }
 ]

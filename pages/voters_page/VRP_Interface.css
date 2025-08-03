@@ -8,7 +8,7 @@
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
-    background-image: url("/ubnhs-voting/assets/images-UBNHS/VOTERS_REGISTRATION_LATEST.png");
+    background-image: url("assets/images-UBNHS/VOTERS_REGISTRATION_LATEST.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

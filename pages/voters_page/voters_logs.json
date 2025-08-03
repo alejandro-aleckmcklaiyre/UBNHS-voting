@@ -1243,5 +1243,296 @@
     {
         "timestamp": "2025-07-23 20:22:13",
         "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-08-03 19:30:23",
+        "post": {
+            "student_number": "123456789011",
+            "first_name": "James",
+            "middle_name": "",
+            "last_name": "Dean",
+            "suffix": "",
+            "email": "james.deantest@gmail.com",
+            "year_level": "11",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-08-03 19:30:23",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "123456789011",
+            "first_name": "James",
+            "middle_name": null,
+            "last_name": "Dean",
+            "suffix": null,
+            "email": "james.deantest@gmail.com",
+            "year_level": "11",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Dean372a72fb18f5c9cb"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:30:23",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:30:23",
+        "step": "class_group_found",
+        "class_group_id": 21
+    },
+    {
+        "timestamp": "2025-08-03 19:30:23",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "123456789011",
+            "first_name": "James",
+            "middle_name": null,
+            "last_name": "Dean",
+            "suffix": null,
+            "email": "james.deantest@gmail.com",
+            "unique_code": "Dean372a72fb18f5c9cb",
+            "class_group_id": 21,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:30:23",
+        "step": "insert_successful",
+        "student_id": 31
+    },
+    {
+        "timestamp": "2025-08-03 19:30:24",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 31
+    },
+    {
+        "timestamp": "2025-08-03 19:30:24",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-08-03 19:32:04",
+        "post": {
+            "student_number": "123456789012",
+            "first_name": "Audrey",
+            "middle_name": "",
+            "last_name": "Hepburn",
+            "suffix": "",
+            "email": "audrey.hepburntest@gmail.com",
+            "year_level": "11",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-08-03 19:32:04",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "123456789012",
+            "first_name": "Audrey",
+            "middle_name": null,
+            "last_name": "Hepburn",
+            "suffix": null,
+            "email": "audrey.hepburntest@gmail.com",
+            "year_level": "11",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Hepburnd132cd2945cedf80"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:32:04",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:32:04",
+        "step": "class_group_found",
+        "class_group_id": 21
+    },
+    {
+        "timestamp": "2025-08-03 19:32:04",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "123456789012",
+            "first_name": "Audrey",
+            "middle_name": null,
+            "last_name": "Hepburn",
+            "suffix": null,
+            "email": "audrey.hepburntest@gmail.com",
+            "unique_code": "Hepburnd132cd2945cedf80",
+            "class_group_id": 21,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:32:04",
+        "step": "insert_successful",
+        "student_id": 32
+    },
+    {
+        "timestamp": "2025-08-03 19:32:05",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 32
+    },
+    {
+        "timestamp": "2025-08-03 19:32:05",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-08-03 19:36:57",
+        "post": {
+            "student_number": "123456789013",
+            "first_name": "Genny",
+            "middle_name": "",
+            "last_name": "Grace",
+            "suffix": "",
+            "email": "testgen.grace@gmail.com",
+            "year_level": "11",
+            "section": "a",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-08-03 19:36:57",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "123456789013",
+            "first_name": "Genny",
+            "middle_name": null,
+            "last_name": "Grace",
+            "suffix": null,
+            "email": "testgen.grace@gmail.com",
+            "year_level": "11",
+            "section": "a",
+            "status_id": 1,
+            "unique_code": "Grace02125b53742f4eba"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:36:57",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "a"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:36:57",
+        "step": "class_group_found",
+        "class_group_id": 21
+    },
+    {
+        "timestamp": "2025-08-03 19:36:57",
+        "error": "Student number already exists",
+        "step": "duplicate_student_number",
+        "student_number": "123456789013",
+        "existing_id": 28,
+        "post": {
+            "student_number": "123456789013",
+            "first_name": "Genny",
+            "middle_name": "",
+            "last_name": "Grace",
+            "suffix": "",
+            "email": "testgen.grace@gmail.com",
+            "year_level": "11",
+            "section": "a",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "post": {
+            "student_number": "123456789014",
+            "first_name": "Genny",
+            "middle_name": "",
+            "last_name": "Grace",
+            "suffix": "",
+            "email": "testgen.grace@gmail.com",
+            "year_level": "11",
+            "section": "a",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "123456789014",
+            "first_name": "Genny",
+            "middle_name": null,
+            "last_name": "Grace",
+            "suffix": null,
+            "email": "testgen.grace@gmail.com",
+            "year_level": "11",
+            "section": "a",
+            "status_id": 1,
+            "unique_code": "Grace70b40892532cc2b5"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "11",
+            "section": "a"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "class_group_found",
+        "class_group_id": 21
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "123456789014",
+            "first_name": "Genny",
+            "middle_name": null,
+            "last_name": "Grace",
+            "suffix": null,
+            "email": "testgen.grace@gmail.com",
+            "unique_code": "Grace70b40892532cc2b5",
+            "class_group_id": 21,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "insert_successful",
+        "student_id": 33
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 33
+    },
+    {
+        "timestamp": "2025-08-03 19:37:03",
+        "step": "script_completed_successfully"
     }
 ]

@@ -5,18 +5,18 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PUPT CS El-Express Candidates</title>
-  <link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
-  <link rel="stylesheet" href="/ubnhs-voting/pages/candidates/CP_Interface.css">
+  <link rel="stylesheet" href="assets/styles/nav.css">
+  <link rel="stylesheet" href="pages/candidates/CP_Interface.css">
 </head>
 <body>
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="/ubnhs-voting/index.php?page=admin_dashboard">Home</a>
-  <a href="/ubnhs-voting/index.php?page=candidates" id="candi">Candidates</a>
-  <a href="/ubnhs-voting/index.php?page=voters_page">Voters/Members</a>
-  <a href="/ubnhs-voting/index.php?page=about">About Us</a>
-  <a href="/ubnhs-voting/php/auth/logout.php">Log Out</a>
+  <a href="index.php?page=admin_dashboard">Home</a>
+  <a href="index.php?page=candidates" id="candi">Candidates</a>
+  <a href="index.php?page=voters_page">Voters/Members</a>
+  <a href="index.php?page=about">About Us</a>
+  <a href="php/auth/logout.php">Log Out</a>
 </div>
 
 <div id="main">
@@ -45,12 +45,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>VP FINANCE</td>
-                <td>John Doe</td>
-                <td><img src="/static/Images/sample_candidate.jpg" alt="Candidate" class="candidate-pic"></td>
-                <td><button class="delete-btn">Delete</button></td>
-              </tr>
+              <!-- Candidates will be dynamically inserted here -->
             </tbody>
           </table>
         </div>
@@ -106,6 +101,6 @@
     </center>
   </main>
 </div>
-<script src="/ubnhs-voting/pages/candidates/cp_script.js"></script>
+<script src="pages/candidates/cp_script.js"></script>
 </body>
 </html>

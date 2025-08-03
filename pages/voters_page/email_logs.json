@@ -187,5 +187,12 @@
         "message": "Email sent",
         "email": "aleck.alejandro04@gmail.com",
         "timestamp": "2025-07-25 16:17:56"
+    },
+    {
+        "student_number": "202512345671",
+        "status": "success",
+        "message": "Email sent",
+        "email": "aleck.alejandro04@gmail.com",
+        "timestamp": "2025-08-03 19:37:40"
     }
 ]

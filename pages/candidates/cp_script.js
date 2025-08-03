@@ -24,7 +24,7 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
   formData.append('name', candidateName);
   formData.append('picture', candidatePic);
 
-  fetch('/ubnhs-voting/php/candidate/add_candidate.php', {
+  fetch('php/candidate/add_candidate.php', {
     method: 'POST',
     body: formData
   })
@@ -44,7 +44,7 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
 });
 
 function loadCandidates() {
-  fetch('/ubnhs-voting/php/candidate/display_candidate.php')
+  fetch('php/candidate/display_candidate.php')
     .then(res => res.json())
     .then(data => {
       if (data.success) {
@@ -55,7 +55,7 @@ function loadCandidates() {
           row.innerHTML = `
             <td>${candidate.committee}</td>
             <td>${candidate.name}</td>
-            <td><img src="/ubnhs-voting/${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
+            <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
             <td><button class="delete-btn" data-id="${candidate.id}">Delete</button></td>
           `;
           tableBody.appendChild(row);
@@ -75,7 +75,7 @@ function loadCandidates() {
               confirmButtonText: 'Yes, remove it!'
             }).then((result) => {
               if (result.isConfirmed) {
-                fetch('/ubnhs-voting/php/candidate/delete_candidate.php', {
+                fetch('php/candidate/delete_candidate.php', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                   body: 'id=' + encodeURIComponent(candidateId)

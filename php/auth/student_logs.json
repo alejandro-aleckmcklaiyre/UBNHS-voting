@@ -195,5 +195,21 @@
             "surname": "Martinez",
             "unique_code": "Martinezc4bc8465baa20fb3"
         }
+    },
+    {
+        "timestamp": "2025-07-25 16:29:29",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Alejandro",
+            "unique_code": "Alejandrocdbd9000edc0ab1e"
+        }
+    },
+    {
+        "timestamp": "2025-08-03 19:49:44",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Hepburn",
+            "unique_code": "Hepburnd132cd2945cedf80"
+        }
     }
 ]
