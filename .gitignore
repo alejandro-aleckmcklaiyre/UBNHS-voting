@@ -22,6 +22,7 @@ composer.phar
 # Ignore configuration files with sensitive data
 /php/config/email_config.php
 /php/config/db_config.php
+/php/config/db_config_hostinger.php
 
 # Ignore environment files
 .env
