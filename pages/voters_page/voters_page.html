@@ -3,24 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUPT CS El-Express Candidates</title>
+    <title>UBNHSelect Voters</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/nav.css">
     <link rel="stylesheet" href="pages/voters_page/VRP_Interface.css">
-
 </head>
 <body>
 
 <div id="mySidebar" class="sidebar">
-
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="index.php?page=admin_dashboard">Home</a>
-  <a href="index.php?page=candidates">Candidates</a>
-  <a href="index.php?page=voters_page" id="voters_p">Voters/Members</a>
-  <a href="index.php?page=about">About Us</a>
-  <a href="php/auth/logout.php">Log Out</a>
-
+  <a href="index.php?page=admin_dashboard">
+    <i class="fas fa-home"></i> Home
+  </a>
+  <a href="index.php?page=candidates">
+    <i class="fas fa-users"></i> Candidates
+  </a>
+  <a href="index.php?page=voters_page" id="voters_p">
+    <i class="fas fa-vote-yea"></i> Voters/Members
+  </a>
+  <a href="index.php?page=about">
+    <i class="fas fa-info-circle"></i> About Us
+  </a>
+  <a href="php/auth/logout.php">L
+    <i class="fas fa-sign-out-alt"></i> Log Out
+  </a>
 </div>
 
 <div id="main">
@@ -32,6 +40,7 @@
         <header>
         <img src="assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
         <img src="assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
+
         <h1>Voters Registration</h1>
         </header>
 
@@ -41,9 +50,13 @@
         <!-- Add filter dropdowns and pagination controls above the table -->
         <div style="margin-bottom: 1em;">
           <label for="filter-year">Year Level:</label>
-          <select id="filter-year"></select>
+          <div class="select-wrapper">
+            <select id="filter-year"></select>
+          </div>
           <label for="filter-section" style="margin-left:1em;">Section:</label>
-          <select id="filter-section"></select>
+          <div class="select-wrapper">
+            <select id="filter-section"></select>
+          </div>
         </div>
         <div id="pagination-controls" style="margin-bottom: 1em;"></div>
 
@@ -82,6 +95,22 @@
     </center>
   </main>
 </div>
+<script>
+  function openNav() {
+    document.getElementById("mySidebar").style.width = "250px";
+    document.getElementById("main").style.marginLeft = "250px";
+    document.querySelector(".openbtn").style.display = "none";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    document.querySelector(".openbtn").style.display = "inline-block";
+  }
+
+  // Set active state for current page
+  document.getElementById('voters_p').classList.add('active');
+
 <script src="pages/voters_page/voters_page.js"></script>
 </body>
 </html>

@@ -197,19 +197,19 @@
         }
     },
     {
-        "timestamp": "2025-07-25 16:29:29",
+        "timestamp": "2025-07-27 17:15:55",
         "error": "Debug QR",
         "details": {
-            "surname": "Alejandro",
-            "unique_code": "Alejandrocdbd9000edc0ab1e"
+            "surname": "Arquines",
+            "unique_code": "Arquines8d3933d73754302e"
         }
     },
     {
-        "timestamp": "2025-08-03 19:49:44",
+        "timestamp": "2025-07-28 07:19:05",
         "error": "Debug QR",
         "details": {
-            "surname": "Hepburn",
-            "unique_code": "Hepburnd132cd2945cedf80"
+            "surname": "Arquines",
+            "unique_code": "Arquinesb32d05366eea4be1"
         }
     }
 ]
