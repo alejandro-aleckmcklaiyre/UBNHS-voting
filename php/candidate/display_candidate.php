@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 require_once '../config/db_config.php';
 
-$result = $conn->query("SELECT id, committee, name, picture 
+$result = $conn->query("SELECT id, committee, name, partylist_name, picture 
                 FROM candidate 
                 WHERE deleted = 0 
                 ORDER BY committee, name");
