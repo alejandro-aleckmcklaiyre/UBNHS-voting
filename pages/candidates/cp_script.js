@@ -17,11 +17,13 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
 
   const committee = document.getElementById('committee').value;
   const candidateName = document.getElementById('candidateName').value;
+  const partylistName = document.getElementById('partylistName').value;
   const candidatePic = document.getElementById('candidatePic').files[0];
 
   const formData = new FormData();
   formData.append('committee', committee);
   formData.append('name', candidateName);
+  formData.append('partylist_name', partylistName);
   formData.append('picture', candidatePic);
 
   fetch('php/candidate/add_candidate.php', {
@@ -33,7 +35,7 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
       if (data.success) {
         Swal.fire('Success', data.message, 'success');
         document.getElementById('addCandidateForm').reset();
-        loadCandidates(); // Refresh the table
+        loadCandidates();
       } else {
         Swal.fire('Error', data.message, 'error');
       }
@@ -41,7 +43,7 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
     .catch(() => {
       Swal.fire('Error', 'Failed to add candidate.', 'error');
     });
-});
+}); // <-- Make sure this closing bracket is present
 
 function loadCandidates() {
   fetch('php/candidate/display_candidate.php')
@@ -55,6 +57,7 @@ function loadCandidates() {
           row.innerHTML = `
             <td>${candidate.committee}</td>
             <td>${candidate.name}</td>
+            <td>${candidate.partylist_name || ''}</td>
             <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
             <td><button class="delete-btn" data-id="${candidate.id}">Delete</button></td>
           `;
