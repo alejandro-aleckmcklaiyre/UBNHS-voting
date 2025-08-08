@@ -12,87 +12,24 @@ body {
   overflow-y: auto;
 }
 
-/* Enhanced Sidebar */
+/* Force nav.css sidebar styles to take priority */
 .sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1001;
-  top: 0;
-  left: 0;
-  background: linear-gradient(180deg, #143642 0%, #0f2a35 100%);
-  overflow-x: hidden;
-  transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  padding-top: 60px;
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  width: 280px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
 }
 
 .sidebar a {
-  padding: 15px 25px;
-  text-decoration: none;
-  font-size: 16px;
-  color: #DAD2D8;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s ease;
-  border-left: 4px solid transparent;
-  margin: 5px 0;
+  width: 90% !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
 }
 
-.sidebar a i {
-  margin-right: 12px;
-  font-size: 18px;
-  width: 20px;
-  text-align: center;
-}
-
-.sidebar a:hover, .sidebar a.active {
-  color: #fbd302;
-  background: rgba(251, 211, 2, 0.1);
-  border-left-color: #fbd302;
-  transform: translateX(5px);
-}
-
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-  color: #DAD2D8;
-  transition: all 0.3s ease;
-}
-
-.sidebar .closebtn:hover {
-  color: #fbd302;
-  transform: scale(1.2);
-}
-
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: rgba(20, 54, 66, 0.9);
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 8px;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-}
-
-.openbtn:hover {
-  background-color: #fbd302;
-  color: #143642;
-  transform: scale(1.05);
-}
-
+/* Main content transition - adjusted for always open sidebar */
 #main {
-  transition: margin-left .5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-left: 280px !important;
+  transition: margin-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   padding: 10px;
   min-height: 100vh;
   overflow: visible;
@@ -587,6 +524,14 @@ header h1 i {
 
 /* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
+  .sidebar {
+    width: 250px !important;
+  }
+  
+  #main {
+    margin-left: 250px !important;
+  }
+  
   .dashboard-container {
     width: 98vw;
     max-width: 100vw;
@@ -655,20 +600,6 @@ header h1 i {
   .results-section {
     height: 400px;
   }
-  
-  .sidebar a {
-    font-size: 18px;
-    padding: 12px 20px;
-  }
-  
-  .openbtn {
-    font-size: 18px;
-    padding: 10px 15px;
-  }
-  
-  #main {
-    padding: 5px;
-  }
 
   .filter-row {
     flex-direction: column;
@@ -677,6 +608,15 @@ header h1 i {
 }
 
 @media screen and (max-width: 480px) {
+  .sidebar {
+    width: 220px !important;
+  }
+  
+  #main {
+    margin-left: 220px !important;
+    padding: 5px;
+  }
+  
   .dashboard-grid {
     grid-template-areas:
       "stats-cards"
@@ -740,28 +680,30 @@ header h1 i {
     padding: 12px 14px;
     font-size: 0.9em;
   }
-  
-  .sidebar a {
-    font-size: 16px;
-    padding: 10px 15px;
-  }
-  
-  .sidebar a i {
-    font-size: 16px;
-  }
-  
-  .openbtn {
-    font-size: 16px;
-    padding: 8px 12px;
+}
+
+/* Very small screens */
+@media screen and (max-width: 320px) {
+  .sidebar {
+    width: 200px !important;
   }
   
   #main {
+    margin-left: 200px !important;
     padding: 3px;
   }
 }
 
-/* High-resolution display adjustments */
+/* High resolution displays */
 @media screen and (min-width: 1200px) {
+  .sidebar {
+    width: 320px !important;
+  }
+  
+  #main {
+    margin-left: 320px !important;
+  }
+  
   .dashboard-container {
     max-width: 1500px;
     padding: 30px;
@@ -819,7 +761,7 @@ header h1 i {
 
 /* Print styles */
 @media print {
-  .sidebar, .openbtn, .particles {
+  .sidebar {
     display: none !important;
   }
   
@@ -835,6 +777,10 @@ header h1 i {
   .quick-actions-card {
     display: none;
   }
+  
+  #main {
+    margin-left: 0 !important;
+  }
 }
 
 #analyticsModal {
@@ -847,10 +793,12 @@ header h1 i {
   align-items: center;
   justify-content: center;
 }
+
 #analyticsModal.active {
   display: flex !important;
   animation: fadeInModal 0.3s;
 }
+
 @keyframes fadeInModal {
   from { opacity: 0; transform: scale(0.96);}
   to { opacity: 1; transform: scale(1);}

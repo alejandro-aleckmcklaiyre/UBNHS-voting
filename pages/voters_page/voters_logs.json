@@ -137,5 +137,81 @@
     {
         "timestamp": "2025-08-03 19:37:03",
         "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-28 10:41:08",
+        "post": {
+            "student_number": "202412340091",
+            "first_name": "Joseph",
+            "middle_name": "",
+            "last_name": "Soguilon",
+            "suffix": "",
+            "email": "joseph.soguilon@deped.gov.ph",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-28 10:41:08",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202412340091",
+            "first_name": "Joseph",
+            "middle_name": null,
+            "last_name": "Soguilon",
+            "suffix": null,
+            "email": "joseph.soguilon@deped.gov.ph",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Soguilon3b5803f6ee85d336"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:41:08",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "202412340091",
+            "first_name": "Joseph",
+            "middle_name": null,
+            "last_name": "Soguilon",
+            "suffix": null,
+            "email": "joseph.soguilon@deped.gov.ph",
+            "unique_code": "Soguilon3b5803f6ee85d336",
+            "class_group_id": 26,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "insert_successful",
+        "student_id": 34
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 34
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "script_completed_successfully"
     }
 ]
