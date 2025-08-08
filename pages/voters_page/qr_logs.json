@@ -141,5 +141,18 @@
         "step": "qr_generation_successful",
         "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Pineda-12-D-202400123263.png",
         "file_size": 2428
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "qr_generation_start",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Soguilon-12-A-202412340091.png",
+        "qr_library_available": true,
+        "gd_extension_loaded": true
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "qr_generation_successful",
+        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Soguilon-12-A-202412340091.png",
+        "file_size": 2468
     }
 ]

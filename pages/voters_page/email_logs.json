@@ -240,5 +240,19 @@
         "message": "Email sent",
         "email": "pinedaharvie32@gmail.com",
         "timestamp": "2025-07-28 07:20:15"
+    },
+    {
+        "student_number": "202412345008",
+        "status": "fail",
+        "reason": "QR code image not found",
+        "qr_path": "..\/..\/assets\/qr_code\/Wilson-8-C-202412345008.png",
+        "timestamp": "2025-07-28 10:41:17"
+    },
+    {
+        "student_number": "202412340091",
+        "status": "success",
+        "message": "Email sent",
+        "email": "joseph.soguilon@deped.gov.ph",
+        "timestamp": "2025-07-28 10:41:31"
     }
 ]

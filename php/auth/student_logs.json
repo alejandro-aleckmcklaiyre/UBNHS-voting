@@ -211,5 +211,26 @@
             "surname": "Arquines",
             "unique_code": "Arquinesb32d05366eea4be1"
         }
+    },
+    {
+        "timestamp": "2025-07-28 10:42:02",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Soguilon",
+            "unique_code": "Soguilon3b5803f6ee85d336"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:42:39",
+        "error": "Debug QR",
+        "details": {
+            "surname": "Soguilon",
+            "unique_code": "Soguilon3b5803f6ee85d336"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:42:39",
+        "error": "Invalid or already used QR code.",
+        "details": null
     }
 ]
