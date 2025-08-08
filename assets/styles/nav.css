@@ -3,7 +3,7 @@
 /* Enhanced Sidebar Container */
 .sidebar {
   height: 100%;
-  width: 0;
+  width: 280px; /* Fixed width instead of 0 */
   position: fixed;
   z-index: 1001;
   top: 0;
@@ -15,6 +15,9 @@
   box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(15px);
   border-right: 2px solid rgba(251, 211, 2, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center the content */
 }
 
 /* Animated Background Patterns */
@@ -100,6 +103,7 @@
   color: #DAD2D8;
   display: flex;
   align-items: center;
+  justify-content: center; /* Center the links */
   transition: all 0.3s ease;
   border-left: 4px solid transparent;
   margin: 5px 0;
@@ -107,10 +111,10 @@
   font-weight: 500;
   position: relative;
   z-index: 2;
-  border-radius: 0 12px 12px 0;
+  border-radius: 12px; /* Changed from 0 12px 12px 0 to full rounded */
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
-  margin-right: 10px;
+  width: 90%; /* Set width to center properly */
 }
 
 /* Icon styling for sidebar links */
@@ -160,96 +164,11 @@
   left: 100%;
 }
 
-/* Close Button Enhancement */
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-  color: #DAD2D8;
-  transition: all 0.3s ease;
-  z-index: 10;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 15px;
-}
-
-.sidebar .closebtn:hover {
-  color: #fbd302;
-  background: rgba(251, 211, 2, 0.2);
-  transform: scale(1.1) rotate(90deg);
-  box-shadow: 0 0 20px rgba(251, 211, 2, 0.4);
-  border-color: rgba(251, 211, 2, 0.3);
-}
-
-/* Enhanced Open Button */
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background: linear-gradient(135deg, #143642, #7da2bb);
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 12px;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-  transition: all 0.4s ease;
-  box-shadow: 
-    0 4px 15px rgba(20, 54, 66, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  font-weight: 600;
-  border: 2px solid rgba(251, 211, 2, 0.2);
-  overflow: hidden;
-}
-
-.openbtn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(251, 211, 2, 0.3), 
-    transparent);
-  transition: left 0.5s ease;
-}
-
-.openbtn:hover {
-  background: linear-gradient(135deg, #fbd302, #f39c12);
-  color: #143642;
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 
-    0 8px 25px rgba(251, 211, 2, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  border-color: rgba(251, 211, 2, 0.6);
-}
-
-.openbtn:hover::before {
-  left: 100%;
-}
-
-.openbtn:active {
-  transform: translateY(0) scale(1.02);
-}
+/* Close Button Enhancement - REMOVED */
+/* Hamburger Button - REMOVED */
 
 /* Glow Effects */
-.sidebar a:hover,
-.sidebar .closebtn:hover,
-.openbtn:hover {
+.sidebar a:hover {
   animation: pulseGlow 2s ease-in-out infinite alternate;
 }
 
@@ -262,8 +181,9 @@
   }
 }
 
-/* Main content transition */
+/* Main content transition - adjusted for always open sidebar */
 #main {
+  margin-left: 280px; /* Always account for sidebar width */
   transition: margin-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   padding: 10px;
 }
@@ -271,12 +191,14 @@
 /* Mobile Responsive Design */
 @media screen and (max-width: 768px) {
   .sidebar {
+    width: 250px;
     padding-top: 50px;
   }
   
   .sidebar a {
     font-size: 18px;
     padding: 12px 20px;
+    width: 85%;
   }
   
   .sidebar a i {
@@ -284,31 +206,21 @@
     margin-right: 10px;
   }
   
-  .sidebar .closebtn {
-    font-size: 30px;
-    width: 40px;
-    height: 40px;
-    right: 20px;
-    margin-top: 10px;
-  }
-  
-  .openbtn {
-    font-size: 18px;
-    padding: 10px 15px;
-    top: 15px;
-    left: 15px;
+  #main {
+    margin-left: 250px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .sidebar {
+    width: 220px;
     padding-top: 40px;
   }
   
   .sidebar a {
     font-size: 16px;
     padding: 10px 15px;
-    margin-right: 5px;
+    width: 85%;
   }
   
   .sidebar a i {
@@ -316,27 +228,21 @@
     margin-right: 8px;
   }
   
-  .sidebar .closebtn {
-    font-size: 28px;
-    width: 35px;
-    height: 35px;
-    right: 15px;
-    margin-top: 8px;
-  }
-  
-  .openbtn {
-    font-size: 16px;
-    padding: 8px 12px;
-    top: 12px;
-    left: 12px;
+  #main {
+    margin-left: 220px;
   }
 }
 
 /* Very small screens */
 @media screen and (max-width: 320px) {
+  .sidebar {
+    width: 200px;
+  }
+  
   .sidebar a {
     font-size: 14px;
     padding: 8px 12px;
+    width: 85%;
   }
   
   .sidebar a i {
@@ -344,9 +250,8 @@
     margin-right: 6px;
   }
   
-  .openbtn {
-    font-size: 14px;
-    padding: 6px 10px;
+  #main {
+    margin-left: 200px;
   }
 }
 
@@ -361,17 +266,14 @@
     margin: 3px 0;
     font-size: 14px;
   }
-  
-  .sidebar .closebtn {
-    width: 30px;
-    height: 30px;
-    font-size: 24px;
-    margin-top: 5px;
-  }
 }
 
 /* High resolution displays */
 @media screen and (min-width: 1200px) {
+  .sidebar {
+    width: 320px;
+  }
+  
   .sidebar a {
     font-size: 18px;
     padding: 18px 30px;
@@ -382,15 +284,8 @@
     margin-right: 15px;
   }
   
-  .sidebar .closebtn {
-    font-size: 40px;
-    width: 50px;
-    height: 50px;
-  }
-  
-  .openbtn {
-    font-size: 22px;
-    padding: 15px 22px;
+  #main {
+    margin-left: 320px;
   }
 }
 
@@ -405,19 +300,12 @@
     color: #E2E8F0;
     background: rgba(255, 255, 255, 0.03);
   }
-  
-  .sidebar .closebtn {
-    color: #E2E8F0;
-    background: rgba(255, 255, 255, 0.03);
-  }
 }
 
 /* Accessibility improvements */
 @media (prefers-reduced-motion: reduce) {
   .sidebar,
   .sidebar a,
-  .sidebar .closebtn,
-  .openbtn,
   #main {
     transition: none;
   }
@@ -429,17 +317,14 @@
 }
 
 /* Focus states for accessibility */
-.sidebar a:focus,
-.sidebar .closebtn:focus,
-.openbtn:focus {
+.sidebar a:focus {
   outline: 2px solid #fbd302;
   outline-offset: 2px;
 }
 
 /* Print styles */
 @media print {
-  .sidebar,
-  .openbtn {
+  .sidebar {
     display: none !important;
   }
   
