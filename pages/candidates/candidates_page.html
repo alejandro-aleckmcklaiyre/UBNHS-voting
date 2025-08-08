@@ -5,19 +5,20 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UBNHSelect Candidates</title>
-  <link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
-  <link rel="stylesheet" href="/ubnhs-voting/pages/candidates/CP_Interface.css">
+  <title>PUPT CS El-Express Candidates</title>
+  <link rel="stylesheet" href="assets/styles/nav.css">
+  <link rel="stylesheet" href="pages/candidates/CP_Interface.css">
+
 </head>
 <body>
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="/ubnhs-voting/index.php?page=admin_dashboard">Home</a>
-  <a href="/ubnhs-voting/index.php?page=candidates" id="candi">Candidates</a>
-  <a href="/ubnhs-voting/index.php?page=voters_page">Voters/Members</a>
-  <a href="/ubnhs-voting/index.php?page=about">About Us</a>
-  <a href="/ubnhs-voting/php/auth/logout.php">Log Out</a>
+  <a href="index.php?page=admin_dashboard">Home</a>
+  <a href="index.php?page=candidates" id="candi">Candidates</a>
+  <a href="index.php?page=voters_page">Voters/Members</a>
+  <a href="index.php?page=about">About Us</a>
+  <a href="php/auth/logout.php">Log Out</a>
 </div>
 
 <div id="main">
@@ -41,17 +42,13 @@
               <tr>
                 <th>Committee</th>
                 <th>Candidate Name</th>
+                <th>Partylist Name</th>
                 <th>Picture</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>VP FINANCE</td>
-                <td>John Doe</td>
-                <td><img src="/static/Images/sample_candidate.jpg" alt="Candidate" class="candidate-pic"></td>
-                <td><button class="delete-btn">Delete</button></td>
-              </tr>
+              <!-- Candidates will be dynamically inserted here -->
             </tbody>
           </table>
         </div>
@@ -63,25 +60,24 @@
             <select id="committee" name="committee" required>
               <option value="">Select a Committee</option>
               <option value="PRESIDENT">PRESIDENT</option>
-              <option value="VP EXTERNAL AFFAIRS">VP EXTERNAL AFFAIRS</option>
-              <option value="VP FINANCE">VP FINANCE</option>
-              <option value="AVP FOR RECORDS">AVP FOR RECORDS</option>
-              <option value="AVP FOR FINANCE">AVP FOR FINANCE</option>
-              <option value="AVP FOR RESEARCH AND DOCUMENTATION">AVP FOR RESEARCH AND DOCUMENTATION</option>
-              <option value="VP AUDIT">VP AUDIT</option>
-              <option value="VP COMMUNICATIONS">VP COMMUNICATIONS</option>
-              <option value="AVP COMMUNICATIONS">AVP COMMUNICATIONS</option>
-              <option value="DELEGATES REPRESENTATIVE">DELEGATES REPRESENTATIVE</option>
-              <option value="DIRECTOR FOR CREATIVES">DIRECTOR FOR CREATIVES</option>
-              <option value="CO-DIRECTOR FOR CREATIVES">CO-DIRECTOR FOR CREATIVES</option>
-              <option value="DIRECTOR FOR ACADEMICS">DIRECTOR FOR ACADEMICS</option>
-              <option value="CO-DIRECTOR FOR ACADEMICS">CO-DIRECTOR FOR ACADEMICS</option>
-              <option value="DIRECTOR FOR SPORTS">DIRECTOR FOR SPORTS</option>
-              <option value="CO-DIRECTOR FOR SPORTS">CO-DIRECTOR FOR SPORTS</option>
+              <option value="VICE PRESIDENT">VICE PRESIDENT</option>
+              <option value="SECRETARY">SECRETARY</option>
+              <option value="TREASURER">TREASURER</option>
+              <option value="AUDITOR">AUDITOR</option>
+              <option value="PIO">PIO</option>
+              <option value="PO">PO</option>
+              <option value="GR 12 REPRESENTATIVE">GR 12 REPRESENTATIVE</option>
+              <option value="GR 11 REPRESENTATIVE">GR 11 REPRESENTATIVE</option>
+              <option value="GR 10 REPRESENTATIVE">GR 10 REPRESENTATIVE</option>
+              <option value="GR 9 REPRESENTATIVE">GR 9 REPRESENTATIVE</option>
+              <option value="GR 8 REPRESENTATIVE">GR 8 REPRESENTATIVE</option>
             </select>
             <label for="candidateName">Candidate Name:</label>
             <input type="text" id="candidateName" name="candidate_name" placeholder="Enter Name" required>
             
+            <label for="partylistName">Partylist Name:</label>
+            <input type="text" id="partylistName" name="partylist_name" placeholder="partylist name">
+
             <label for="candidatePic">Candidate Picture:</label>
             <div class="file-input-container">
               <input type="file" id="candidatePic" name="candidate_pic" accept="image/*" required>
@@ -107,6 +103,6 @@
     </center>
   </main>
 </div>
-<script src="/ubnhs-voting/pages/candidates/cp_script.js"></script>
+<script src="pages/candidates/cp_script.js"></script>
 </body>
 </html>

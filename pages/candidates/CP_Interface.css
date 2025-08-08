@@ -2,7 +2,9 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   height: 100vh; 
-  background-image: url("/ubnhs-voting/assets/images-UBNHS/CANDIDATE-FINALBG.png");
+
+  background-image: url("assets/images-UBNHS/CANDIDATE_BG.png");
+
   background-size: cover; 
   background-position: center center; 
   background-attachment: fixed; 

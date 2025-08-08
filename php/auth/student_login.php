@@ -30,22 +30,36 @@ function logStudentError($message, $details = null) {
     file_put_contents($log_path, json_encode($logs, JSON_PRETTY_PRINT));
 }
 
+// Add this function near the top, after logStudentError()
+function logStudentErrorTxt($message, $details = null) {
+    $log_path = __DIR__ . '/student_error.log';
+    $log_entry = "[" . date('Y-m-d H:i:s') . "] " . $message;
+    if ($details) $log_entry .= " | Details: " . (is_string($details) ? $details : json_encode($details));
+    $log_entry .= "\n";
+    file_put_contents($log_path, $log_entry, FILE_APPEND);
+}
+
 // Global error handler
 set_exception_handler(function($e) {
     logStudentError('Uncaught Exception', $e->getMessage());
+    logStudentErrorTxt('Uncaught Exception', $e->getMessage());
     header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Server error. Check student_logs.json for details.']);
+    echo json_encode(['success' => false, 'message' => 'Server error. Check student_logs.json or student_error.log for details.']);
     exit;
 });
 set_error_handler(function($errno, $errstr, $errfile, $errline) {
     logStudentError('PHP Error', "$errstr in $errfile on line $errline");
+    logStudentErrorTxt('PHP Error', "$errstr in $errfile on line $errline");
     header('Content-Type: application/json');
-    echo json_encode(['success' => false, 'message' => 'Server error. Check student_logs.json for details.']);
+    echo json_encode(['success' => false, 'message' => 'Server error. Check student_logs.json or student_error.log for details.']);
     exit;
 });
 
 function sendResponse($success, $message, $data = null, $redirect = null) {
-    if (!$success) logStudentError($message, $data);
+    if (!$success) {
+        logStudentError($message, $data);
+        logStudentErrorTxt($message, $data);
+    }
     $response = [
         'success' => $success,
         'message' => $message
@@ -104,7 +118,7 @@ if ($conn->connect_error) {
 }
 
 $stmt = $conn->prepare("
-    SELECT s.id, s.student_number, s.first_name, s.middle_name, s.last_name, s.suffix, s.email, s.status_id, ss.status_name
+    SELECT s.id, s.student_number, s.first_name, s.middle_name, s.last_name, s.suffix, s.email, s.status_id, ss.status_name, s.class_group_id
     FROM student s
     JOIN student_status ss ON s.status_id = ss.id
     WHERE s.last_name = ? AND s.unique_code = ? AND ss.status_name = 'Active'
@@ -120,6 +134,18 @@ if ($result->num_rows !== 1) {
 
 $student = $result->fetch_assoc();
 $stmt->close();
+
+// Get year_level from class_group
+$year_level = null;
+$class_group_id = $student['class_group_id'] ?? null;
+if ($class_group_id) {
+    $year_stmt = $conn->prepare("SELECT year_level FROM class_group WHERE id = ?");
+    $year_stmt->bind_param("i", $class_group_id);
+    $year_stmt->execute();
+    $year_stmt->bind_result($year_level);
+    $year_stmt->fetch();
+    $year_stmt->close();
+}
 
 // Mark QR code as used (change status_id to 'Used')
 $used_status_id = 2;
@@ -146,6 +172,7 @@ $_SESSION['student_number'] = $student['student_number'];
 $_SESSION['student_name'] = trim($student['first_name'] . ' ' . ($student['middle_name'] ? $student['middle_name'] . ' ' : '') . $student['last_name'] . ($student['suffix'] ? ' ' . $student['suffix'] : ''));
 $_SESSION['login_time'] = time();
 $_SESSION['last_activity'] = time();
+$_SESSION['year_level'] = $year_level; // <-- Add this line
 
 $student_data = [
     'id' => $student['id'],

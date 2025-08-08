@@ -115,7 +115,7 @@ function confirmRow(button) {
     }
 
     $.ajax({
-        url: '/ubnhs-voting/php/voters/add_voters.php',
+        url: '../../php/voters/add_voters.php', // changed to relative path
         type: 'POST',
         dataType: 'json',
         data: {
@@ -200,93 +200,59 @@ function confirmRow(button) {
             }
         },
         error: function(xhr, status, error) {
-            // Reset button
             button.disabled = false;
             button.textContent = 'Confirm';
-            
+
             let errorMsg = 'Failed to add student.';
             let errorDetails = '';
-            
-            console.error('AJAX Error Details:', {
-                status: xhr.status,
-                statusText: xhr.statusText,
-                responseText: xhr.responseText,
-                responseJSON: xhr.responseJSON,
-                error: error,
-                readyState: xhr.readyState
-            });
-            
+
             // Try to parse JSON response first
+            let parsed = null;
             if (xhr.responseJSON) {
-                if (xhr.responseJSON.message) {
-                    errorMsg = xhr.responseJSON.message;
-                }
-                if (xhr.responseJSON.error) {
-                    errorDetails = xhr.responseJSON.error;
-                }
+                parsed = xhr.responseJSON;
             } else if (xhr.responseText) {
-                // Try to extract useful info from responseText
                 try {
-                    const parsed = JSON.parse(xhr.responseText);
-                    if (parsed.message) {
-                        errorMsg = parsed.message;
-                    }
-                    if (parsed.success === true) {
-                        // This means the server actually succeeded but jQuery treated it as error
-                        // This can happen with malformed JSON or HTTP status issues
-                        console.warn('Server succeeded but AJAX treated as error:', parsed);
-                        
-                        // Manually call the success handler logic
-                        if (inputs.length > 0) {
-                            inputs.forEach(input => {
-                                const td = input.parentElement;
-                                td.textContent = input.value || '';
-                            });
-                        }
-                        const actionsCell = row.cells[row.cells.length - 1];
-                        const studentNumber = row.cells[1].textContent;
-                        actionsCell.innerHTML = '<button onclick="deleteStudent(\'' + studentNumber + '\')">Delete</button>';
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Success!',
-                            text: 'Student added successfully!',
-                            showConfirmButton: true,
-                            timer: 3000
-                        });
-
-                        if (typeof loadVotersTable === 'function') {
-                            setTimeout(() => loadVotersTable(), 1000);
-                        }
-                        return;
-                    }
+                    parsed = JSON.parse(xhr.responseText);
                 } catch (e) {
-                    // If not JSON, check for common server errors
-                    if (xhr.status >= 500) {
-                        errorMsg = `Server error (${xhr.status}): The server encountered an internal error.`;
-                    } else if (xhr.status === 404) {
-                        errorMsg = 'The add_voters.php file could not be found.';
-                    } else if (xhr.status === 403) {
-                        errorMsg = 'Access denied to add_voters.php';
-                    } else if (xhr.status >= 400) {
-                        errorMsg = `Client error (${xhr.status}): ${xhr.statusText || 'Bad request'}`;
-                    } else {
-                        errorMsg = `HTTP error (${xhr.status}): ${xhr.statusText || 'Unknown error'}`;
-                    }
-                }
-            } else {
-                // Network or other error
-                if (status === 'timeout') {
-                    errorMsg = 'Request timed out. Please try again.';
-                } else if (status === 'error') {
-                    errorMsg = 'Network error: Unable to connect to server.';
-                } else if (status === 'abort') {
-                    errorMsg = 'Request was cancelled.';
-                } else {
-                    errorMsg = `Network error: ${error || 'Unable to connect to server'}`;
+                    // Not JSON
                 }
             }
-            
+
+            // If the server actually succeeded but jQuery treated it as error
+            if (parsed && parsed.success === true) {
+                // Manually call the success handler logic
+                if (inputs.length > 0) {
+                    inputs.forEach(input => {
+                        const td = input.parentElement;
+                        td.textContent = input.value || '';
+                    });
+                }
+                const actionsCell = row.cells[row.cells.length - 1];
+                const studentNumber = row.cells[1].textContent;
+                actionsCell.innerHTML = '<button onclick="deleteStudent(\'' + studentNumber + '\')">Delete</button>';
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Student added successfully!',
+                    showConfirmButton: true,
+                    timer: 3000
+                });
+
+                if (typeof loadVotersTable === 'function') {
+                    setTimeout(() => loadVotersTable(), 1000);
+                }
+                return;
+            }
+
+            // Otherwise, show error
+            if (parsed && parsed.message) {
+                errorMsg = parsed.message;
+            }
+            if (parsed && parsed.error) {
+                errorDetails = parsed.error;
+            }
+
             Swal.fire({
                 icon: 'error',
                 title: 'Error Adding Student',
@@ -325,7 +291,7 @@ function deleteStudent(studentNumber) {
         if (result.isConfirmed) {
             // AJAX call to soft delete
             $.ajax({
-                url: '/ubnhs-voting/php/voters/remove_voter.php',
+                url: '../../php/voters/remove_voter.php', // changed to relative path
                 type: 'POST',
                 dataType: 'json',
                 data: { student_number: studentNumber },
@@ -601,7 +567,7 @@ function renderPagination(totalRows) {
 }
 
 function loadVotersTable() {
-    fetch('/ubnhs-voting/php/voters/display_voter.php')
+    fetch('../../php/voters/display_voter.php') // changed to relative path
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -704,8 +670,8 @@ function sendQrEmail(studentNumber, btn) {
             const originalText = btn.textContent;
             btn.disabled = true;
             btn.textContent = 'Sending...';
-            
-            fetch('/ubnhs-voting/php/voters/send_qr_email.php', {
+
+            fetch('../../php/voters/send_qr_email.php', { // changed to relative path
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'student_number=' + encodeURIComponent(studentNumber)

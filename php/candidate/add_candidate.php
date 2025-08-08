@@ -5,6 +5,7 @@ require_once '../config/db_config.php';
 // Get POST data
 $committee = $_POST['committee'] ?? '';
 $name = $_POST['name'] ?? '';
+$partylist_name = $_POST['partylist_name'] ?? '';
 $picture = $_FILES['picture'] ?? null;
 
 // Validate input
@@ -31,8 +32,8 @@ if (!move_uploaded_file($picture['tmp_name'], $target_file)) {
 $picture_path = 'assets/ubnhs-candidates/' . $filename;
 
 // Insert into database
-$stmt = $conn->prepare("INSERT INTO candidate (committee, name, picture) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $committee, $name, $picture_path);
+$stmt = $conn->prepare("INSERT INTO candidate (committee, name, partylist_name, picture) VALUES (?, ?, ?, ?)");
+$stmt->bind_param("ssss", $committee, $name, $partylist_name, $picture_path);
 
 if ($stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Candidate added successfully.']);

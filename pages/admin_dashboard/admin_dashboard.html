@@ -4,107 +4,142 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>UBNHSelect Admin Dashboard</title>
-<link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
-<link rel="stylesheet" href="/ubnhs-voting/pages/admin_dashboard/AD_Interface.css">
+<link rel="stylesheet" href="assets/styles/nav.css">
+<link rel="stylesheet" href="pages/admin_dashboard/AD_Interface.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="/ubnhs-voting/index.php?page=admin_dashboard" id="home">
+  <a href="index.php?page=admin_dashboard" id="home">
     <i class="fas fa-home"></i> Home
   </a>
-  <a href="/ubnhs-voting/index.php?page=candidates">
+  <a href="index.php?page=candidates">
     <i class="fas fa-users"></i> Candidates
   </a>
-  <a href="/ubnhs-voting/index.php?page=voters_page">
+  <a href="index.php?page=voters_page">
     <i class="fas fa-vote-yea"></i> Voters/Members
   </a>
-  <a href="/ubnhs-voting/index.php?page=about">
+  <a href="index.php?page=about">
     <i class="fas fa-info-circle"></i> About Us
   </a>
-  <a href="/ubnhs-voting/php/auth/logout.php">
+  <a href="php/auth/logout.php">
     <i class="fas fa-sign-out-alt"></i> Log Out
   </a>
 </div>
-
 <div id="main">
   <button class="openbtn" id="openSidebarBtn" onclick="openNav()">☰</button>
   <main class="content">
     <div class="dashboard-container">
       <header>
-        <img src="/ubnhs-voting/assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
-        <img src="/ubnhs-voting/assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
-        <h1><i class="fas fa-chart-bar"></i> Election Status</h1>
-        <div class="header-decoration"></div>
-      </header>
-
-      <!-- Stats Cards -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-vote-yea"></i>
-          </div>
-          <div class="stat-info">
-            <h3>450</h3>
-            <p>Total Votes</p>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <div class="stat-info">
-            <h3>12</h3>
-            <p>Candidates</p>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-percentage"></i>
-          </div>
-          <div class="stat-info">
-            <h3>87%</h3>
-            <p>Turnout</p>
-          </div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <div class="stat-info">
-            <h3>Live</h3>
-            <p>Status</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="election-section">
-        <h2 class="election-title">
-          <i class="fas fa-chart-line"></i> Voting Results
-        </h2>
+        <img src="assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
+        <img src="assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
+        <h1>Election Status</h1>
+        </header>
         
-        <div class="chart-wrapper">
+      <div class="dashboard-grid">
+        <div class="stats-cards">
+          <div class="stat-card">
+            <div class="stat-title">Total Votes</div>
+            <div class="stat-value" id="totalVotes">0</div>
+            <div class="stat-desc">Votes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Vote Turnouts</div>
+            <div class="stat-value" id="turnoutPercent">0%</div>
+            <div class="stat-desc">Turnouts</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Total Candidates</div>
+            <div class="stat-value" id="totalCandidates">0</div>
+            <div class="stat-desc">Candidates</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-title">Election Status</div>
+            <div class="stat-value live" id="electionStatus">Live</div>
+            <div class="stat-desc">Status</div>
+          </div>
+        </div>
+        
+        <div class="quick-actions-card">
+          <div class="quick-actions-title">Quick Actions</div>
+          <button class="quick-action-btn">
+            <i class="fas fa-chart-line"></i>
+            Detailed Report
+          </button>
+          <button class="quick-action-btn">
+            <i class="fas fa-download"></i>
+            Export Results
+          </button>
+          <button class="quick-action-btn">
+            <i class="fas fa-analytics"></i>
+            Advance Analytics
+          </button>
+          <button class="quick-action-btn danger">
+            <i class="fas fa-redo"></i>
+            Reset Election
+          </button>
+        </div>
+        
+        <div class="results-section">
+          <div class="results-header">
+            <i class="fas fa-trophy"></i>
+            Voting Result
+          </div>
+          <div class="results-subheader">Leading Candidates</div>
+          <div class="leading-candidates-list" id="leadingCandidatesList">
+            <!-- JS will populate this -->
+          </div>
+        </div>
+        
+        <div class="chart-section">
+          <div class="chart-header">
+            <i class="fas fa-chart-bar"></i>
+            Leading Votes
+          </div>
+          <div class="chart-subheader">Dashboard Insights</div>
+          
+          <div class="chart-filters">
+            <div class="filter-group">
+              <label>Data Filters</label>
+              <div class="filter-row">
+                <select id="committeeSelect" class="filter-select">
+                  <option value="all">All Committees</option>
+                  <option value="president">President</option>
+                  <option value="vice-president">Vice President</option>
+                  <option value="secretary">Secretary</option>
+                  <option value="treasurer">Treasurer</option>
+                  <option value="auditor">Auditor</option>
+                  <option value="pio">PIO</option>
+                  <option value="po">PO</option>
+                  <option value="grade-12-rep">Grade 12 Representative</option>
+                  <option value="grade-11-rep">Grade 11 Representative</option>
+                  <option value="grade-10-rep">Grade 10 Representative</option>
+                  <option value="grade-9-rep">Grade 9 Representative</option>
+                  <option value="grade-8-rep">Grade 8 Representative</option>
+                  <option value="grade-7-rep">Grade 7 Representative</option>
+                </select>
+                <select id="yearLevelSelect" class="filter-select">
+                  <option value="all">All Year Level</option>
+                  <option value="grade-7">Grade 7</option>
+                  <option value="grade-8">Grade 8</option>
+                  <option value="grade-9">Grade 9</option>
+                  <option value="grade-10">Grade 10</option>
+                  <option value="grade-11">Grade 11</option>
+                  <option value="grade-12">Grade 12</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          
           <div class="chart-container">
             <canvas id="positionsChart"></canvas>
           </div>
         </div>
-        
-        <div class="action-buttons">
-          <a href="summary.php" class="action-btn primary">
-            <i class="fas fa-file-alt"></i> View Summary
-          </a>
-          <button class="action-btn secondary">
-            <i class="fas fa-download"></i> Export Results
-          </button>
-          <button class="action-btn danger">
-            <i class="fas fa-redo"></i> Reset Election
-          </button>
-        </div>
       </div>
-
+      
       <!-- Floating particles for decoration -->
       <div class="particles">
         <div class="particle"></div>
@@ -117,143 +152,95 @@
   </main>
 </div>
 
-<script>
-  function openNav() {
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-    document.getElementById("openSidebarBtn").style.display = "none";
-  }
-
-  function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-    document.getElementById("openSidebarBtn").style.display = "inline-block";
-  }
-
-  document.getElementById('home').classList.add('active');
-
-// Chart.js Script with JavaScript data
-  const ctx = document.getElementById('positionsChart').getContext('2d');
-  
-  // Static data - you can modify these arrays as needed
-  //create a get_data.php file to fetch this data dynamically
-  const committees = ['President', 'Vice President', 'Secretary', 'Treasurer'];
-  const votes = [120, 98, 87, 145];
-
-  const positionsChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-          labels: committees,
-          datasets: [{
-              label: 'Voting Results',
-              data: votes,
-              backgroundColor: [
-                'rgba(168, 32, 26, 0.8)',
-                'rgba(20, 54, 66, 0.8)',
-                'rgba(251, 211, 2, 0.8)',
-                'rgba(125, 162, 187, 0.8)'
-              ],
-              borderColor: [
-                'rgba(168, 32, 26, 1)',
-                'rgba(20, 54, 66, 1)',
-                'rgba(251, 211, 2, 1)',
-                'rgba(125, 162, 187, 1)'
-              ],
-              borderWidth: 2,
-              borderRadius: 8,
-              borderSkipped: false,
-          }]
-      },
-      options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-              x: {
-                  beginAtZero: true,
-                  ticks: {
-                      maxRotation: 45,
-                      minRotation: 45,
-                      color: '#2C3E50',
-                      font: {
-                        weight: 'bold'
-                      }
-                  },
-                  grid: {
-                    display: false
-                  }
-              },
-              y: {
-                  beginAtZero: true,
-                  ticks: {
-                    color: '#2C3E50',
-                    font: {
-                      weight: 'bold'
-                    }
-                  },
-                  grid: {
-                    color: 'rgba(0,0,0,0.1)'
-                  }
-              }
-          },
-          animation: {
-            duration: 2000,
-            easing: 'easeInOutQuart'
-          }
-      }
-  });
-
-  // Add functionality for buttons
-  document.addEventListener('DOMContentLoaded', function() {
-    const exportBtn = document.querySelector('.action-buttons .action-btn.secondary');
-    const resetBtn = document.querySelector('.action-buttons .action-btn.danger');
-    
-    if (exportBtn) {
-      exportBtn.addEventListener('click', function() {
-        // Add your export functionality here
-        console.log('Export results clicked');
-        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Exporting...';
-        setTimeout(() => {
-          this.innerHTML = '<i class="fas fa-download"></i> Export Results';
-        }, 2000);
-      });
-    }
-    
-    if (resetBtn) {
-      resetBtn.addEventListener('click', function() {
-        // Add your reset functionality here
-        if (confirm('Are you sure you want to reset the election? This action cannot be undone.')) {
-          console.log('Reset election clicked');
-          this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Resetting...';
-          setTimeout(() => {
-            this.innerHTML = '<i class="fas fa-redo"></i> Reset Election';
-          }, 2000);
-        }
-      });
-    }
-
-    // Add live updating effect for stats
-    setInterval(() => {
-      const statNumbers = document.querySelectorAll('.stat-info h3');
-      statNumbers.forEach(stat => {
-        if (stat.textContent === 'Live') return;
-        
-        const current = parseInt(stat.textContent) || 0;
-        const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
-        const newValue = Math.max(0, current + variation);
-        
-        if (stat.textContent.includes('%')) {
-          stat.textContent = Math.min(100, newValue) + '%';
-        } else {
-          stat.textContent = newValue;
-        }
-      });
-    }, 5000);
-  });
-</script>
+<div id="analyticsModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(20,54,66,0.25); z-index:9999; align-items:center; justify-content:center;">
+  <div class="modal-content" style="max-width:600px; width:95%; margin:auto; background:#fff; border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:32px 24px; position:relative;">
+    <span class="close" id="closeAnalyticsModal" style="position:absolute;top:18px;right:24px;font-size:28px;cursor:pointer;">&times;</span>
+    <h2 style="margin-bottom:24px; font-size:1.5em; font-weight:700; color:#143642;">
+      <i class="fas fa-chart-bar" style="color:#fbd302;"></i> Advanced Analytics
+    </h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div>
+        <div style="font-weight:600;margin-bottom:10px;">Turnout Rate by Grade Level</div>
+        <div style="margin-bottom:8px;">Grade 12 <span style="float:right;">91%</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:91%;background:#2ecc40;height:8px;"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:8px;">Grade 11 <span style="float:right;">85%</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:85%;background:#3498db;height:8px;"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:8px;">Grade 10 <span style="float:right;">82%</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:82%;background:#f39c12;height:8px;"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:8px;">Grade 9 <span style="float:right;">79%</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:79%;background:#e74c3c;height:8px;"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:600;margin-bottom:10px;">Vote Distribution by Position</div>
+        <canvas id="analyticsPieChart" width="180" height="120"></canvas>
+        <div style="font-size:0.9em;margin-top:8px;">
+          <span style="color:#3b82f6;">&#9632;</span> President (33%) &nbsp;
+          <span style="color:#22c55e;">&#9632;</span> VP (22%) &nbsp;
+          <span style="color:#f59e42;">&#9632;</span> Secretary (17%) &nbsp;
+          <span style="color:#e74c3c;">&#9632;</span> Treasurer (14%) &nbsp;
+          <span style="color:#888;">&#9632;</span> Others (14%)
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:32px;">
+      <div style="font-weight:600;margin-bottom:10px;">Voting Progress Throughout the Day</div>
+      <div style="display:flex;align-items:center;gap:18px;">
+        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
+        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
+        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
+        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
+        <span style="width:18px;height:18px;background:#f39c12;border-radius:50%;display:inline-block;"></span>
+        <span style="width:18px;height:18px;background:#e9ecef;border-radius:50%;display:inline-block;"></span>
+      </div>
+    </div>
+    <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div>
+        <div style="font-weight:600;margin-bottom:10px;">Competition Intensity</div>
+        <div>President <span style="float:right;">High</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:90%;background:#e74c3c;height:8px;"></div>
+          </div>
+        </div>
+        <div>VP <span style="float:right;">Medium</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:60%;background:#f39c12;height:8px;"></div>
+          </div>
+        </div>
+        <div>Secretary <span style="float:right;">Low</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:30%;background:#22c55e;height:8px;"></div>
+          </div>
+        </div>
+        <div>Treasurer <span style="float:right;">High</span>
+          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
+            <div style="width:85%;background:#e74c3c;height:8px;"></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:600;margin-bottom:10px;">Vote Trends (Last 2 Hours)</div>
+        <canvas id="analyticsLineChart" width="180" height="120"></canvas>
+        <div style="font-size:0.9em;margin-top:8px;">
+          <span style="color:#3b82f6;">&#9632;</span> Dyanna Pineda &nbsp;
+          <span style="color:#22c55e;">&#9632;</span> Alex Rodriguez &nbsp;
+          <span style="color:#f59e42;">&#9632;</span> Maria Santos
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="pages/admin_dashboard/ad_script.js"></script>
 </body>
 </html>

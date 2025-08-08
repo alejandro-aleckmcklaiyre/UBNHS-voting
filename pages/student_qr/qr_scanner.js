@@ -49,6 +49,11 @@ function stopCamera() {
 function scanLoop() {
     if (!cameraActive || !video.srcObject || !scanning) return;
 
+    if (video.videoWidth === 0 || video.videoHeight === 0) {
+        requestAnimationFrame(scanLoop);
+        return;
+    }
+
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -61,7 +66,7 @@ function scanLoop() {
         document.getElementById('result').textContent = 'QR code detected!';
         handleQRResult(code.data);
     } else {
-        requestAnimationFrame(scanLoop); // much faster than setTimeout
+        requestAnimationFrame(scanLoop);
     }
 }
 
@@ -83,13 +88,22 @@ window.onclick = function(event) {
 };
 
 function handleQRResult(qrData) {
-    fetch('/ubnhs-voting/php/auth/student_login.php', {
+    fetch('php/auth/student_login.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ qr_code_data: qrData })
     })
-    .then(response => response.json())
-    .then(loginData => {
+    .then(async response => {
+        let text = await response.text();
+        let loginData;
+        try {
+            loginData = JSON.parse(text);
+        } catch (e) {
+            // Not valid JSON, likely HTML error page
+            document.getElementById('result').textContent = 'Login failed. Please contact support.';
+            alert('Login error: Invalid server response.');
+            return;
+        }
         if (loginData.success) {
             document.getElementById('result').textContent = loginData.message;
             setTimeout(() => {
@@ -97,7 +111,6 @@ function handleQRResult(qrData) {
             }, 1200);
         } else {
             document.getElementById('result').textContent = loginData.message;
-            // Show popup for used QR code
             if (loginData.message === "Invalid or already used QR code.") {
                 showModal("QR code is already used.");
             } else {
