@@ -1,3 +1,5 @@
+/* Body */
+
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,7 +14,7 @@ body {
   overflow-y: auto;
 }
 
-/* Enhanced Sidebar */
+/* Enhanced */
 .sidebar {
   height: 100%;
   width: 0;
@@ -817,7 +819,7 @@ header h1 i {
   background: linear-gradient(180deg, #8a1a16, #0f2a35);
 }
 
-/* Print styles */
+
 @media print {
   .sidebar, .openbtn, .particles {
     display: none !important;
