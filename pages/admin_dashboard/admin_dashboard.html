@@ -10,7 +10,90 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="has-top-nav">
+
+<!-- Top Navigation Bar -->
+<nav class="top-nav">
+  <!-- Background particles -->
+  <div class="nav-particles">
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+  </div>
+  
+  <!-- Logo section -->
+  <div class="nav-logo-section">
+    <div class="nav-logo-placeholder">
+      <i class="fas fa-vote-yea"></i>
+    </div>
+    <div class="nav-system-name">UBNHSelect System</div>
+  </div>
+  
+  <!-- Desktop navigation menu -->
+  <div class="nav-menu">
+    <a href="index.php?page=admin_dashboard" class="nav-item active">
+      <i class="fas fa-tachometer-alt"></i>
+      Admin Dashboard
+    </a>
+    <a href="index.php?page=candidates" class="nav-item">
+      <i class="fas fa-users"></i>
+      Candidates
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item">
+      <i class="fas fa-user-check"></i>
+      Voters/Members Registration
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item">
+      <i class="fas fa-history"></i>
+      SSG President's History
+    </a>
+    <a href="index.php?page=about" class="nav-item">
+      <i class="fas fa-info-circle"></i>
+      About Us
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      Logout
+    </a>
+  </div>
+  
+  <!-- Mobile menu button -->
+  <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Mobile navigation menu -->
+  <div class="mobile-nav-menu" id="mobileNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item active">
+      <i class="fas fa-tachometer-alt"></i>
+      Admin Dashboard
+    </a>
+    <a href="index.php?page=candidates" class="nav-item">
+      <i class="fas fa-users"></i>
+      Candidates
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item">
+      <i class="fas fa-user-check"></i>
+      Voters/Members Registration
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item">
+      <i class="fas fa-history"></i>
+      SSG President's History
+    </a>
+    <a href="index.php?page=about" class="nav-item">
+      <i class="fas fa-info-circle"></i>
+      About Us
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      Logout
+    </a>
+  </div>
+</nav>
+
+<!-- Existing sidebar -->
 <div id="mySidebar" class="sidebar">
   <!-- REMOVED THE CLOSE BUTTON -->
   <a href="index.php?page=admin_dashboard" id="home">
@@ -29,6 +112,7 @@
     <i class="fas fa-sign-out-alt"></i> Log Out
   </a>
 </div>
+
 <div id="main">
   <!-- REMOVED THE HAMBURGER BUTTON -->
   <main class="content">
@@ -241,8 +325,44 @@
     </div>
   </div>
 </div>
+
 <script src="pages/admin_dashboard/ad_script16.js"></script>
-</body>
-</html>
+<script>
+// Mobile menu toggle function
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  mobileMenu.classList.toggle('active');
+}
 
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.querySelector('.mobile-menu-btn');
+  
+  if (!mobileMenu.contains(event.target) && !mobileBtn.contains(event.target)) {
+    mobileMenu.classList.remove('active');
+  }
+});
 
+// Close mobile menu when window is resized to desktop
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    const mobileMenu = document.getElementById('mobileNavMenu');
+    mobileMenu.classList.remove('active');
+  }
+});
+
+// Set active navigation item based on current page
+document.addEventListener('DOMContentLoaded', function() {
+  const currentPage = window.location.search;
+  const navItems = document.querySelectorAll('.nav-item');
+  
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('href').includes(currentPage) || 
+        (currentPage === '' && item.getAttribute('href').includes('admin_dashboard'))) {
+      item.classList.add('active');
+    }
+  });
+});
+</script>
