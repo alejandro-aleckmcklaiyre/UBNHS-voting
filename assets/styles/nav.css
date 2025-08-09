@@ -488,7 +488,7 @@ body.has-top-nav {
   }
 }
 
-/* Animation for page load */
+
 .top-nav {
   animation: navSlideDown 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
