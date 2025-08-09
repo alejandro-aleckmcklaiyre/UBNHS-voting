@@ -101,7 +101,8 @@
         <img src="assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
         <img src="assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
         <h1>Election Status</h1>
-        </header>
+        <div class="header-decoration"></div>
+      </header>
         
       <div class="dashboard-grid">
         <div class="stats-cards">
@@ -216,90 +217,103 @@
   </main>
 </div>
 
-<div id="analyticsModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(20,54,66,0.25); z-index:9999; align-items:center; justify-content:center;">
-  <div class="modal-content" style="max-width:600px; width:95%; margin:auto; background:#fff; border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:32px 24px; position:relative;">
-    <span class="close" id="closeAnalyticsModal" style="position:absolute;top:18px;right:24px;font-size:28px;cursor:pointer;">&times;</span>
-    <h2 style="margin-bottom:24px; font-size:1.5em; font-weight:700; color:#143642;">
-      <i class="fas fa-chart-bar" style="color:#fbd302;"></i> Advanced Analytics
+<!-- Advanced Analytics Modal -->
+<div id="analyticsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeAnalyticsModal">&times;</span>
+    <h2>
+      <i class="fas fa-chart-bar"></i> Advanced Analytics
     </h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-      <div>
-        <div style="font-weight:600;margin-bottom:10px;">Turnout Rate by Grade Level</div>
-        <div style="margin-bottom:8px;">Grade 12 <span style="float:right;">91%</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:91%;background:#2ecc40;height:8px;"></div>
+    <div class="analytics-grid">
+      <div class="analytics-section">
+        <div class="analytics-title">Turnout Rate by Grade Level</div>
+        <div class="turnout-bars">
+          <div class="turnout-bar">
+            Grade 12 <span>91%</span>
+            <div class="bar-container">
+              <div class="bar" style="width:91%; background:#2ecc40;"></div>
+            </div>
           </div>
-        </div>
-        <div style="margin-bottom:8px;">Grade 11 <span style="float:right;">85%</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:85%;background:#3498db;height:8px;"></div>
+          <div class="turnout-bar">
+            Grade 11 <span>85%</span>
+            <div class="bar-container">
+              <div class="bar" style="width:85%; background:#3498db;"></div>
+            </div>
           </div>
-        </div>
-        <div style="margin-bottom:8px;">Grade 10 <span style="float:right;">82%</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:82%;background:#f39c12;height:8px;"></div>
+          <div class="turnout-bar">
+            Grade 10 <span>82%</span>
+            <div class="bar-container">
+              <div class="bar" style="width:82%; background:#f39c12;"></div>
+            </div>
           </div>
-        </div>
-        <div style="margin-bottom:8px;">Grade 9 <span style="float:right;">79%</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:79%;background:#e74c3c;height:8px;"></div>
+          <div class="turnout-bar">
+            Grade 9 <span>79%</span>
+            <div class="bar-container">
+              <div class="bar" style="width:79%; background:#e74c3c;"></div>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div style="font-weight:600;margin-bottom:10px;">Vote Distribution by Position</div>
-        <canvas id="analyticsPieChart" width="180" height="120"></canvas>
-        <div style="font-size:0.9em;margin-top:8px;">
-          <span style="color:#3b82f6;">&#9632;</span> President (33%) &nbsp;
-          <span style="color:#22c55e;">&#9632;</span> VP (22%) &nbsp;
-          <span style="color:#f59e42;">&#9632;</span> Secretary (17%) &nbsp;
-          <span style="color:#e74c3c;">&#9632;</span> Treasurer (14%) &nbsp;
-          <span style="color:#888;">&#9632;</span> Others (14%)
+      <div class="analytics-section">
+        <div class="analytics-title">Vote Distribution by Position</div>
+        <canvas id="analyticsPieChart"></canvas>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="color-box" style="background:#3b82f6;"></span> President (33%)</span>
+          <span class="legend-item"><span class="color-box" style="background:#22c55e;"></span> VP (22%)</span>
+          <span class="legend-item"><span class="color-box" style="background:#f59e42;"></span> Secretary (17%)</span>
+          <span class="legend-item"><span class="color-box" style="background:#e74c3c;"></span> Treasurer (14%)</span>
+          <span class="legend-item"><span class="color-box" style="background:#888;"></span> Others (14%)</span>
         </div>
-      </div>
-    </div>
-    <div style="margin-top:32px;">
-      <div style="font-weight:600;margin-bottom:10px;">Voting Progress Throughout the Day</div>
-      <div style="display:flex;align-items:center;gap:18px;">
-        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
-        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
-        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
-        <span style="width:18px;height:18px;background:#2ecc40;border-radius:50%;display:inline-block;"></span>
-        <span style="width:18px;height:18px;background:#f39c12;border-radius:50%;display:inline-block;"></span>
-        <span style="width:18px;height:18px;background:#e9ecef;border-radius:50%;display:inline-block;"></span>
       </div>
     </div>
-    <div style="margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
-      <div>
-        <div style="font-weight:600;margin-bottom:10px;">Competition Intensity</div>
-        <div>President <span style="float:right;">High</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:90%;background:#e74c3c;height:8px;"></div>
+    <div class="voting-progress">
+      <div class="analytics-title">Voting Progress Throughout the Day</div>
+      <div class="progress-indicators">
+        <span class="indicator active"></span>
+        <span class="indicator active"></span>
+        <span class="indicator active"></span>
+        <span class="indicator active"></span>
+        <span class="indicator current"></span>
+        <span class="indicator"></span>
+      </div>
+    </div>
+    <div class="analytics-grid">
+      <div class="analytics-section">
+        <div class="analytics-title">Competition Intensity</div>
+        <div class="competition-bars">
+          <div class="competition-bar">
+            President <span>High</span>
+            <div class="bar-container">
+              <div class="bar" style="width:90%; background:#e74c3c;"></div>
+            </div>
           </div>
-        </div>
-        <div>VP <span style="float:right;">Medium</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:60%;background:#f39c12;height:8px;"></div>
+          <div class="competition-bar">
+            VP <span>Medium</span>
+            <div class="bar-container">
+              <div class="bar" style="width:60%; background:#f39c12;"></div>
+            </div>
           </div>
-        </div>
-        <div>Secretary <span style="float:right;">Low</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:30%;background:#22c55e;height:8px;"></div>
+          <div class="competition-bar">
+            Secretary <span>Low</span>
+            <div class="bar-container">
+              <div class="bar" style="width:30%; background:#22c55e;"></div>
+            </div>
           </div>
-        </div>
-        <div>Treasurer <span style="float:right;">High</span>
-          <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-            <div style="width:85%;background:#e74c3c;height:8px;"></div>
+          <div class="competition-bar">
+            Treasurer <span>High</span>
+            <div class="bar-container">
+              <div class="bar" style="width:85%; background:#e74c3c;"></div>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-        <div style="font-weight:600;margin-bottom:10px;">Vote Trends (Last 2 Hours)</div>
-        <canvas id="analyticsLineChart" width="180" height="120"></canvas>
-        <div style="font-size:0.9em;margin-top:8px;">
-          <span style="color:#3b82f6;">&#9632;</span> Dyanna Pineda &nbsp;
-          <span style="color:#22c55e;">&#9632;</span> Alex Rodriguez &nbsp;
-          <span style="color:#f59e42;">&#9632;</span> Maria Santos
+      <div class="analytics-section">
+        <div class="analytics-title">Vote Trends (Last 2 Hours)</div>
+        <canvas id="analyticsLineChart"></canvas>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="color-box" style="background:#3b82f6;"></span> Dyanna Pineda</span>
+          <span class="legend-item"><span class="color-box" style="background:#22c55e;"></span> Alex Rodriguez</span>
+          <span class="legend-item"><span class="color-box" style="background:#f59e42;"></span> Maria Santos</span>
         </div>
       </div>
     </div>
@@ -346,3 +360,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+</body>
+</html>

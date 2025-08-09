@@ -496,9 +496,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function updateTurnoutRates(data) {
-    const turnoutContainer = document.querySelector('#analyticsModal .modal-content > div > div');
+    const turnoutContainer = document.querySelector('#analyticsModal .turnout-bars');
     if (turnoutContainer) {
-      turnoutContainer.innerHTML = '<div style="font-weight:600;margin-bottom:10px;">Turnout Rate by Grade Level</div>';
+      turnoutContainer.innerHTML = '';
       const yearLevels = ['12', '11', '10', '9'];
       yearLevels.forEach(yl => {
         const percent = data.yearLevelVotes && data.yearLevelVotes[yl] && data.totalStudents
@@ -506,9 +506,10 @@ document.addEventListener('DOMContentLoaded', function() {
           : Math.floor(Math.random() * 30) + 70; // Fallback to demo data
         const colors = { '12': '#2ecc40', '11': '#3498db', '10': '#f39c12', '9': '#e74c3c' };
         turnoutContainer.innerHTML += `
-          <div style="margin-bottom:8px;">Grade ${yl} <span style="float:right;">${percent}%</span>
-            <div style="background:#e9ecef;border-radius:8px;height:8px;overflow:hidden;">
-              <div style="width:${percent}%;background:${colors[yl]};height:8px;"></div>
+          <div class="turnout-bar">
+            Grade ${yl} <span>${percent}%</span>
+            <div class="bar-container">
+              <div class="bar" style="width:${percent}%; background:${colors[yl]};"></div>
             </div>
           </div>
         `;
