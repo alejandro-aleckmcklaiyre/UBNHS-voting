@@ -8,26 +8,65 @@
   <title>PUPT CS El-Express Candidates</title>
   <link rel="stylesheet" href="assets/styles/nav.css">
   <link rel="stylesheet" href="pages/candidates/CP_Interface.css">
-
 </head>
 <body>
 
-<div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="index.php?page=admin_dashboard">Home</a>
-  <a href="index.php?page=candidates" id="candi">Candidates</a>
-  <a href="index.php?page=voters_page">Voters/Members</a>
-  <a href="index.php?page=about">About Us</a>
-  <a href="php/auth/logout.php">Log Out</a>
-</div>
-
-<div id="main">
-  <button class="openbtn" onclick="openNav()">☰</button>  
-  <main class="content">
-    <div class="image-container1">
-      <img src="assets/images-UBNHS/TEXT-LOGO.png" alt="Web Logo">
+<!-- Top Navigation -->
+<nav class="top-navbar">
+  <div class="nav-container">
+    <div class="nav-logo">
+      <img src="assets/images-UBNHS/OURLOGO-WBG.png" alt="PUP Logo">
+      <h1>CS El-Express</h1>
     </div>
+    
+    <ul class="nav-menu" id="navMenu">
+      <li class="nav-item">
+        <a href="index.php?page=admin_dashboard" class="nav-link">
+          <i class="fas fa-tachometer-alt"></i>
+          Admin Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="index.php?page=candidates" class="nav-link active">
+          <i class="fas fa-users"></i>
+          Candidates
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="index.php?page=voters_page" class="nav-link">
+          <i class="fas fa-user-plus"></i>
+          Voters/Members Registration
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="index.php?page=ssg_history" class="nav-link">
+          <i class="fas fa-history"></i>
+          SSG President's History
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="index.php?page=about" class="nav-link">
+          <i class="fas fa-info-circle"></i>
+          About Us
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="php/auth/logout.php" class="nav-link logout-link">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
+<!-- Content Area -->
+<div class="content-area">
+  <div class="image-container1">
+    <img src="assets/images-UBNHS/TEXT-LOGO.png" alt="Web Logo">
+  </div>
+
+  <main class="content">
     <center>
       <div class="container">
         <div class="header">
@@ -103,6 +142,21 @@
     </center>
   </main>
 </div>
+
 <script src="pages/candidates/cp_script.js"></script>
+<script>
+  // Active link highlighting
+  const currentPage = window.location.search;
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href').includes(currentPage.split('=')[1]) || 
+        (currentPage === '' && link.getAttribute('href').includes('admin_dashboard'))) {
+      link.classList.add('active');
+    }
+  });
+</script>
+
 </body>
 </html>
