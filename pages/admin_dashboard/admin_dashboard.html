@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UBNHSelect Admin Dashboard</title>
 <link rel="stylesheet" href="assets/styles/nav.css">
 <link rel="stylesheet" href="pages/admin_dashboard/AD_Interface.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="has-top-nav">
 
-<!-- Top Navigation Bar -->
+<!-- Enhanced Top Navigation Bar -->
 <nav class="top-nav">
-  <!-- Background particles -->
+  <!-- Floating background particles -->
   <div class="nav-particles">
     <div class="nav-particle"></div>
     <div class="nav-particle"></div>
@@ -24,7 +24,7 @@
     <div class="nav-particle"></div>
   </div>
   
-  <!-- Logo section -->
+  <!-- Logo and system name -->
   <div class="nav-logo-section">
     <div class="nav-logo-placeholder">
       <i class="fas fa-vote-yea"></i>
@@ -33,24 +33,24 @@
   </div>
   
   <!-- Desktop navigation menu -->
-  <div class="nav-menu">
-    <a href="index.php?page=admin_dashboard" class="nav-item active">
+  <div class="nav-menu" id="desktopNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item active" data-page="admin_dashboard">
       <i class="fas fa-tachometer-alt"></i>
-      <span>Admin Dashboard</span>
+      <span>Dashboard</span>
     </a>
-    <a href="index.php?page=candidates" class="nav-item">
+    <a href="index.php?page=candidates" class="nav-item" data-page="candidates">
       <i class="fas fa-users"></i>
       <span>Candidates</span>
     </a>
-    <a href="index.php?page=voters_page" class="nav-item">
+    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
       <i class="fas fa-user-check"></i>
-      <span>Voters/Members Registration</span>
+      <span>Voters Registration</span>
     </a>
-    <a href="index.php?page=ssg_history" class="nav-item">
+    <a href="index.php?page=ssg_history" class="nav-item" data-page="ssg_history">
       <i class="fas fa-history"></i>
-      <span>SSG President's History</span>
+      <span>SSG History</span>
     </a>
-    <a href="index.php?page=about" class="nav-item">
+    <a href="index.php?page=about" class="nav-item" data-page="about">
       <i class="fas fa-info-circle"></i>
       <span>About Us</span>
     </a>
@@ -61,29 +61,29 @@
   </div>
   
   <!-- Mobile menu button -->
-  <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
     <i class="fas fa-bars"></i>
   </button>
   
   <!-- Mobile navigation menu -->
   <div class="mobile-nav-menu" id="mobileNavMenu">
-    <a href="index.php?page=admin_dashboard" class="nav-item active">
+    <a href="index.php?page=admin_dashboard" class="nav-item active" data-page="admin_dashboard">
       <i class="fas fa-tachometer-alt"></i>
       <span>Admin Dashboard</span>
     </a>
-    <a href="index.php?page=candidates" class="nav-item">
+    <a href="index.php?page=candidates" class="nav-item" data-page="candidates">
       <i class="fas fa-users"></i>
       <span>Candidates</span>
     </a>
-    <a href="index.php?page=voters_page" class="nav-item">
+    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
       <i class="fas fa-user-check"></i>
       <span>Voters/Members Registration</span>
     </a>
-    <a href="index.php?page=ssg_history" class="nav-item">
+    <a href="index.php?page=ssg_history" class="nav-item" data-page="ssg_history">
       <i class="fas fa-history"></i>
       <span>SSG President's History</span>
     </a>
-    <a href="index.php?page=about" class="nav-item">
+    <a href="index.php?page=about" class="nav-item" data-page="about">
       <i class="fas fa-info-circle"></i>
       <span>About Us</span>
     </a>
@@ -94,91 +94,105 @@
   </div>
 </nav>
 
+<!-- Main Content Area -->
 <div id="main">
   <main class="content">
     <div class="dashboard-container">
       <header>
         <img src="assets/images-UBNHS/UBNHS_-_LOGO-removebg.png" alt="UBNHS Logo" class="logo">
         <img src="assets/images-UBNHS/TEXT-LOGO2.png" alt="Web Logo" class="logo2">
-        <h1>Election Status</h1>
+        <h1><i class="fas fa-chart-line"></i> Election Status Dashboard</h1>
         <div class="header-decoration"></div>
       </header>
         
       <div class="dashboard-grid">
+        <!-- Statistics Cards -->
         <div class="stats-cards">
           <div class="stat-card">
             <div class="stat-title">Total Votes</div>
             <div class="stat-value" id="totalVotes">0</div>
-            <div class="stat-desc">Votes</div>
+            <div class="stat-desc">Votes Cast</div>
           </div>
           <div class="stat-card">
-            <div class="stat-title">Vote Turnouts</div>
+            <div class="stat-title">Vote Turnout</div>
             <div class="stat-value" id="turnoutPercent">0%</div>
-            <div class="stat-desc">Turnouts</div>
+            <div class="stat-desc">Participation</div>
           </div>
           <div class="stat-card">
             <div class="stat-title">Total Candidates</div>
             <div class="stat-value" id="totalCandidates">0</div>
-            <div class="stat-desc">Candidates</div>
+            <div class="stat-desc">Running</div>
           </div>
           <div class="stat-card">
             <div class="stat-title">Election Status</div>
-            <div class="stat-value live" id="electionStatus">Live</div>
-            <div class="stat-desc">Status</div>
+            <div class="stat-value live" id="electionStatus">LIVE</div>
+            <div class="stat-desc">Active</div>
           </div>
         </div>
         
+        <!-- Quick Actions Panel -->
         <div class="quick-actions-card">
-          <div class="quick-actions-title">Quick Actions</div>
-          <button class="quick-action-btn">
+          <div class="quick-actions-title">
+            <i class="fas fa-bolt"></i> Quick Actions
+          </div>
+          <button class="quick-action-btn" onclick="generateDetailedReport()">
             <i class="fas fa-chart-line"></i>
-            Detailed Report
+            <span>Detailed Report</span>
           </button>
-          <button class="quick-action-btn">
+          <button class="quick-action-btn" onclick="exportResults()">
             <i class="fas fa-download"></i>
-            Export Results
+            <span>Export Results</span>
           </button>
-          <button class="quick-action-btn">
+          <button class="quick-action-btn" onclick="openAdvancedAnalytics()">
             <i class="fas fa-analytics"></i>
-            Advance Analytics
+            <span>Advanced Analytics</span>
           </button>
-          <button class="quick-action-btn danger">
+          <button class="quick-action-btn danger" onclick="confirmResetElection()">
             <i class="fas fa-redo"></i>
-            Reset Election
+            <span>Reset Election</span>
           </button>
         </div>
         
+        <!-- Results Section -->
         <div class="results-section">
           <div class="results-header">
             <i class="fas fa-trophy"></i>
-            Voting Result
+            Live Results
           </div>
-          <div class="results-subheader">Leading Candidates</div>
+          <div class="results-subheader">Leading Candidates by Position</div>
           <div class="leading-candidates-list" id="leadingCandidatesList">
-            <!-- JS will populate this -->
+            <!-- Dynamic content will be loaded here -->
+            <div class="leading-candidate-card">
+              <div class="candidate-info">
+                <div class="candidate-name">Loading...</div>
+                <div class="candidate-position">President</div>
+              </div>
+              <div class="votes">---</div>
+            </div>
           </div>
         </div>
         
+        <!-- Chart Section -->
         <div class="chart-section">
           <div class="chart-header">
             <i class="fas fa-chart-bar"></i>
-            Leading Votes
+            Vote Distribution
           </div>
-          <div class="chart-subheader">Dashboard Insights</div>
+          <div class="chart-subheader">Real-time Analytics Dashboard</div>
           
           <div class="chart-filters">
             <div class="filter-group">
-              <label>Data Filters</label>
+              <label><i class="fas fa-filter"></i> Filter Options</label>
               <div class="filter-row">
-                <select id="committeeSelect" class="filter-select">
-                  <option value="all">All Committees</option>
+                <select id="committeeSelect" class="filter-select" onchange="updateChart()">
+                  <option value="all">All Positions</option>
                   <option value="president">President</option>
                   <option value="vice-president">Vice President</option>
                   <option value="secretary">Secretary</option>
                   <option value="treasurer">Treasurer</option>
                   <option value="auditor">Auditor</option>
-                  <option value="pio">PIO</option>
-                  <option value="po">PO</option>
+                  <option value="pio">Public Information Officer</option>
+                  <option value="po">Peace Officer</option>
                   <option value="grade-12-rep">Grade 12 Representative</option>
                   <option value="grade-11-rep">Grade 11 Representative</option>
                   <option value="grade-10-rep">Grade 10 Representative</option>
@@ -186,8 +200,8 @@
                   <option value="grade-8-rep">Grade 8 Representative</option>
                   <option value="grade-7-rep">Grade 7 Representative</option>
                 </select>
-                <select id="yearLevelSelect" class="filter-select">
-                  <option value="all">All Year Level</option>
+                <select id="yearLevelSelect" class="filter-select" onchange="updateChart()">
+                  <option value="all">All Grade Levels</option>
                   <option value="grade-7">Grade 7</option>
                   <option value="grade-8">Grade 8</option>
                   <option value="grade-9">Grade 9</option>
@@ -205,7 +219,7 @@
         </div>
       </div>
       
-      <!-- Floating particles for decoration -->
+      <!-- Decorative Floating Particles -->
       <div class="particles">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -222,8 +236,9 @@
   <div class="modal-content">
     <span class="close" id="closeAnalyticsModal">&times;</span>
     <h2>
-      <i class="fas fa-chart-bar"></i> Advanced Analytics
+      <i class="fas fa-chart-pie"></i> Advanced Analytics Dashboard
     </h2>
+    
     <div class="analytics-grid">
       <div class="analytics-section">
         <div class="analytics-title">Turnout Rate by Grade Level</div>
@@ -254,32 +269,45 @@
           </div>
         </div>
       </div>
+      
       <div class="analytics-section">
-        <div class="analytics-title">Vote Distribution by Position</div>
+        <div class="analytics-title">Vote Distribution Overview</div>
         <canvas id="analyticsPieChart"></canvas>
         <div class="chart-legend">
-          <span class="legend-item"><span class="color-box" style="background:#3b82f6;"></span> President (33%)</span>
-          <span class="legend-item"><span class="color-box" style="background:#22c55e;"></span> VP (22%)</span>
-          <span class="legend-item"><span class="color-box" style="background:#f59e42;"></span> Secretary (17%)</span>
-          <span class="legend-item"><span class="color-box" style="background:#e74c3c;"></span> Treasurer (14%)</span>
-          <span class="legend-item"><span class="color-box" style="background:#888;"></span> Others (14%)</span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#3b82f6;"></span> President (33%)
+          </span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#22c55e;"></span> VP (22%)
+          </span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#f59e42;"></span> Secretary (17%)
+          </span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#e74c3c;"></span> Treasurer (14%)
+          </span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#888;"></span> Others (14%)
+          </span>
         </div>
       </div>
     </div>
+    
     <div class="voting-progress">
-      <div class="analytics-title">Voting Progress Throughout the Day</div>
+      <div class="analytics-title">Election Progress Timeline</div>
       <div class="progress-indicators">
-        <span class="indicator active"></span>
-        <span class="indicator active"></span>
-        <span class="indicator active"></span>
-        <span class="indicator active"></span>
-        <span class="indicator current"></span>
-        <span class="indicator"></span>
+        <span class="indicator active" title="Registration Complete"></span>
+        <span class="indicator active" title="Campaign Period"></span>
+        <span class="indicator active" title="Voting Started"></span>
+        <span class="indicator current" title="Active Voting"></span>
+        <span class="indicator" title="Voting Ends"></span>
+        <span class="indicator" title="Results Declaration"></span>
       </div>
     </div>
+    
     <div class="analytics-grid">
       <div class="analytics-section">
-        <div class="analytics-title">Competition Intensity</div>
+        <div class="analytics-title">Competition Intensity by Position</div>
         <div class="competition-bars">
           <div class="competition-bar">
             President <span>High</span>
@@ -288,7 +316,7 @@
             </div>
           </div>
           <div class="competition-bar">
-            VP <span>Medium</span>
+            Vice President <span>Medium</span>
             <div class="bar-container">
               <div class="bar" style="width:60%; background:#f39c12;"></div>
             </div>
@@ -307,58 +335,251 @@
           </div>
         </div>
       </div>
+      
       <div class="analytics-section">
         <div class="analytics-title">Vote Trends (Last 2 Hours)</div>
         <canvas id="analyticsLineChart"></canvas>
         <div class="chart-legend">
-          <span class="legend-item"><span class="color-box" style="background:#3b82f6;"></span> Dyanna Pineda</span>
-          <span class="legend-item"><span class="color-box" style="background:#22c55e;"></span> Alex Rodriguez</span>
-          <span class="legend-item"><span class="color-box" style="background:#f59e42;"></span> Maria Santos</span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#3b82f6;"></span> Leading Candidate A
+          </span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#22c55e;"></span> Leading Candidate B
+          </span>
+          <span class="legend-item">
+            <span class="color-box" style="background:#f59e42;"></span> Leading Candidate C
+          </span>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Enhanced JavaScript -->
 <script src="pages/admin_dashboard/ad_script.js"></script>
+
 <script>
-// Mobile menu toggle function
+// ========================================
+// ENHANCED NAVIGATION FUNCTIONALITY
+// ========================================
+
+// Mobile menu toggle with smooth animation
 function toggleMobileMenu() {
   const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const icon = mobileBtn.querySelector('i');
+  
   mobileMenu.classList.toggle('active');
+  
+  // Animate hamburger to X
+  if (mobileMenu.classList.contains('active')) {
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-times');
+    mobileBtn.style.transform = 'rotate(90deg)';
+  } else {
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
+    mobileBtn.style.transform = 'rotate(0deg)';
+  }
 }
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', function(event) {
   const mobileMenu = document.getElementById('mobileNavMenu');
-  const mobileBtn = document.querySelector('.mobile-menu-btn');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
   
-  if (!mobileMenu.contains(event.target) && !mobileBtn.contains(event.target)) {
-    mobileMenu.classList.remove('active');
+  if (!mobileMenu.contains(event.target) && 
+      !mobileBtn.contains(event.target) && 
+      mobileMenu.classList.contains('active')) {
+    toggleMobileMenu();
   }
 });
 
-// Close mobile menu when window is resized to desktop
+// Close mobile menu on window resize
 window.addEventListener('resize', function() {
   if (window.innerWidth > 768) {
     const mobileMenu = document.getElementById('mobileNavMenu');
-    mobileMenu.classList.remove('active');
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const icon = mobileBtn.querySelector('i');
+    
+    if (mobileMenu.classList.contains('active')) {
+      mobileMenu.classList.remove('active');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+      mobileBtn.style.transform = 'rotate(0deg)';
+    }
   }
 });
 
 // Set active navigation item based on current page
-document.addEventListener('DOMContentLoaded', function() {
-  const currentPage = window.location.search;
-  const navItems = document.querySelectorAll('.nav-item');
+function setActiveNavItem() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentPage = urlParams.get('page') || 'admin_dashboard';
+  const allNavItems = document.querySelectorAll('.nav-item');
   
-  navItems.forEach(item => {
+  allNavItems.forEach(item => {
     item.classList.remove('active');
-    if (item.getAttribute('href').includes(currentPage) || 
-        (currentPage === '' && item.getAttribute('href').includes('admin_dashboard'))) {
+    const itemPage = item.getAttribute('data-page');
+    if (itemPage === currentPage) {
       item.classList.add('active');
     }
   });
+}
+
+// Enhanced Quick Action Functions
+function generateDetailedReport() {
+  console.log('Generating detailed report...');
+  // Add your report generation logic here
+  showNotification('Detailed report is being generated...', 'info');
+}
+
+function exportResults() {
+  console.log('Exporting results...');
+  // Add your export logic here
+  showNotification('Results export started...', 'info');
+}
+
+function openAdvancedAnalytics() {
+  const modal = document.getElementById('analyticsModal');
+  modal.classList.add('active');
+  initializeAnalyticsCharts();
+}
+
+function confirmResetElection() {
+  if (confirm('Are you sure you want to reset the election? This action cannot be undone.')) {
+    console.log('Resetting election...');
+    // Add your reset logic here
+    showNotification('Election reset initiated...', 'warning');
+  }
+}
+
+// Close analytics modal
+document.getElementById('closeAnalyticsModal').addEventListener('click', function() {
+  document.getElementById('analyticsModal').classList.remove('active');
+});
+
+// Notification system
+function showNotification(message, type = 'info') {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.innerHTML = `
+    <i class="fas fa-${type === 'info' ? 'info-circle' : type === 'warning' ? 'exclamation-triangle' : 'check-circle'}"></i>
+    <span>${message}</span>
+  `;
+  
+  // Add notification styles
+  notification.style.cssText = `
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: ${type === 'info' ? '#3498db' : type === 'warning' ? '#f39c12' : '#27ae60'};
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 10001;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    animation: slideInRight 0.3s ease;
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Remove notification after 3 seconds
+  setTimeout(() => {
+    notification.style.animation = 'slideOutRight 0.3s ease';
+    setTimeout(() => notification.remove(), 300);
+  }, 3000);
+}
+
+// Initialize analytics charts
+function initializeAnalyticsCharts() {
+  // Pie Chart
+  const pieCtx = document.getElementById('analyticsPieChart');
+  if (pieCtx) {
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: ['President', 'VP', 'Secretary', 'Treasurer', 'Others'],
+        datasets: [{
+          data: [33, 22, 17, 14, 14],
+          backgroundColor: ['#3b82f6', '#22c55e', '#f59e42', '#e74c3c', '#888']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  }
+  
+  // Line Chart
+  const lineCtx = document.getElementById('analyticsLineChart');
+  if (lineCtx) {
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: ['12:00', '12:30', '1:00', '1:30', '2:00'],
+        datasets: [
+          {
+            label: 'Candidate A',
+            data: [65, 70, 75, 78, 80],
+            borderColor: '#3b82f6',
+            tension: 0.4
+          },
+          {
+            label: 'Candidate B',
+            data: [45, 48, 52, 55, 58],
+            borderColor: '#22c55e',
+            tension: 0.4
+          },
+          {
+            label: 'Candidate C',
+            data: [25, 28, 30, 32, 35],
+            borderColor: '#f59e42',
+            tension: 0.4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  }
+}
+
+// Update main chart
+function updateChart() {
+  const committee = document.getElementById('committeeSelect').value;
+  const yearLevel = document.getElementById('yearLevelSelect').value;
+  console.log('Updating chart for:', committee, yearLevel);
+  // Add your chart update logic here
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  setActiveNavItem();
+  
+  // Add CSS animations
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutRight {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(100%); opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+  
+  console.log('UBNHSelect Admin Dashboard initialized successfully!');
 });
 </script>
+
 </body>
 </html>
