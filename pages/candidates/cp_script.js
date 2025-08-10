@@ -43,7 +43,7 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
     .catch(() => {
       Swal.fire('Error', 'Failed to add candidate.', 'error');
     });
-}); // <-- Make sure this closing bracket is present
+});
 
 function loadCandidates() {
   fetch('php/candidate/display_candidate.php')
@@ -54,11 +54,14 @@ function loadCandidates() {
         tableBody.innerHTML = '';
         data.candidates.forEach(candidate => {
           const row = document.createElement('tr');
+          // Fixed the image path - removed the extra "../../" prefix
+          const imagePath = candidate.picture.startsWith('assets/') ? candidate.picture : `assets/${candidate.picture}`;
+          
           row.innerHTML = `
             <td>${candidate.committee}</td>
             <td>${candidate.name}</td>
             <td>${candidate.partylist_name || ''}</td>
-            <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
+            <td><img src="${imagePath}" alt="Candidate" class="candidate-pic" onerror="this.src='assets/images-UBNHS/default-avatar.png'"></td>
             <td><button class="delete-btn" data-id="${candidate.id}">Delete</button></td>
           `;
           tableBody.appendChild(row);
