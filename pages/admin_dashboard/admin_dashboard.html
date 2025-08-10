@@ -355,7 +355,7 @@
   </div>
 </div>
 
-<!-- Enhanced JavaScript -->
+<!-- JavaScript Files -->
 <script src="pages/admin_dashboard/ad_script.js"></script>
 
 <script>
@@ -429,13 +429,11 @@ function setActiveNavItem() {
 // Enhanced Quick Action Functions
 function generateDetailedReport() {
   console.log('Generating detailed report...');
-  // Add your report generation logic here
   showNotification('Detailed report is being generated...', 'info');
 }
 
 function exportResults() {
   console.log('Exporting results...');
-  // Add your export logic here
   showNotification('Results export started...', 'info');
 }
 
@@ -448,7 +446,6 @@ function openAdvancedAnalytics() {
 function confirmResetElection() {
   if (confirm('Are you sure you want to reset the election? This action cannot be undone.')) {
     console.log('Resetting election...');
-    // Add your reset logic here
     showNotification('Election reset initiated...', 'warning');
   }
 }
@@ -460,7 +457,6 @@ document.getElementById('closeAnalyticsModal').addEventListener('click', functio
 
 // Notification system
 function showNotification(message, type = 'info') {
-  // Create notification element
   const notification = document.createElement('div');
   notification.className = `notification notification-${type}`;
   notification.innerHTML = `
@@ -468,7 +464,6 @@ function showNotification(message, type = 'info') {
     <span>${message}</span>
   `;
   
-  // Add notification styles
   notification.style.cssText = `
     position: fixed;
     top: 100px;
@@ -487,7 +482,6 @@ function showNotification(message, type = 'info') {
   
   document.body.appendChild(notification);
   
-  // Remove notification after 3 seconds
   setTimeout(() => {
     notification.style.animation = 'slideOutRight 0.3s ease';
     setTimeout(() => notification.remove(), 300);
@@ -496,7 +490,6 @@ function showNotification(message, type = 'info') {
 
 // Initialize analytics charts
 function initializeAnalyticsCharts() {
-  // Pie Chart
   const pieCtx = document.getElementById('analyticsPieChart');
   if (pieCtx) {
     new Chart(pieCtx, {
@@ -515,7 +508,6 @@ function initializeAnalyticsCharts() {
     });
   }
   
-  // Line Chart
   const lineCtx = document.getElementById('analyticsLineChart');
   if (lineCtx) {
     new Chart(lineCtx, {
@@ -556,7 +548,6 @@ function updateChart() {
   const committee = document.getElementById('committeeSelect').value;
   const yearLevel = document.getElementById('yearLevelSelect').value;
   console.log('Updating chart for:', committee, yearLevel);
-  // Add your chart update logic here
 }
 
 // Initialize everything when DOM is loaded
