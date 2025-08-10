@@ -2,7 +2,9 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   height: 100vh; 
+
   background-image: url("assets/images-UBNHS/CANDIDATE_BG.png");
+
   background-size: cover; 
   background-position: center center; 
   background-attachment: fixed; 
@@ -40,141 +42,6 @@ body::before {
 @keyframes float {
   0% { transform: translateY(100vh) rotate(0deg); }
   100% { transform: translateY(-100vh) rotate(360deg); }
-}
-
-/* Fixed Top Navigation Bar */
-.top-navbar {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  border-bottom: 2px solid rgba(139, 0, 0, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  padding: 0;
-}
-
-.nav-container {
-  max-width: none;
-  width: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
-  height: 70px;
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.nav-logo img {
-  width: 45px;
-  height: 45px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-.nav-logo h1 {
-  font-size: 1.4rem;
-  background: linear-gradient(45deg, #8B0000, #FFD700);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: bold;
-  text-shadow: none;
-}
-
-.nav-menu {
-  display: flex;
-  list-style: none;
-  gap: 2px;
-  align-items: center;
-}
-
-.nav-item {
-  position: relative;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-  font-size: 13px;
-  transition: all 0.3s ease;
-  border-radius: 6px;
-  margin: 0 1px;
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.nav-link:hover::before {
-  left: 0;
-}
-
-.nav-link:hover {
-  color: #8B0000;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(139, 0, 0, 0.2);
-}
-
-.nav-link.active {
-  background: linear-gradient(135deg, rgba(139, 0, 0, 0.9) 0%, rgba(139, 0, 0, 0.7) 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
-}
-
-.nav-link.active:hover {
-  color: white;
-  background: linear-gradient(135deg, rgba(139, 0, 0, 1) 0%, rgba(100, 0, 0, 0.9) 100%);
-}
-
-.nav-link i {
-  font-size: 14px;
-}
-
-.logout-link {
-  background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
-  color: #000 !important;
-  font-weight: bold;
-  border-radius: 20px;
-  padding: 10px 16px !important;
-  margin-left: 6px;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
-}
-
-.logout-link:hover {
-  background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-  color: #000 !important;
-}
-
-/* Content Area */
-.content-area {
-  position: relative;
-  z-index: 2;
-  padding: 20px;
-  min-height: calc(100vh - 70px);
 }
 
 .image-container1 {
@@ -432,66 +299,8 @@ input:focus, select:focus {
   animation: pulse 2s infinite;
 }
 
-/* Mobile Responsive Styles - Updated for nav */
-@media screen and (max-width: 1200px) {
-  .nav-container {
-    padding: 0 15px;
-  }
-
-  .nav-link {
-    padding: 8px 10px;
-    font-size: 12px;
-  }
-
-  .nav-logo h1 {
-    font-size: 1.2rem;
-  }
-}
-
+/* Mobile Responsive Styles */
 @media screen and (max-width: 768px) {
-  .nav-container {
-    flex-wrap: wrap;
-    height: auto;
-    padding: 10px;
-  }
-
-  .nav-logo {
-    margin-bottom: 8px;
-    width: 100%;
-    justify-content: center;
-  }
-
-  .nav-logo img {
-    width: 35px;
-    height: 35px;
-  }
-
-  .nav-logo h1 {
-    font-size: 1.1rem;
-  }
-
-  .nav-menu {
-    width: 100%;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 3px;
-  }
-
-  .nav-link {
-    padding: 8px 10px;
-    font-size: 11px;
-  }
-
-  .logout-link {
-    margin-left: 3px;
-    padding: 8px 12px !important;
-  }
-
-  .content-area {
-    padding: 10px;
-    min-height: calc(100vh - 120px);
-  }
-
   #main {
     transition: margin-left .5s, width 0.5s;
     padding: 8px;
@@ -577,10 +386,6 @@ input:focus, select:focus {
 }
 
 @media screen and (max-width: 480px) {
-  .nav-link i {
-    display: none;
-  }
-
   .container {
     width: 98%;
     padding: 0.75rem;
@@ -632,6 +437,14 @@ input:focus, select:focus {
 }
 
 @media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  
+  .sidebar a {
+    font-size: 18px;
+  }
+  
   #candidateTableContainer {
     height: 200px;
     max-height: 40vh;
