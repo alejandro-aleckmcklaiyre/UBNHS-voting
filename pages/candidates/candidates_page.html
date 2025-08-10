@@ -2,24 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PUPT CS El-Express Candidates</title>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUPT CS El-Express Candidates</title>
+  
   <style>
-    /* Reset and Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-      min-height: 100vh;
-    }
-
+    /* Keep your original nav.css styles but improve mobile responsiveness */
+    
     /* Top Navigation Bar */
     .top-navbar {
       position: sticky;
@@ -30,29 +20,31 @@
       border-bottom: 2px solid rgba(139, 0, 0, 0.3);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       z-index: 1000;
+      padding: 0;
     }
 
     .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
+      max-width: none;
+      width: 100%;
+      margin: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 20px;
-      height: 80px;
+      min-height: 80px;
+      flex-wrap: wrap;
     }
 
     .nav-logo {
       display: flex;
       align-items: center;
       gap: 15px;
+      flex-shrink: 0;
     }
 
     .nav-logo img {
       width: 50px;
       height: 50px;
-      background: linear-gradient(135deg, #8B0000, #FFD700);
-      border-radius: 50%;
       filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
     }
 
@@ -63,13 +55,16 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-weight: bold;
+      text-shadow: none;
+      white-space: nowrap;
     }
 
     .nav-menu {
       display: flex;
       list-style: none;
-      gap: 5px;
+      gap: 0;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-item {
@@ -87,8 +82,10 @@
       font-size: 14px;
       transition: all 0.3s ease;
       border-radius: 8px;
+      margin: 2px;
       position: relative;
       overflow: hidden;
+      white-space: nowrap;
     }
 
     .nav-link::before {
@@ -119,50 +116,140 @@
       box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
     }
 
+    .nav-link.active:hover {
+      color: white;
+      background: linear-gradient(135deg, rgba(139, 0, 0, 1) 0%, rgba(100, 0, 0, 0.9) 100%);
+    }
+
+    .nav-link i {
+      font-size: 16px;
+    }
+
     .logout-link {
       background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
       color: #000 !important;
       font-weight: bold;
       border-radius: 25px;
-      padding: 12px 20px !important;
-      margin-left: 10px;
+      padding: 12px 18px !important;
+      margin-left: 8px;
       box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
     }
 
-    /* Content Area */
+    .logout-link:hover {
+      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+      color: #000 !important;
+    }
+
+    /* Content Area - keep original structure */
     .content-area {
+      position: relative;
+      z-index: 2;
       padding: 20px;
       min-height: calc(100vh - 80px);
     }
 
-    .image-container1 {
-      text-align: center;
-      margin-bottom: 30px;
+    /* Mobile Responsive Navigation */
+    @media screen and (max-width: 1200px) {
+      .nav-container {
+        padding: 15px;
+      }
+
+      .nav-menu {
+        gap: 3px;
+      }
+
+      .nav-link {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .logout-link {
+        margin-left: 5px;
+        padding: 10px 15px !important;
+      }
     }
 
-    .image-container1 img {
-      max-width: 300px;
-      height: auto;
-      background: linear-gradient(135deg, #8B0000, #FFD700);
-      padding: 20px;
-      border-radius: 15px;
-      color: white;
-      font-size: 24px;
-      font-weight: bold;
+    @media screen and (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .nav-logo {
+        margin-bottom: 10px;
+      }
+
+      .nav-logo h1 {
+        font-size: 1.3rem;
+      }
+
+      .nav-logo img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .nav-menu {
+        width: 100%;
+        justify-content: center;
+        gap: 5px;
+      }
+
+      .nav-link {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+
+      .nav-link i {
+        font-size: 14px;
+      }
+
+      .logout-link {
+        margin-left: 0;
+        margin-top: 5px;
+      }
     }
 
-    .content {
+    @media screen and (max-width: 600px) {
+      .nav-logo h1 {
+        font-size: 1.1rem;
+      }
+
+      .nav-logo img {
+        width: 35px;
+        height: 35px;
+      }
+
+      .nav-link {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      .nav-link span.nav-text {
+        display: none; /* Hide text, keep icons */
+      }
+
+      .logout-link span.nav-text {
+        display: inline; /* Keep logout text */
+      }
+    }
+
+    /* Add some basic styling for the missing CSS file content */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Placeholder styles for content that would be in CP_Interface.css */
+    .container {
       max-width: 1200px;
       margin: 0 auto;
-    }
-
-    .container {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
 
     .header {
@@ -171,232 +258,119 @@
       justify-content: center;
       gap: 20px;
       margin-bottom: 30px;
-      padding: 20px;
-      background: linear-gradient(135deg, rgba(139, 0, 0, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
-      border-radius: 15px;
+      text-align: center;
     }
 
     .header img {
       width: 60px;
       height: 60px;
-      background: linear-gradient(135deg, #8B0000, #FFD700);
-      border-radius: 50%;
     }
 
     .header h1 {
-      font-size: 2rem;
-      background: linear-gradient(45deg, #8B0000, #FFD700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-align: center;
-    }
-
-    /* Table Styles */
-    #candidateTableContainer {
-      overflow-x: auto;
-      margin-bottom: 30px;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      color: #8B0000;
+      margin: 0;
     }
 
     #candidateTable {
       width: 100%;
       border-collapse: collapse;
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
+      margin-bottom: 20px;
     }
 
-    #candidateTable thead {
-      background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+    #candidateTable th,
+    #candidateTable td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
     }
 
     #candidateTable th {
-      padding: 15px;
-      text-align: left;
+      background-color: #8B0000;
       color: white;
-      font-weight: 600;
-      font-size: 14px;
     }
 
-    #candidateTable td {
-      padding: 15px;
-      border-bottom: 1px solid #eee;
-      vertical-align: middle;
-    }
-
-    #candidateTable tbody tr:hover {
-      background: rgba(139, 0, 0, 0.05);
-      transform: scale(1.01);
-      transition: all 0.3s ease;
-    }
-
-    /* Form Styles */
     .form-container {
-      background: linear-gradient(135deg, rgba(139, 0, 0, 0.05) 0%, rgba(255, 215, 0, 0.05) 100%);
-      padding: 30px;
-      border-radius: 15px;
-      border: 2px solid rgba(139, 0, 0, 0.1);
+      background: rgba(248, 249, 250, 0.9);
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
     }
 
     .form-container h3 {
       color: #8B0000;
       margin-bottom: 20px;
-      font-size: 1.5rem;
-      text-align: center;
     }
 
     .form-container label {
       display: block;
-      margin: 15px 0 5px 0;
-      color: #333;
-      font-weight: 600;
+      margin: 10px 0 5px 0;
+      font-weight: bold;
     }
 
     .form-container input,
     .form-container select {
       width: 100%;
-      padding: 12px;
-      border: 2px solid rgba(139, 0, 0, 0.2);
-      border-radius: 8px;
-      font-size: 14px;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-container input:focus,
-    .form-container select:focus {
-      outline: none;
-      border-color: #8B0000;
-      box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
     }
 
     .file-input-container {
       position: relative;
-      overflow: hidden;
-      display: inline-block;
-      width: 100%;
     }
 
     .file-input-label {
-      background: linear-gradient(135deg, #FFD700 0%, #FFC107 100%);
+      background: #FFD700;
       color: #000;
-      padding: 12px 20px;
-      border-radius: 8px;
+      padding: 10px 15px;
+      border-radius: 4px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      display: block;
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .file-input-label:hover {
-      background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
-      transform: translateY(-2px);
-    }
-
-    .form-container input[type="file"] {
-      position: absolute;
-      left: -9999px;
+      display: inline-block;
     }
 
     button[type="submit"] {
-      background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+      background: #8B0000;
       color: white;
-      padding: 15px 30px;
+      padding: 12px 24px;
       border: none;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 600;
+      border-radius: 4px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-      margin-top: 20px;
+      font-size: 16px;
     }
 
     button[type="submit"]:hover {
-      background: linear-gradient(135deg, #A52A2A 0%, #8B0000 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+      background: #660000;
     }
 
-    /* Mobile Responsive */
-    @media screen and (max-width: 968px) {
-      .nav-container {
-        flex-direction: column;
-        height: auto;
-        padding: 15px;
-      }
-
-      .nav-logo {
-        margin-bottom: 15px;
-      }
-
-      .nav-menu {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-      }
-
-      .nav-link {
-        padding: 10px 12px;
-        font-size: 13px;
-      }
-
-      .header {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .header h1 {
-        font-size: 1.5rem;
-      }
-
-      .container {
-        padding: 20px;
-      }
-    }
-
-    @media screen and (max-width: 600px) {
+    /* Responsive adjustments */
+    @media screen and (max-width: 768px) {
       .content-area {
         padding: 10px;
       }
-
-      .nav-link i {
-        display: none;
+      
+      .container {
+        padding: 15px;
       }
-
-      .header img {
-        width: 40px;
-        height: 40px;
+      
+      .header {
+        flex-direction: column;
+        gap: 10px;
       }
-
+      
       .header h1 {
-        font-size: 1.2rem;
+        font-size: 1.5rem;
       }
-
+      
       #candidateTable {
-        font-size: 12px;
+        font-size: 14px;
       }
-
+      
       #candidateTable th,
       #candidateTable td {
         padding: 8px;
       }
-    }
-
-    /* Placeholder for missing images */
-    img[src*="assets/"] {
-      display: inline-block;
-      background: linear-gradient(135deg, #8B0000, #FFD700);
-      color: white;
-      text-align: center;
-      line-height: 50px;
-      font-weight: bold;
-    }
-
-    img[src*="assets/"]:after {
-      content: "LOGO";
     }
   </style>
 </head>
@@ -414,37 +388,37 @@
       <li class="nav-item">
         <a href="index.php?page=admin_dashboard" class="nav-link">
           <i class="fas fa-tachometer-alt"></i>
-          Dashboard
+          <span class="nav-text">Admin Dashboard</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="index.php?page=candidates" class="nav-link active">
           <i class="fas fa-users"></i>
-          Candidates
+          <span class="nav-text">Candidates</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="index.php?page=voters_page" class="nav-link">
           <i class="fas fa-user-plus"></i>
-          Voters
+          <span class="nav-text">Voters/Members Registration</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="index.php?page=ssg_history" class="nav-link">
           <i class="fas fa-history"></i>
-          History
+          <span class="nav-text">SSG President's History</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="index.php?page=about" class="nav-link">
           <i class="fas fa-info-circle"></i>
-          About
+          <span class="nav-text">About Us</span>
         </a>
       </li>
       <li class="nav-item">
         <a href="php/auth/logout.php" class="nav-link logout-link">
           <i class="fas fa-sign-out-alt"></i>
-          Logout
+          <span class="nav-text">Logout</span>
         </a>
       </li>
     </ul>
@@ -454,99 +428,87 @@
 <!-- Content Area -->
 <div class="content-area">
   <div class="image-container1">
-    <div style="background: linear-gradient(135deg, #8B0000, #FFD700); color: white; padding: 20px; border-radius: 15px; font-size: 24px; font-weight: bold;">
-      CS El-Express System
-    </div>
+    <img src="assets/images-UBNHS/TEXT-LOGO.png" alt="Web Logo">
   </div>
 
   <main class="content">
-    <div class="container">
-      <div class="header">
-        <img src="assets/images-UBNHS/OURLOGO-WBG.png" alt="PUP Logo">
-        <h1>Committee's Candidate Lists</h1>
-        <img src="assets/images-UBNHS/UBNHS-LOGO.png" alt="CS Logo">
+    <center>
+      <div class="container">
+        <div class="header">
+          <img src="assets/images-UBNHS/OURLOGO-WBG.png" alt="PUP Logo">
+          <h1>Committee's Candidate Lists</h1>
+          <img src="assets/images-UBNHS/UBNHS-LOGO.png" alt="CS Logo">
+        </div>
+
+        <div id="candidateTableContainer">
+          <table id="candidateTable">
+            <thead>
+              <tr>
+                <th>Committee</th>
+                <th>Candidate Name</th>
+                <th>Partylist Name</th>
+                <th>Picture</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Candidates will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form-container">
+          <h3>Add Candidates</h3>
+          <form id="addCandidateForm" action="#" method="POST" enctype="multipart/form-data">
+            <label for="committee">Committee:</label>
+            <select id="committee" name="committee" required>
+              <option value="">Select a Committee</option>
+              <option value="PRESIDENT">PRESIDENT</option>
+              <option value="VICE PRESIDENT">VICE PRESIDENT</option>
+              <option value="SECRETARY">SECRETARY</option>
+              <option value="TREASURER">TREASURER</option>
+              <option value="AUDITOR">AUDITOR</option>
+              <option value="PIO">PIO</option>
+              <option value="PO">PO</option>
+              <option value="GR 12 REPRESENTATIVE">GR 12 REPRESENTATIVE</option>
+              <option value="GR 11 REPRESENTATIVE">GR 11 REPRESENTATIVE</option>
+              <option value="GR 10 REPRESENTATIVE">GR 10 REPRESENTATIVE</option>
+              <option value="GR 9 REPRESENTATIVE">GR 9 REPRESENTATIVE</option>
+              <option value="GR 8 REPRESENTATIVE">GR 8 REPRESENTATIVE</option>
+            </select>
+            <label for="candidateName">Candidate Name:</label>
+            <input type="text" id="candidateName" name="candidate_name" placeholder="Enter Name" required>
+            
+            <label for="partylistName">Partylist Name:</label>
+            <input type="text" id="partylistName" name="partylist_name" placeholder="partylist name">
+
+            <label for="candidatePic">Candidate Picture:</label>
+            <div class="file-input-container">
+              <input type="file" id="candidatePic" name="candidate_pic" accept="image/*" required>
+              <label for="candidatePic" class="file-input-label">Choose File</label>
+            </div>
+            <button type="submit">Add Candidate</button>
+          </form>
+        </div>
       </div>
 
-      <div id="candidateTableContainer">
-        <table id="candidateTable">
-          <thead>
-            <tr>
-              <th>Committee</th>
-              <th>Candidate Name</th>
-              <th>Partylist Name</th>
-              <th>Picture</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>PRESIDENT</td>
-              <td>Juan Dela Cruz</td>
-              <td>Progressive Party</td>
-              <td>
-                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #8B0000, #FFD700); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                  JD
-                </div>
-              </td>
-              <td>
-                <button style="background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 5px; margin-right: 5px; cursor: pointer;">Edit</button>
-                <button style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <br><br>
 
-      <div class="form-container">
-        <h3>Add Candidates</h3>
-        <form id="addCandidateForm" action="#" method="POST" enctype="multipart/form-data">
-          <label for="committee">Committee:</label>
-          <select id="committee" name="committee" required>
-            <option value="">Select a Committee</option>
-            <option value="PRESIDENT">PRESIDENT</option>
-            <option value="VICE PRESIDENT">VICE PRESIDENT</option>
-            <option value="SECRETARY">SECRETARY</option>
-            <option value="TREASURER">TREASURER</option>
-            <option value="AUDITOR">AUDITOR</option>
-            <option value="PIO">PIO</option>
-            <option value="PO">PO</option>
-            <option value="GR 12 REPRESENTATIVE">GR 12 REPRESENTATIVE</option>
-            <option value="GR 11 REPRESENTATIVE">GR 11 REPRESENTATIVE</option>
-            <option value="GR 10 REPRESENTATIVE">GR 10 REPRESENTATIVE</option>
-            <option value="GR 9 REPRESENTATIVE">GR 9 REPRESENTATIVE</option>
-            <option value="GR 8 REPRESENTATIVE">GR 8 REPRESENTATIVE</option>
-          </select>
-          
-          <label for="candidateName">Candidate Name:</label>
-          <input type="text" id="candidateName" name="candidate_name" placeholder="Enter Name" required>
-          
-          <label for="partylistName">Partylist Name:</label>
-          <input type="text" id="partylistName" name="partylist_name" placeholder="Partylist name">
-
-          <label for="candidatePic">Candidate Picture:</label>
-          <div class="file-input-container">
-            <input type="file" id="candidatePic" name="candidate_pic" accept="image/*" required>
-            <label for="candidatePic" class="file-input-label">Choose File</label>
-          </div>
-          
-          <button type="submit">Add Candidate</button>
-        </form>
+      <div class="container">
+        <div class="form-container">
+          <h3>Set Voting Duration</h3>
+          <form id="votingDurationForm" method="POST" action="#">
+            <label for="votingDuration">Select Voting End Date and Time:</label>
+            <input type="datetime-local" id="votingDuration" name="voting_end_time" required>
+            <button type="submit">Set Duration</button>
+          </form>
+        </div>
       </div>
-    </div>
-
-    <div class="container">
-      <div class="form-container">
-        <h3>Set Voting Duration</h3>
-        <form id="votingDurationForm" method="POST" action="#">
-          <label for="votingDuration">Select Voting End Date and Time:</label>
-          <input type="datetime-local" id="votingDuration" name="voting_end_time" required>
-          <button type="submit">Set Duration</button>
-        </form>
-      </div>
-    </div>
+    </center>
   </main>
 </div>
 
+<script src="pages/candidates/cp_script.js"></script>
 <script>
   // Active link highlighting
   const currentPage = window.location.search;
@@ -558,23 +520,6 @@
         (currentPage === '' && link.getAttribute('href').includes('admin_dashboard'))) {
       link.classList.add('active');
     }
-  });
-
-  // File input label update
-  document.getElementById('candidatePic').addEventListener('change', function(e) {
-    const fileName = e.target.files[0]?.name || 'Choose File';
-    document.querySelector('.file-input-label').textContent = fileName;
-  });
-
-  // Form submissions (placeholder functionality)
-  document.getElementById('addCandidateForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Candidate would be added here (connect to your PHP backend)');
-  });
-
-  document.getElementById('votingDurationForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Voting duration would be set here (connect to your PHP backend)');
   });
 </script>
 
