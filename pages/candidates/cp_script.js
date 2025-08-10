@@ -10,7 +10,10 @@ function closeNav() {
   document.getElementById("main").style.width = "100%";
 }
 
-document.getElementById('candi').classList.add('active');
+// Keep your original active class logic if needed
+if(document.getElementById('candi')) {
+  document.getElementById('candi').classList.add('active');
+}
 
 document.getElementById('addCandidateForm').addEventListener('submit', function (e) {
   e.preventDefault();
@@ -54,14 +57,11 @@ function loadCandidates() {
         tableBody.innerHTML = '';
         data.candidates.forEach(candidate => {
           const row = document.createElement('tr');
-          // Fixed the image path - removed the extra "../../" prefix
-          const imagePath = candidate.picture.startsWith('assets/') ? candidate.picture : `assets/${candidate.picture}`;
-          
           row.innerHTML = `
             <td>${candidate.committee}</td>
             <td>${candidate.name}</td>
             <td>${candidate.partylist_name || ''}</td>
-            <td><img src="${imagePath}" alt="Candidate" class="candidate-pic" onerror="this.src='assets/images-UBNHS/default-avatar.png'"></td>
+            <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
             <td><button class="delete-btn" data-id="${candidate.id}">Delete</button></td>
           `;
           tableBody.appendChild(row);
