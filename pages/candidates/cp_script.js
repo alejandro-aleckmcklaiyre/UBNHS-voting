@@ -10,10 +10,7 @@ function closeNav() {
   document.getElementById("main").style.width = "100%";
 }
 
-// Keep your original active class logic if needed
-if(document.getElementById('candi')) {
-  document.getElementById('candi').classList.add('active');
-}
+document.getElementById('candi').classList.add('active');
 
 document.getElementById('addCandidateForm').addEventListener('submit', function (e) {
   e.preventDefault();
@@ -46,7 +43,7 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
     .catch(() => {
       Swal.fire('Error', 'Failed to add candidate.', 'error');
     });
-});
+}); // <-- Make sure this closing bracket is present
 
 function loadCandidates() {
   fetch('php/candidate/display_candidate.php')
