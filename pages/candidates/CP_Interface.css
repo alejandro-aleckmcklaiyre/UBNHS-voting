@@ -1,3 +1,13 @@
+/* VIEWPORT AND BOX MODEL FIXES */
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -62,9 +72,10 @@ body::before {
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
+/* FIXED CONTAINER WITH PROPER VIEWPORT SCALING */
 .container {
-  width: 90%;
-  max-width: 1200px; 
+  width: min(90vw, 1200px);
+  min-width: 300px;
   max-height: 90vh;  
   overflow: auto;    
   background: 
@@ -122,74 +133,87 @@ h1 {
   min-width: 200px;
 }
 
-/* UPDATED TABLE CONTAINER WITH FIXES */
+/* FIXED TABLE CONTAINER WITH PROPER SCALING */
 #candidateTableContainer {
   flex: 1;
-  overflow-y: auto !important;
-  overflow-x: auto !important;
+  overflow-y: auto;
+  overflow-x: auto;
   margin-top: 1rem;
   border: 2px solid rgba(139, 0, 0, 0.3);
   border-radius: 15px;
-  height: 500px; /* INCREASED FROM 400px */
-  max-height: 70vh; /* INCREASED FROM 60vh */
-  min-height: 300px; /* ADDED */
+  height: min(400px, 60vh);
+  max-height: 60vh;
+  width: 100%;
+  max-width: 100%;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  position: relative; /* ADDED */
 }
 
-/* UPDATED TABLE WITH VISIBILITY FIXES */
+/* FIXED TABLE WITH PROPER COLUMN CONTROL */
 #candidateTable {
   width: 100%;
-  min-width: 600px;
+  min-width: 500px;
+  max-width: 100%;
   border-collapse: collapse;
   background: linear-gradient(135deg, rgba(139, 0, 0, 0.9) 0%, rgba(139, 0, 0, 0.7) 100%);
   color: #fff;
-  display: table !important; /* ADDED */
-  table-layout: auto; /* ADDED */
+  table-layout: fixed;
+  font-size: 14px;
 }
 
-/* ENSURE TABLE BODY IS VISIBLE */
-#candidateTable tbody {
-  display: table-row-group !important;
-}
-
-/* ENSURE TABLE ROWS ARE VISIBLE */
-#candidateTable tbody tr {
-  display: table-row !important;
-  background: rgba(139, 0, 0, 0.7);
-}
-
-#candidateTable tbody tr:nth-child(even) {
-  background: rgba(139, 0, 0, 0.8);
-}
-
-#candidateTable tbody tr:hover {
-  background: rgba(139, 0, 0, 0.9);
-  transition: background 0.3s ease;
-}
-
-/* UPDATED TABLE CELLS WITH VISIBILITY FIXES */
+/* FIXED TABLE CELLS WITH BETTER SPACING */
 #candidateTable th, #candidateTable td {
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 8px;
+  padding: 8px 4px;
   text-align: center;
   word-wrap: break-word;
-  display: table-cell !important; /* ADDED */
-  vertical-align: middle; /* ADDED */
-  min-height: 40px; /* ADDED */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 0;
 }
 
 #candidateTable th {
   background: linear-gradient(135deg, rgba(139, 0, 0, 1) 0%, rgba(100, 0, 0, 0.95) 100%);
   position: sticky; 
   top: 0;
-  z-index: 10; /* INCREASED FROM 2 */
+  z-index: 2;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   font-weight: bold;
 }
 
-/* UPDATED CANDIDATE PICTURE WITH VISIBILITY FIXES */
+/* COLUMN WIDTH CONTROLS */
+#candidateTable th:nth-child(1),
+#candidateTable td:nth-child(1) {
+  width: 20%;
+  min-width: 80px;
+}
+
+#candidateTable th:nth-child(2),
+#candidateTable td:nth-child(2) {
+  width: 25%;
+  min-width: 100px;
+  white-space: normal;
+}
+
+#candidateTable th:nth-child(3),
+#candidateTable td:nth-child(3) {
+  width: 20%;
+  min-width: 80px;
+}
+
+#candidateTable th:nth-child(4),
+#candidateTable td:nth-child(4) {
+  width: 15%;
+  min-width: 60px;
+}
+
+#candidateTable th:nth-child(5),
+#candidateTable td:nth-child(5) {
+  width: 20%;
+  min-width: 80px;
+}
+
 .candidate-pic {
   width: 50px;
   height: 50px;
@@ -197,8 +221,6 @@ h1 {
   border: 2px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   object-fit: cover;
-  display: block !important; /* ADDED */
-  margin: 0 auto; /* ADDED */
 }
 
 .form-container {
@@ -306,10 +328,13 @@ input:focus, select:focus {
   box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
 }
 
+/* FIXED MAIN CONTAINER WITH VIEWPORT CONTROL */
 #main {
   transition: margin-left .5s, width 0.5s;
   padding: 16px;
   width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   position: relative;
   z-index: 2;
 }
@@ -332,7 +357,7 @@ input:focus, select:focus {
   animation: pulse 2s infinite;
 }
 
-/* Mobile Responsive Styles */
+/* IMPROVED MOBILE RESPONSIVE STYLES */
 @media screen and (max-width: 768px) {
   #main {
     transition: margin-left .5s, width 0.5s;
@@ -340,7 +365,8 @@ input:focus, select:focus {
   }
   
   .container {
-    width: 95%;
+    width: 95vw;
+    max-width: none;
     padding: 1rem;
     margin: 0 auto 1rem auto;
   }
@@ -375,18 +401,17 @@ input:focus, select:focus {
   }
   
   #candidateTableContainer {
-    height: 400px; /* SMALLER ON MOBILE */
+    height: min(300px, 50vh);
     max-height: 50vh;
-    min-height: 250px; /* SMALLER ON MOBILE */
   }
   
   #candidateTable {
-    min-width: 500px;
+    min-width: 400px;
+    font-size: 12px;
   }
   
   #candidateTable th, #candidateTable td {
-    padding: 8px 4px;
-    font-size: 14px;
+    padding: 6px 2px;
   }
   
   .candidate-pic {
@@ -421,8 +446,8 @@ input:focus, select:focus {
 
 @media screen and (max-width: 480px) {
   .container {
-    width: 98%;
-    padding: 0.75rem;
+    width: 98vw;
+    padding: 0.5rem;
   }
   
   .image-container1 {
@@ -446,22 +471,21 @@ input:focus, select:focus {
   }
   
   #candidateTableContainer {
-    height: 300px; /* EVEN SMALLER ON SMALL MOBILE */
-    min-height: 200px;
+    height: min(250px, 40vh);
   }
   
   #candidateTable {
-    min-width: 400px;
+    min-width: 350px;
+    font-size: 11px;
   }
   
   #candidateTable th, #candidateTable td {
-    padding: 6px 3px;
-    font-size: 12px;
+    padding: 4px 2px;
   }
   
   .candidate-pic {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
   }
   
   .delete-btn {
@@ -481,9 +505,8 @@ input:focus, select:focus {
   }
   
   #candidateTableContainer {
-    height: 200px;
+    height: min(200px, 40vh);
     max-height: 40vh;
-    min-height: 150px;
   }
   
   .container {
@@ -494,9 +517,8 @@ input:focus, select:focus {
 /* Landscape mobile orientation */
 @media screen and (max-width: 768px) and (orientation: landscape) {
   #candidateTableContainer {
-    height: 250px;
+    height: min(200px, 40vh);
     max-height: 40vh;
-    min-height: 200px;
   }
   
   .container {
@@ -506,14 +528,4 @@ input:focus, select:focus {
   .image-container1 {
     padding: 10px;
   }
-}
-
-/* DEBUG STYLES - REMOVE AFTER TESTING */
-
-#candidateTable {
-  border: 3px solid red !important;
-}
-
-#candidateTableContainer {
-  border: 3px solid blue !important;
 }
