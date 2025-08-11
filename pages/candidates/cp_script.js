@@ -40,38 +40,25 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
         Swal.fire('Error', data.message, 'error');
       }
     })
-    .catch((error) => {
-      console.error('Error adding candidate:', error);
+    .catch(() => {
       Swal.fire('Error', 'Failed to add candidate.', 'error');
     });
-});
+}); // <-- Make sure this closing bracket is present
 
 function loadCandidates() {
-  // Add loading indicator
-  const tableBody = document.querySelector('#candidateTable tbody');
-  tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Loading candidates...</td></tr>';
-  
   fetch('php/candidate/display_candidate.php')
-    .then(res => {
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return res.json();
-    })
+    .then(res => res.json())
     .then(data => {
-      console.log('Received data:', data); // Debug log
-      
-      const tableBody = document.querySelector('#candidateTable tbody');
-      tableBody.innerHTML = '';
-      
-      if (data.success && data.candidates && data.candidates.length > 0) {
+      if (data.success) {
+        const tableBody = document.querySelector('#candidateTable tbody');
+        tableBody.innerHTML = '';
         data.candidates.forEach(candidate => {
           const row = document.createElement('tr');
           row.innerHTML = `
             <td>${candidate.committee}</td>
             <td>${candidate.name}</td>
             <td>${candidate.partylist_name || ''}</td>
-            <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic" onerror="this.src='assets/images-UBNHS/default-avatar.png'"></td>
+            <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
             <td><button class="delete-btn" data-id="${candidate.id}">Delete</button></td>
           `;
           tableBody.appendChild(row);
@@ -112,23 +99,11 @@ function loadCandidates() {
             });
           });
         });
-      } else {
-        // Show message when no candidates found
-        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #fff;">No candidates found. Add some candidates below!</td></tr>';
       }
-    })
-    .catch((error) => {
-      console.error('Error loading candidates:', error);
-      const tableBody = document.querySelector('#candidateTable tbody');
-      tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #fff;">Error loading candidates. Please check your connection and try again.</td></tr>';
     });
 }
 
-// Load candidates when page loads
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Page loaded, loading candidates...'); // Debug log
-  loadCandidates();
-});
+document.addEventListener('DOMContentLoaded', loadCandidates);
 
 document.getElementById('votingDurationForm').addEventListener('submit', function (e) {
   e.preventDefault();
