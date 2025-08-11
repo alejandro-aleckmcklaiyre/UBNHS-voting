@@ -6,42 +6,23 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UBNHSelect Candidates</title>
+  <link rel="stylesheet" href="assets/styles/nav.css">
   <link rel="stylesheet" href="pages/candidates/CP_Interface.css">
 </head>
 <body>
 
-<!-- Enhanced Top Navigation Bar -->
-<nav class="top-navbar">
-  <div class="nav-container">
-    <div class="nav-brand">
-      <i class="fas fa-vote-yea"></i>
-      UBNHSelect
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.php?page=admin_dashboard"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a></li>
-      <li><a href="index.php?page=candidates" class="active"><i class="fas fa-users"></i> Candidates</a></li>
-      <li><a href="index.php?page=voters_page"><i class="fas fa-user-plus"></i> Voters / Members Registration</a></li>
-      <li><a href="index.php?page=ssg_history"><i class="fas fa-history"></i> SSG President's History</a></li>
-      <li><a href="index.php?page=about"><i class="fas fa-info-circle"></i> About Us</a></li>
-      <li><a href="php/auth/logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-    </ul>
-    <div class="mobile-menu-btn">
-      <i class="fas fa-bars"></i>
-    </div>
-  </div>
-  
-  <!-- Mobile Menu -->
-  <div class="mobile-menu">
-    <a href="index.php?page=admin_dashboard"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
-    <a href="index.php?page=candidates" class="active"><i class="fas fa-users"></i> Candidates</a>
-    <a href="index.php?page=voters_page"><i class="fas fa-user-plus"></i> Voters / Members Registration</a>
-    <a href="index.php?page=ssg_history"><i class="fas fa-history"></i> SSG President's History</a>
-    <a href="index.php?page=about"><i class="fas fa-info-circle"></i> About Us</a>
-    <a href="php/auth/logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
-  </div>
-</nav>
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="index.php?page=admin_dashboard">Home</a>
+  <a href="index.php?page=candidates" id="candi">Candidates</a>
+  <a href="index.php?page=voters_page">Voters/Members</a>
+  <a href="index.php?page=about">About Us</a>
+  <a href="php/auth/logout.php">Log Out</a>
+</div>
 
 <div id="main">
+  <button class="openbtn" onclick="openNav()">☰</button>  
+  
   <div class="image-container1">
     <img src="assets/images-UBNHS/TEXT-LOGO.png" alt="Web Logo">
   </div>
@@ -144,18 +125,5 @@
 </div>
 
 <script src="pages/candidates/cp_script.js"></script>
-<script>
-// Mobile menu toggle functionality
-document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-  document.querySelector('.mobile-menu').classList.toggle('active');
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.top-navbar')) {
-    document.querySelector('.mobile-menu').classList.remove('active');
-  }
-});
-</script>
 </body>
 </html>
