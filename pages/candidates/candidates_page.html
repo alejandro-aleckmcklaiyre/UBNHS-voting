@@ -5,27 +5,23 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UBNHSelect Candidates</title>
+  <title>PUPT CS El-Express Candidates</title>
+  <link rel="stylesheet" href="assets/styles/nav.css">
   <link rel="stylesheet" href="pages/candidates/CP_Interface.css">
 </head>
 <body>
 
-<!-- Top Navigation Bar -->
-<nav class="top-navbar">
-  <div class="nav-container">
-    <div class="nav-brand">UBNHSelect</div>
-    <ul class="nav-links">
-      <li><a href="index.php?page=admin_dashboard">Admin Dashboard</a></li>
-      <li><a href="index.php?page=candidates" class="active">Candidates</a></li>
-      <li><a href="index.php?page=voters_page">Voters / Members Registration</a></li>
-      <li><a href="index.php?page=ssg_history">SSG President's History</a></li>
-      <li><a href="index.php?page=about">About Us</a></li>
-      <li><a href="php/auth/logout.php">Logout</a></li>
-    </ul>
-  </div>
-</nav>
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="index.php?page=admin_dashboard">Home</a>
+  <a href="index.php?page=candidates" id="candi">Candidates</a>
+  <a href="index.php?page=voters_page">Voters/Members</a>
+  <a href="index.php?page=about">About Us</a>
+  <a href="php/auth/logout.php">Log Out</a>
+</div>
 
-<div id="main">  
+<div id="main">
+  <button class="openbtn" onclick="openNav()">☰</button>  
   
   <div class="image-container1">
     <img src="assets/images-UBNHS/TEXT-LOGO.png" alt="Web Logo">
