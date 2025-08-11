@@ -159,11 +159,13 @@ h3 {
 /* FIXED TABLE WITH PROPER SIZING */
 #candidateTable {
   width: 100%;
-  min-width: 600px;
+  /* min-width: 600px; */ /* FIX */
   border-collapse: collapse;
   background: linear-gradient(135deg, rgba(139, 0, 0, 0.9) 0%, rgba(139, 0, 0, 0.7) 100%);
   color: #fff;
   font-size: 14px;
+  table-layout: auto; /* FIX */
+  word-wrap: break-word; /* FIX */
 }
 
 /* FIXED TABLE CELLS */
@@ -184,35 +186,19 @@ h3 {
   white-space: nowrap;
 }
 
-/* IMPROVED COLUMN WIDTHS */
+/* IMPROVED COLUMN WIDTHS (FIXED TO FLEXIBLE) */
 #candidateTable th:nth-child(1),
-#candidateTable td:nth-child(1) {
-  width: 25%;
-  min-width: 120px;
-}
-
+#candidateTable td:nth-child(1),
 #candidateTable th:nth-child(2),
-#candidateTable td:nth-child(2) {
-  width: 30%;
-  min-width: 150px;
-}
-
+#candidateTable td:nth-child(2),
 #candidateTable th:nth-child(3),
-#candidateTable td:nth-child(3) {
-  width: 25%;
-  min-width: 120px;
-}
-
+#candidateTable td:nth-child(3),
 #candidateTable th:nth-child(4),
-#candidateTable td:nth-child(4) {
-  width: 10%;
-  min-width: 80px;
-}
-
+#candidateTable td:nth-child(4),
 #candidateTable th:nth-child(5),
 #candidateTable td:nth-child(5) {
-  width: 10%;
-  min-width: 80px;
+  width: auto; /* FIX */
+  min-width: unset; /* FIX */
 }
 
 .candidate-pic {
@@ -410,7 +396,7 @@ input:focus, select:focus {
   }
   
   #candidateTable {
-    min-width: 500px;
+    /* min-width: 500px; */ /* FIX */
     font-size: 12px;
   }
   
@@ -429,7 +415,7 @@ input:focus, select:focus {
   
   input, select {
     padding: 10px;
-    font-size: 16px; /* Prevents zoom on iOS */
+    font-size: 16px;
   }
   
   .container button, .file-input-label {
@@ -466,7 +452,7 @@ input:focus, select:focus {
   }
   
   #candidateTable {
-    min-width: 450px;
+    /* min-width: 450px; */ /* FIX */
     font-size: 11px;
   }
   
