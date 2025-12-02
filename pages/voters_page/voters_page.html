@@ -11,30 +11,90 @@
     <link rel="stylesheet" href="/ubnhs-voting/pages/voters_page/VRP_Interface.css">
 
 </head>
-<body>
+<body class="has-top-nav">
 
-<div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="/ubnhs-voting/index.php?page=admin_dashboard">
-    <i class="fas fa-home"></i> Home
-  </a>
-  <a href="/ubnhs-voting/index.php?page=candidates">
-    <i class="fas fa-users"></i> Candidates
-  </a>
-  <a href="/ubnhs-voting/index.php?page=voters_page" id="voters_p">
-    <i class="fas fa-vote-yea"></i> Voters/Members
-  </a>
-  <a href="/ubnhs-voting/index.php?page=about">
-    <i class="fas fa-info-circle"></i> About Us
-  </a>
-  <a href="/ubnhs-voting/php/auth/logout.php">
-    <i class="fas fa-sign-out-alt"></i> Log Out
-  </a>
-</div>
+<!-- Enhanced Top Navigation Bar -->
+<nav class="top-nav">
+  <!-- Floating background particles -->
+  <div class="nav-particles">
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+  </div>
+  
+  <!-- Logo and system name -->
+  <div class="nav-logo-section">
+    <div class="nav-logo-placeholder">
+      <i class="fas fa-vote-yea"></i>
+    </div>
+    <div class="nav-system-name">UBNHSelect System</div>
+  </div>
+  
+  <!-- Desktop navigation menu -->
+  <div class="nav-menu" id="desktopNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item" data-page="admin_dashboard">
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="index.php?page=candidates" class="nav-item" data-page="candidates">
+      <i class="fas fa-users"></i>
+      <span>Candidates</span>
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
+      <i class="fas fa-user-check"></i>
+      <span>Voters Registration</span>
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item" data-page="ssg_history">
+      <i class="fas fa-history"></i>
+      <span>SSG History</span>
+    </a>
+    <a href="index.php?page=about" class="nav-item" data-page="about">
+      <i class="fas fa-info-circle"></i>
+      <span>About Us</span>
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+  
+  <!-- Mobile menu button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Mobile navigation menu -->
+  <div class="mobile-nav-menu" id="mobileNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item" data-page="admin_dashboard">
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Admin Dashboard</span>
+    </a>
+    <a href="index.php?page=candidates" class="nav-item" data-page="candidates">
+      <i class="fas fa-users"></i>
+      <span>Candidates</span>
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item active" data-page="voters_page">
+      <i class="fas fa-user-check"></i>
+      <span>Voters/Members Registration</span>
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item" data-page="ssg_history">
+      <i class="fas fa-history"></i>
+      <span>SSG President's History</span>
+    </a>
+    <a href="index.php?page=about" class="nav-item" data-page="about">
+      <i class="fas fa-info-circle"></i>
+      <span>About Us</span>
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+</nav>
 
-<div id="main">
-  <button class="openbtn" onclick="openNav()">☰</button>  
-  <main class="content">
+<main class="content">
    
     <center>
     <div class="container">
@@ -95,23 +155,75 @@
     </div>
     </center>
   </main>
-</div>
 
 <script>
-  function openNav() {
-    document.getElementById("mySidebar").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-    document.querySelector(".openbtn").style.display = "none";
+  // Mobile menu toggle with smooth animation
+  function toggleMobileMenu() {
+    const mobileMenu = document.getElementById('mobileNavMenu');
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const icon = mobileBtn.querySelector('i');
+
+    mobileMenu.classList.toggle('active');
+
+    if (mobileMenu.classList.contains('active')) {
+      icon.classList.remove('fa-bars');
+      icon.classList.add('fa-times');
+      mobileBtn.style.transform = 'rotate(90deg)';
+    } else {
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+      mobileBtn.style.transform = 'rotate(0deg)';
+    }
   }
 
-  function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-    document.querySelector(".openbtn").style.display = "inline-block";
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    const mobileMenu = document.getElementById('mobileNavMenu');
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+
+    if (mobileMenu && mobileBtn && mobileMenu.classList.contains('active')) {
+      if (!mobileMenu.contains(event.target) && !mobileBtn.contains(event.target)) {
+        toggleMobileMenu();
+      }
+    }
+  });
+
+  // Close mobile menu on window resize
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      const mobileMenu = document.getElementById('mobileNavMenu');
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      if (mobileMenu && mobileBtn) {
+        const icon = mobileBtn.querySelector('i');
+        if (mobileMenu.classList.contains('active')) {
+          mobileMenu.classList.remove('active');
+          icon.classList.remove('fa-times');
+          icon.classList.add('fa-bars');
+          mobileBtn.style.transform = 'rotate(0deg)';
+        }
+      }
+    }
+  });
+
+  // Set active navigation item based on current page
+  function setActiveNavItem() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const currentPage = urlParams.get('page') || 'admin_dashboard';
+    const allNavItems = document.querySelectorAll('.nav-item');
+
+    allNavItems.forEach(item => {
+      item.classList.remove('active');
+      const itemPage = item.getAttribute('data-page');
+      if (itemPage === currentPage) {
+        item.classList.add('active');
+      }
+    });
   }
 
-  // Set active state for current page
-  document.getElementById('voters_p').classList.add('active');
+  document.addEventListener('DOMContentLoaded', function() {
+    setActiveNavItem();
+    console.log('UBNHSelect Voters Page initialized with enhanced navigation.');
+  });
 </script>
 <script src="/ubnhs-voting/pages/voters_page/voters_page.js"></script>
 </body>
