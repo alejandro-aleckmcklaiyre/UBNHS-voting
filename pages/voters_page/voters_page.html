@@ -7,9 +7,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
-    <link rel="stylesheet" href="/ubnhs-voting/pages/voters_page/VRP_Interface.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/nav.css">
+    <link rel="stylesheet" href="pages/voters_page/VRP_Interface.css">
 </head>
 <body class="has-top-nav">
 
@@ -42,7 +42,7 @@
       <i class="fas fa-users"></i>
       <span>Candidates</span>
     </a>
-    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
+    <a href="index.php?page=voters_page" class="nav-item active" data-page="voters_page">
       <i class="fas fa-user-check"></i>
       <span>Voters Registration</span>
     </a>
@@ -94,8 +94,8 @@
   </div>
 </nav>
 
-<main class="content">
-   
+<div id="main">
+  <main class="content">
     <center>
     <div class="container">
         <header>
@@ -155,76 +155,82 @@
     </div>
     </center>
   </main>
+</div>
 
 <script>
-  // Mobile menu toggle with smooth animation
-  function toggleMobileMenu() {
+// ========================================
+// ENHANCED NAVIGATION FUNCTIONALITY
+// ========================================
+
+// Mobile menu toggle with smooth animation
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const icon = mobileBtn.querySelector('i');
+  
+  mobileMenu.classList.toggle('active');
+  
+  // Animate hamburger to X
+  if (mobileMenu.classList.contains('active')) {
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-times');
+    mobileBtn.style.transform = 'rotate(90deg)';
+  } else {
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
+    mobileBtn.style.transform = 'rotate(0deg)';
+  }
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  
+  if (!mobileMenu.contains(event.target) && 
+      !mobileBtn.contains(event.target) && 
+      mobileMenu.classList.contains('active')) {
+    toggleMobileMenu();
+  }
+});
+
+// Close mobile menu on window resize
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
     const mobileMenu = document.getElementById('mobileNavMenu');
     const mobileBtn = document.getElementById('mobileMenuBtn');
     const icon = mobileBtn.querySelector('i');
-
-    mobileMenu.classList.toggle('active');
-
+    
     if (mobileMenu.classList.contains('active')) {
-      icon.classList.remove('fa-bars');
-      icon.classList.add('fa-times');
-      mobileBtn.style.transform = 'rotate(90deg)';
-    } else {
+      mobileMenu.classList.remove('active');
       icon.classList.remove('fa-times');
       icon.classList.add('fa-bars');
       mobileBtn.style.transform = 'rotate(0deg)';
     }
   }
+});
 
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', function(event) {
-    const mobileMenu = document.getElementById('mobileNavMenu');
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-
-    if (mobileMenu && mobileBtn && mobileMenu.classList.contains('active')) {
-      if (!mobileMenu.contains(event.target) && !mobileBtn.contains(event.target)) {
-        toggleMobileMenu();
-      }
+// Set active navigation item based on current page
+function setActiveNavItem() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentPage = urlParams.get('page') || 'admin_dashboard';
+  const allNavItems = document.querySelectorAll('.nav-item');
+  
+  allNavItems.forEach(item => {
+    item.classList.remove('active');
+    const itemPage = item.getAttribute('data-page');
+    if (itemPage === currentPage) {
+      item.classList.add('active');
     }
   });
+}
 
-  // Close mobile menu on window resize
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-      const mobileMenu = document.getElementById('mobileNavMenu');
-      const mobileBtn = document.getElementById('mobileMenuBtn');
-      if (mobileMenu && mobileBtn) {
-        const icon = mobileBtn.querySelector('i');
-        if (mobileMenu.classList.contains('active')) {
-          mobileMenu.classList.remove('active');
-          icon.classList.remove('fa-times');
-          icon.classList.add('fa-bars');
-          mobileBtn.style.transform = 'rotate(0deg)';
-        }
-      }
-    }
-  });
-
-  // Set active navigation item based on current page
-  function setActiveNavItem() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentPage = urlParams.get('page') || 'admin_dashboard';
-    const allNavItems = document.querySelectorAll('.nav-item');
-
-    allNavItems.forEach(item => {
-      item.classList.remove('active');
-      const itemPage = item.getAttribute('data-page');
-      if (itemPage === currentPage) {
-        item.classList.add('active');
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    setActiveNavItem();
-    console.log('UBNHSelect Voters Page initialized with enhanced navigation.');
-  });
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  setActiveNavItem();
+  console.log('UBNHSelect Voters Page initialized successfully!');
+});
 </script>
-<script src="/ubnhs-voting/pages/voters_page/voters_page.js"></script>
+<script src="pages/voters_page/voters_page.js"></script>
 </body>
 </html>
