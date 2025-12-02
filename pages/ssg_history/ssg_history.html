@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSG Presidents - School History</title>
+    <link rel="stylesheet" href="assets/styles/nav.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="has-top-nav">
+<!-- Enhanced Top Navigation Bar -->
+<nav class="top-nav">
+  <!-- Floating background particles -->
+  <div class="nav-particles">
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+  </div>
+  
+  <!-- Logo and system name -->
+  <div class="nav-logo-section">
+    <div class="nav-logo-placeholder">
+      <i class="fas fa-vote-yea"></i>
+    </div>
+    <div class="nav-system-name">UBNHSelect System</div>
+  </div>
+  
+  <!-- Desktop navigation menu -->
+  <div class="nav-menu" id="desktopNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item" data-page="admin_dashboard">
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="index.php?page=candidates" class="nav-item" data-page="candidates">
+      <i class="fas fa-users"></i>
+      <span>Candidates</span>
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
+      <i class="fas fa-user-check"></i>
+      <span>Voters Registration</span>
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item active" data-page="ssg_history">
+      <i class="fas fa-history"></i>
+      <span>SSG History</span>
+    </a>
+    <a href="index.php?page=about" class="nav-item" data-page="about">
+      <i class="fas fa-info-circle"></i>
+      <span>About Us</span>
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+  
+  <!-- Mobile menu button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Mobile navigation menu -->
+  <div class="mobile-nav-menu" id="mobileNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item" data-page="admin_dashboard">
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Admin Dashboard</span>
+    </a>
+    <a href="index.php?page=candidates" class="nav-item" data-page="candidates">
+      <i class="fas fa-users"></i>
+      <span>Candidates</span>
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
+      <i class="fas fa-user-check"></i>
+      <span>Voters/Members Registration</span>
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item active" data-page="ssg_history">
+      <i class="fas fa-history"></i>
+      <span>SSG President's History</span>
+    </a>
+    <a href="index.php?page=about" class="nav-item" data-page="about">
+      <i class="fas fa-info-circle"></i>
+      <span>About Us</span>
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+</nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>SSG Presidents Hall of Fame</h1>
+            <p>Honoring the Leaders Who Shaped Our School Community</p>
+        </div>
+
+        <div class="presidents-grid">
+            <!-- Row 1 -->
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Maria Santos</h3>
+                    <div class="term">2023-2024</div>
+                    <div class="motto">"Unity in diversity, excellence in leadership. Together we build a stronger tomorrow."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>John Rodriguez</h3>
+                    <div class="term">2022-2023</div>
+                    <div class="motto">"Empowering students, fostering innovation, creating lasting change in our academic community."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Sarah Kim</h3>
+                    <div class="term">2021-2022</div>
+                    <div class="motto">"Leading with compassion, serving with purpose. Every voice matters in our journey."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Michael Chen</h3>
+                    <div class="term">2020-2021</div>
+                    <div class="motto">"Resilience through challenges, growth through adversity. Together we overcome anything."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Ana Martinez</h3>
+                    <div class="term">2019-2020</div>
+                    <div class="motto">"Innovation meets tradition. Building bridges to a brighter educational future."</div>
+                </div>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>David Wilson</h3>
+                    <div class="term">2018-2019</div>
+                    <div class="motto">"Student first, leader always. Championing the rights and dreams of every learner."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Lisa Park</h3>
+                    <div class="term">2017-2018</div>
+                    <div class="motto">"Excellence in academics, integrity in leadership. Setting standards for generations to come."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Robert Garcia</h3>
+                    <div class="term">2016-2017</div>
+                    <div class="motto">"Community over competition. Building connections that last beyond graduation."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Emily Johnson</h3>
+                    <div class="term">2015-2016</div>
+                    <div class="motto">"Courage to lead, wisdom to serve. Making a difference one initiative at a time."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>James Lee</h3>
+                    <div class="term">2014-2015</div>
+                    <div class="motto">"Inspiring excellence, nurturing potential. Every student deserves to shine bright."</div>
+                </div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Rachel Brown</h3>
+                    <div class="term">2013-2014</div>
+                    <div class="motto">"Progress through participation. Engaging every student in our shared vision."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Kevin Thompson</h3>
+                    <div class="term">2012-2013</div>
+                    <div class="motto">"Leadership is service. Dedication to our school community above all else."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Michelle Davis</h3>
+                    <div class="term">2011-2012</div>
+                    <div class="motto">"Dreams into action, ideas into reality. Making our school the best it can be."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Alex Rivera</h3>
+                    <div class="term">2010-2011</div>
+                    <div class="motto">"Unity in purpose, strength in numbers. Together we achieve the extraordinary."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Stephanie Moore</h3>
+                    <div class="term">2009-2010</div>
+                    <div class="motto">"Passion for progress, commitment to community. Leading with heart and mind."</div>
+                </div>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Christopher White</h3>
+                    <div class="term">2008-2009</div>
+                    <div class="motto">"Building foundations for success. Every student's future matters to our community."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Nicole Taylor</h3>
+                    <div class="term">2007-2008</div>
+                    <div class="motto">"Tradition meets innovation. Honoring our past while embracing our future."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Matthew Clark</h3>
+                    <div class="term">2006-2007</div>
+                    <div class="motto">"Excellence is a habit, leadership is a privilege. Serving with honor and dedication."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Jessica Hall</h3>
+                    <div class="term">2005-2006</div>
+                    <div class="motto">"Empowering voices, inspiring change. Every idea has the power to transform."</div>
+                </div>
+            </div>
+
+            <div class="president-item">
+                <div class="president-circle">
+                    <div class="placeholder-text">President Photo</div>
+                </div>
+                <div class="president-info">
+                    <h3>Daniel Adams</h3>
+                    <div class="term">2004-2005</div>
+                    <div class="motto">"Legacy of leadership, foundation of excellence. Building tomorrow's leaders today."</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // ========================================
+        // ENHANCED NAVIGATION FUNCTIONALITY
+        // ========================================
+
+        // Mobile menu toggle with smooth animation
+        function toggleMobileMenu() {
+          const mobileMenu = document.getElementById('mobileNavMenu');
+          const mobileBtn = document.getElementById('mobileMenuBtn');
+          const icon = mobileBtn.querySelector('i');
+          
+          mobileMenu.classList.toggle('active');
+          
+          // Animate hamburger to X
+          if (mobileMenu.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+            mobileBtn.style.transform = 'rotate(90deg)';
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+            mobileBtn.style.transform = 'rotate(0deg)';
+          }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+          const mobileMenu = document.getElementById('mobileNavMenu');
+          const mobileBtn = document.getElementById('mobileMenuBtn');
+          
+          if (!mobileMenu.contains(event.target) && 
+              !mobileBtn.contains(event.target) && 
+              mobileMenu.classList.contains('active')) {
+            toggleMobileMenu();
+          }
+        });
+
+        // Close mobile menu on window resize
+        window.addEventListener('resize', function() {
+          if (window.innerWidth > 768) {
+            const mobileMenu = document.getElementById('mobileNavMenu');
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const icon = mobileBtn.querySelector('i');
+            
+            if (mobileMenu.classList.contains('active')) {
+              mobileMenu.classList.remove('active');
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+              mobileBtn.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+
+        // Set active navigation item based on current page
+        function setActiveNavItem() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const currentPage = urlParams.get('page') || 'ssg_history';
+          const allNavItems = document.querySelectorAll('.nav-item');
+          
+          allNavItems.forEach(item => {
+            item.classList.remove('active');
+            const itemPage = item.getAttribute('data-page');
+            if (itemPage === currentPage) {
+              item.classList.add('active');
+            }
+          });
+        }
+
+        // Initialize navigation when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+          setActiveNavItem();
+          console.log('SSG Presidents History Page initialized successfully!');
+        });
+    </script>
+</body>
+</html>
