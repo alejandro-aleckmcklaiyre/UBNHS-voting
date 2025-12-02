@@ -213,5 +213,498 @@
     {
         "timestamp": "2025-07-28 10:41:09",
         "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "post": {
+            "student_number": "202412345001",
+            "first_name": "Maria",
+            "middle_name": "Santos",
+            "last_name": "Rodriguez",
+            "suffix": "",
+            "email": "maria.rodriguez@university.edu",
+            "year_level": "7",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202412345001",
+            "first_name": "Maria",
+            "middle_name": "Santos",
+            "last_name": "Rodriguez",
+            "suffix": null,
+            "email": "maria.rodriguez@university.edu",
+            "year_level": "7",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Rodriguezb8a5da3a0bad5b56"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "7",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "step": "class_group_found",
+        "class_group_id": 1
+    },
+    {
+        "timestamp": "2025-07-27 15:52:22",
+        "error": "Student number already exists",
+        "step": "duplicate_student_number",
+        "student_number": "202412345001",
+        "existing_id": 24,
+        "post": {
+            "student_number": "202412345001",
+            "first_name": "Maria",
+            "middle_name": "Santos",
+            "last_name": "Rodriguez",
+            "suffix": "",
+            "email": "maria.rodriguez@university.edu",
+            "year_level": "7",
+            "section": "A",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:14:39",
+        "post": {
+            "student_number": "202400123261",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-28 07:14:39",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202400123261",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Arquinesb32d05366eea4be1"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:14:39",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:14:39",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-28 07:14:40",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "202400123261",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "annaydmaypineda15@gmail.com",
+            "unique_code": "Arquinesb32d05366eea4be1",
+            "class_group_id": 26,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:14:40",
+        "step": "insert_successful",
+        "student_id": 31
+    },
+    {
+        "timestamp": "2025-07-28 07:14:41",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 31
+    },
+    {
+        "timestamp": "2025-07-28 07:14:41",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-28 07:14:51",
+        "post": {
+            "student_number": "202400123261",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-28 07:14:51",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202400123261",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Arquinesbdb0a0047d763bc4"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:14:51",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:14:51",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-28 07:14:51",
+        "error": "Student number already exists",
+        "step": "duplicate_student_number",
+        "student_number": "202400123261",
+        "existing_id": 31,
+        "post": {
+            "student_number": "202400123261",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:15:03",
+        "post": {
+            "student_number": "202400123263",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-28 07:15:03",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202400123263",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Arquines27932ad4b36e662e"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:15:03",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:15:03",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-28 07:15:03",
+        "error": "Email already exists",
+        "step": "duplicate_email",
+        "email": "annaydmaypineda15@gmail.com",
+        "existing_id": 31,
+        "post": {
+            "student_number": "202400123263",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "annaydmaypineda15@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:15:41",
+        "post": {
+            "student_number": "202400123263",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": "",
+            "email": "pinedaraul0313@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-28 07:15:41",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202400123263",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "pinedaraul0313@gmail.com",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Arquines05347a45127fe16e"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:15:41",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:15:41",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-28 07:15:41",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "202400123263",
+            "first_name": "Vhon",
+            "middle_name": "Benedict",
+            "last_name": "Arquines",
+            "suffix": null,
+            "email": "pinedaraul0313@gmail.com",
+            "unique_code": "Arquines05347a45127fe16e",
+            "class_group_id": 26,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:15:41",
+        "step": "insert_successful",
+        "student_id": 32
+    },
+    {
+        "timestamp": "2025-07-28 07:15:42",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 32
+    },
+    {
+        "timestamp": "2025-07-28 07:15:42",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-28 07:20:02",
+        "post": {
+            "student_number": "202400123263",
+            "first_name": "Harvie",
+            "middle_name": "",
+            "last_name": "Pineda",
+            "suffix": "",
+            "email": "pinedaharvie32@gmail.com",
+            "year_level": "12",
+            "section": "D",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-28 07:20:02",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202400123263",
+            "first_name": "Harvie",
+            "middle_name": null,
+            "last_name": "Pineda",
+            "suffix": null,
+            "email": "pinedaharvie32@gmail.com",
+            "year_level": "12",
+            "section": "D",
+            "status_id": 1,
+            "unique_code": "Pinedac7178f21caae4794"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:20:02",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "D"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:20:02",
+        "step": "class_group_found",
+        "class_group_id": 29
+    },
+    {
+        "timestamp": "2025-07-28 07:20:03",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "202400123263",
+            "first_name": "Harvie",
+            "middle_name": null,
+            "last_name": "Pineda",
+            "suffix": null,
+            "email": "pinedaharvie32@gmail.com",
+            "unique_code": "Pinedac7178f21caae4794",
+            "class_group_id": 29,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-28 07:20:03",
+        "step": "insert_successful",
+        "student_id": 33
+    },
+    {
+        "timestamp": "2025-07-28 07:20:03",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 33
+    },
+    {
+        "timestamp": "2025-07-28 07:20:03",
+        "step": "script_completed_successfully"
+    },
+    {
+        "timestamp": "2025-07-28 10:41:08",
+        "post": {
+            "student_number": "202412340091",
+            "first_name": "Joseph",
+            "middle_name": "",
+            "last_name": "Soguilon",
+            "suffix": "",
+            "email": "joseph.soguilon@deped.gov.ph",
+            "year_level": "12",
+            "section": "A",
+            "status_id": "1"
+        },
+        "step": "initial_post_received",
+        "is_ajax": true
+    },
+    {
+        "timestamp": "2025-07-28 10:41:08",
+        "step": "data_sanitized",
+        "sanitized_data": {
+            "student_number": "202412340091",
+            "first_name": "Joseph",
+            "middle_name": null,
+            "last_name": "Soguilon",
+            "suffix": null,
+            "email": "joseph.soguilon@deped.gov.ph",
+            "year_level": "12",
+            "section": "A",
+            "status_id": 1,
+            "unique_code": "Soguilon3b5803f6ee85d336"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:41:08",
+        "step": "before_class_group_lookup",
+        "lookup_params": {
+            "year_level": "12",
+            "section": "A"
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "class_group_found",
+        "class_group_id": 26
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "before_insert",
+        "insert_data": {
+            "student_number": "202412340091",
+            "first_name": "Joseph",
+            "middle_name": null,
+            "last_name": "Soguilon",
+            "suffix": null,
+            "email": "joseph.soguilon@deped.gov.ph",
+            "unique_code": "Soguilon3b5803f6ee85d336",
+            "class_group_id": 26,
+            "status_id": 1
+        }
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "insert_successful",
+        "student_id": 34
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "success_response_sent",
+        "qr_generated": true,
+        "message": "Voter added successfully!",
+        "student_id": 34
+    },
+    {
+        "timestamp": "2025-07-28 10:41:09",
+        "step": "script_completed_successfully"
     }
 ]
