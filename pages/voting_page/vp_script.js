@@ -127,7 +127,7 @@ function submitVote() {
 
 function finalizeVote() {
     // Send selectedCandidates to the backend
-    fetch('/ubnhs-voting/php/voting/submit_vote.php', {
+    fetch('php/voting/submit_vote.php', { // changed to relative path
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ votes: Object.values(selectedCandidates) })
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadCandidatesFromDB() {
-    fetch('/ubnhs-voting/php/candidate/display_candidate.php')
+    fetch('php/candidate/display_candidate.php') // changed to relative path
         .then(res => res.json())
         .then(data => {
             if (data.success) {
@@ -231,7 +231,7 @@ function loadCandidatesFromDB() {
                         const candidateBox = document.createElement('div');
                         candidateBox.className = 'candidate-box';
                         candidateBox.innerHTML = `
-                            <img src="/ubnhs-voting/${candidate.picture}" alt="${candidate.name}">
+                            <img src="${candidate.picture}" alt="${candidate.name}">
                             <label>
                                 <input type="radio" name="${committeeName}" value="${candidate.name}"> ${candidate.name}
                             </label>

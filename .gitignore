@@ -22,6 +22,7 @@ composer.phar
 # Ignore configuration files with sensitive data
 /php/config/email_config.php
 /php/config/db_config.php
+/php/config/db_config_hostinger.php
 
 # Ignore environment files
 .env
@@ -51,6 +52,11 @@ temp/
 /assets/qr_code/*.png
 /assets/qr_code/*.jpg
 /assets/qr_code/*.jpeg
+
+# Ignore candidate images (if they shouldn't be tracked)
+/assets/ubnhs-candidates/*.png
+/assets/ubnhs-candidates/*.jpg
+/assets/ubnhs-candidates/*.jpeg
 
 # Ignore any uploaded files
 uploads/

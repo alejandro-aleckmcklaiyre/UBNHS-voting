@@ -4,109 +4,350 @@
   <meta charset="UTF-8">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UBNHSelect Candidates</title>
-  <link rel="stylesheet" href="/ubnhs-voting/assets/styles/nav.css">
-  <link rel="stylesheet" href="/ubnhs-voting/pages/candidates/CP_Interface.css">
+  <link rel="stylesheet" href="assets/styles/nav.css">
+  <link rel="stylesheet" href="pages/candidates/CP_Interface.css">
 </head>
-<body>
+<body class="has-top-nav">
 
-<div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="/ubnhs-voting/index.php?page=admin_dashboard">Home</a>
-  <a href="/ubnhs-voting/index.php?page=candidates" id="candi">Candidates</a>
-  <a href="/ubnhs-voting/index.php?page=voters_page">Voters/Members</a>
-  <a href="/ubnhs-voting/index.php?page=about">About Us</a>
-  <a href="/ubnhs-voting/php/auth/logout.php">Log Out</a>
-</div>
+<!-- Enhanced Top Navigation Bar -->
+<nav class="top-nav">
+  <!-- Floating background particles -->
+  <div class="nav-particles">
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+    <div class="nav-particle"></div>
+  </div>
+  
+  <!-- Logo and system name -->
+  <div class="nav-logo-section">
+    <div class="nav-logo-placeholder">
+      <i class="fas fa-vote-yea"></i>
+    </div>
+    <div class="nav-system-name">UBNHSelect System</div>
+  </div>
+  
+  <!-- Desktop navigation menu -->
+  <div class="nav-menu" id="desktopNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item" data-page="admin_dashboard">
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Dashboard</span>
+    </a>
+    <a href="index.php?page=candidates" class="nav-item active" data-page="candidates">
+      <i class="fas fa-users"></i>
+      <span>Candidates</span>
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
+      <i class="fas fa-user-check"></i>
+      <span>Voters Registration</span>
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item" data-page="ssg_history">
+      <i class="fas fa-history"></i>
+      <span>SSG History</span>
+    </a>
+    <a href="index.php?page=about" class="nav-item" data-page="about">
+      <i class="fas fa-info-circle"></i>
+      <span>About Us</span>
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+  
+  <!-- Mobile menu button -->
+  <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <!-- Mobile navigation menu -->
+  <div class="mobile-nav-menu" id="mobileNavMenu">
+    <a href="index.php?page=admin_dashboard" class="nav-item" data-page="admin_dashboard">
+      <i class="fas fa-tachometer-alt"></i>
+      <span>Admin Dashboard</span>
+    </a>
+    <a href="index.php?page=candidates" class="nav-item active" data-page="candidates">
+      <i class="fas fa-users"></i>
+      <span>Candidates</span>
+    </a>
+    <a href="index.php?page=voters_page" class="nav-item" data-page="voters_page">
+      <i class="fas fa-user-check"></i>
+      <span>Voters/Members Registration</span>
+    </a>
+    <a href="index.php?page=ssg_history" class="nav-item" data-page="ssg_history">
+      <i class="fas fa-history"></i>
+      <span>SSG President's History</span>
+    </a>
+    <a href="index.php?page=about" class="nav-item" data-page="about">
+      <i class="fas fa-info-circle"></i>
+      <span>About Us</span>
+    </a>
+    <a href="php/auth/logout.php" class="nav-item logout">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </a>
+  </div>
+</nav>
 
 <div id="main">
-  <button class="openbtn" onclick="openNav()">☰</button>  
-  <main class="content">
-    <div class="image-container1">
-      <img src="assets/images-UBNHS/TEXT-LOGO.png" alt="Web Logo">
-    </div>
+  <div class="image-container1">
+    <img src="assets/images-UBNHS/TEXT-LOGO.png" alt="Web Logo">
+  </div>
 
-    <center>
-      <div class="container">
-        <div class="header">
-          <img src="assets/images-UBNHS/OURLOGO-WBG.png" alt="PUP Logo">
-          <h1>Committee's Candidate Lists</h1>
-          <img src="assets/images-UBNHS/UBNHS-LOGO.png" alt="CS Logo">
-        </div>
+  <div class="main-content">
+    <div class="container">
+      <div class="header">
+        <img src="assets/images-UBNHS/OURLOGO-WBG.png" alt="PUP Logo">
+        <h1>Committee's Candidate Lists</h1>
+        <img src="assets/images-UBNHS/UBNHS-LOGO.png" alt="CS Logo">
+      </div>
 
+      <div class="table-wrapper">
         <div id="candidateTableContainer">
           <table id="candidateTable">
             <thead>
               <tr>
                 <th>Committee</th>
                 <th>Candidate Name</th>
+                <th>Partylist Name</th>
                 <th>Picture</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>VP FINANCE</td>
-                <td>John Doe</td>
-                <td><img src="/static/Images/sample_candidate.jpg" alt="Candidate" class="candidate-pic"></td>
-                <td><button class="delete-btn">Delete</button></td>
-              </tr>
+              <!-- Real data will be loaded here by cp_script.js -->
             </tbody>
           </table>
         </div>
-
-        <div class="form-container">
-          <h3>Add Candidates</h3>
-          <form id="addCandidateForm" action="#" method="POST" enctype="multipart/form-data">
-            <label for="committee">Committee:</label>
-            <select id="committee" name="committee" required>
-              <option value="">Select a Committee</option>
-              <option value="PRESIDENT">PRESIDENT</option>
-              <option value="VP EXTERNAL AFFAIRS">VP EXTERNAL AFFAIRS</option>
-              <option value="VP FINANCE">VP FINANCE</option>
-              <option value="AVP FOR RECORDS">AVP FOR RECORDS</option>
-              <option value="AVP FOR FINANCE">AVP FOR FINANCE</option>
-              <option value="AVP FOR RESEARCH AND DOCUMENTATION">AVP FOR RESEARCH AND DOCUMENTATION</option>
-              <option value="VP AUDIT">VP AUDIT</option>
-              <option value="VP COMMUNICATIONS">VP COMMUNICATIONS</option>
-              <option value="AVP COMMUNICATIONS">AVP COMMUNICATIONS</option>
-              <option value="DELEGATES REPRESENTATIVE">DELEGATES REPRESENTATIVE</option>
-              <option value="DIRECTOR FOR CREATIVES">DIRECTOR FOR CREATIVES</option>
-              <option value="CO-DIRECTOR FOR CREATIVES">CO-DIRECTOR FOR CREATIVES</option>
-              <option value="DIRECTOR FOR ACADEMICS">DIRECTOR FOR ACADEMICS</option>
-              <option value="CO-DIRECTOR FOR ACADEMICS">CO-DIRECTOR FOR ACADEMICS</option>
-              <option value="DIRECTOR FOR SPORTS">DIRECTOR FOR SPORTS</option>
-              <option value="CO-DIRECTOR FOR SPORTS">CO-DIRECTOR FOR SPORTS</option>
-            </select>
-            <label for="candidateName">Candidate Name:</label>
-            <input type="text" id="candidateName" name="candidate_name" placeholder="Enter Name" required>
-            
-            <label for="candidatePic">Candidate Picture:</label>
-            <div class="file-input-container">
-              <input type="file" id="candidatePic" name="candidate_pic" accept="image/*" required>
-              <label for="candidatePic" class="file-input-label">Choose File</label>
-            </div>
-            <button type="submit">Add Candidate</button>
-          </form>
-        </div>
       </div>
 
-      <br><br>
+      <div class="form-container">
+        <h3>Add Candidates</h3>
+        <form id="addCandidateForm" action="#" method="POST" enctype="multipart/form-data">
+          <label for="committee">Committee:</label>
+          <select id="committee" name="committee" required>
+            <option value="">Select a Committee</option>
+            <option value="PRESIDENT">PRESIDENT</option>
+            <option value="VICE PRESIDENT">VICE PRESIDENT</option>
+            <option value="SECRETARY">SECRETARY</option>
+            <option value="TREASURER">TREASURER</option>
+            <option value="AUDITOR">AUDITOR</option>
+            <option value="PIO">PIO</option>
+            <option value="PO">PO</option>
+            <option value="GR 12 REPRESENTATIVE">GR 12 REPRESENTATIVE</option>
+            <option value="GR 11 REPRESENTATIVE">GR 11 REPRESENTATIVE</option>
+            <option value="GR 10 REPRESENTATIVE">GR 10 REPRESENTATIVE</option>
+            <option value="GR 9 REPRESENTATIVE">GR 9 REPRESENTATIVE</option>
+            <option value="GR 8 REPRESENTATIVE">GR 8 REPRESENTATIVE</option>
+          </select>
+          
+          <label for="candidateName">Candidate Name:</label>
+          <input type="text" id="candidateName" name="candidate_name" placeholder="Enter Name" required>
+          
+          <label for="partylistName">Partylist Name:</label>
+          <input type="text" id="partylistName" name="partylist_name" placeholder="partylist name">
 
-      <div class="container">
-        <div class="form-container">
-          <h3>Set Voting Duration</h3>
-          <form id="votingDurationForm" method="POST" action="#">
-            <label for="votingDuration">Select Voting End Date and Time:</label>
-            <input type="datetime-local" id="votingDuration" name="voting_end_time" required>
-            <button type="submit">Set Duration</button>
-          </form>
-        </div>
+          <label for="candidatePic">Candidate Picture:</label>
+          <div class="file-input-container">
+            <input type="file" id="candidatePic" name="candidate_pic" accept="image/*" required>
+            <label for="candidatePic" class="file-input-label">Choose File</label>
+          </div>
+          <button type="submit">Add Candidate</button>
+        </form>
       </div>
-    </center>
-  </main>
+    </div>
+
+    <div class="container">
+      <div class="form-container">
+        <h3>Set Voting Duration</h3>
+        <form id="votingDurationForm" method="POST" action="#">
+          <label for="votingDuration">Select Voting End Date and Time:</label>
+          <input type="datetime-local" id="votingDuration" name="voting_end_time" required>
+          <button type="submit">Set Duration</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
-<script src="/ubnhs-voting/pages/candidates/cp_script.js"></script>
+
+<script>
+// Remove the old sidebar navigation functions and fix the script
+document.getElementById('addCandidateForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const committee = document.getElementById('committee').value;
+  const candidateName = document.getElementById('candidateName').value;
+  const partylistName = document.getElementById('partylistName').value;
+  const candidatePic = document.getElementById('candidatePic').files[0];
+
+  const formData = new FormData();
+  formData.append('committee', committee);
+  formData.append('name', candidateName);
+  formData.append('partylist_name', partylistName);
+  formData.append('picture', candidatePic);
+
+  fetch('php/candidate/add_candidate.php', {
+    method: 'POST',
+    body: formData
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        Swal.fire('Success', data.message, 'success');
+        document.getElementById('addCandidateForm').reset();
+        loadCandidates();
+      } else {
+        Swal.fire('Error', data.message, 'error');
+      }
+    })
+    .catch(() => {
+      Swal.fire('Error', 'Failed to add candidate.', 'error');
+    });
+});
+
+function loadCandidates() {
+  fetch('php/candidate/display_candidate.php')
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        const tableBody = document.querySelector('#candidateTable tbody');
+        tableBody.innerHTML = '';
+        data.candidates.forEach(candidate => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${candidate.committee}</td>
+            <td>${candidate.name}</td>
+            <td>${candidate.partylist_name || ''}</td>
+            <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
+            <td><button class="delete-btn" data-id="${candidate.id}">Delete</button></td>
+          `;
+          tableBody.appendChild(row);
+        });
+
+        // Attach delete event listeners with SweetAlert confirmation
+        document.querySelectorAll('.delete-btn').forEach(button => {
+          button.addEventListener('click', function () {
+            const candidateId = this.getAttribute('data-id');
+            Swal.fire({
+              title: 'Are you sure?',
+              text: "This will remove the candidate from the list.",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#A8201A',
+              cancelButtonColor: '#143642',
+              confirmButtonText: 'Yes, remove it!'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                fetch('php/candidate/delete_candidate.php', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: 'id=' + encodeURIComponent(candidateId)
+                })
+                  .then(res => res.json())
+                  .then(data => {
+                    if (data.success) {
+                      Swal.fire('Removed!', 'Candidate has been removed.', 'success');
+                      loadCandidates();
+                    } else {
+                      Swal.fire('Error', data.message, 'error');
+                    }
+                  })
+                  .catch(() => {
+                    Swal.fire('Error', 'Failed to delete candidate.', 'error');
+                  });
+              }
+            });
+          });
+        });
+      }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadCandidates);
+
+document.getElementById('votingDurationForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  const votingDuration = document.getElementById('votingDuration').value;
+  alert("Voting will end at: " + votingDuration);
+});
+
+// ========================================
+// ENHANCED NAVIGATION FUNCTIONALITY
+// ========================================
+
+// Mobile menu toggle with smooth animation
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const icon = mobileBtn.querySelector('i');
+  
+  mobileMenu.classList.toggle('active');
+  
+  // Animate hamburger to X
+  if (mobileMenu.classList.contains('active')) {
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-times');
+    mobileBtn.style.transform = 'rotate(90deg)';
+  } else {
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
+    mobileBtn.style.transform = 'rotate(0deg)';
+  }
+}
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  
+  if (!mobileMenu.contains(event.target) && 
+      !mobileBtn.contains(event.target) && 
+      mobileMenu.classList.contains('active')) {
+    toggleMobileMenu();
+  }
+});
+
+// Close mobile menu on window resize
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    const mobileMenu = document.getElementById('mobileNavMenu');
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const icon = mobileBtn.querySelector('i');
+    
+    if (mobileMenu.classList.contains('active')) {
+      mobileMenu.classList.remove('active');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+      mobileBtn.style.transform = 'rotate(0deg)';
+    }
+  }
+});
+
+// Set active navigation item based on current page
+function setActiveNavItem() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentPage = urlParams.get('page') || 'admin_dashboard';
+  const allNavItems = document.querySelectorAll('.nav-item');
+  
+  allNavItems.forEach(item => {
+    item.classList.remove('active');
+    const itemPage = item.getAttribute('data-page');
+    if (itemPage === currentPage) {
+      item.classList.add('active');
+    }
+  });
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  setActiveNavItem();
+  console.log('UBNHSelect Candidates Page initialized successfully!');
+});
+</script>
+
 </body>
 </html>

@@ -1,13 +1,6 @@
 [
     {
-        "timestamp": "2025-07-20 10:59:50",
-        "step": "qr_generation_start",
-        "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Rodriguez-7-A-202412345001.png",
-        "qr_library_available": true,
-        "gd_extension_loaded": true
-    },
-    {
-        "timestamp": "2025-07-20 10:59:51",
+        "timestamp": "2025-08-03 19:37:03",
         "step": "qr_generation_successful",
         "file_path": "C:\\xampp\\htdocs\\UBNHS-voting\\php\\voters\/..\/..\/assets\/qr_code\\Rodriguez-7-A-202412345001.png",
         "file_size": 2529

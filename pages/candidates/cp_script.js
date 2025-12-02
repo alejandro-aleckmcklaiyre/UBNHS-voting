@@ -17,14 +17,16 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
 
   const committee = document.getElementById('committee').value;
   const candidateName = document.getElementById('candidateName').value;
+  const partylistName = document.getElementById('partylistName').value;
   const candidatePic = document.getElementById('candidatePic').files[0];
 
   const formData = new FormData();
   formData.append('committee', committee);
   formData.append('name', candidateName);
+  formData.append('partylist_name', partylistName);
   formData.append('picture', candidatePic);
 
-  fetch('/ubnhs-voting/php/candidate/add_candidate.php', {
+  fetch('php/candidate/add_candidate.php', {
     method: 'POST',
     body: formData
   })
@@ -33,7 +35,7 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
       if (data.success) {
         Swal.fire('Success', data.message, 'success');
         document.getElementById('addCandidateForm').reset();
-        loadCandidates(); // Refresh the table
+        loadCandidates();
       } else {
         Swal.fire('Error', data.message, 'error');
       }
@@ -41,10 +43,10 @@ document.getElementById('addCandidateForm').addEventListener('submit', function 
     .catch(() => {
       Swal.fire('Error', 'Failed to add candidate.', 'error');
     });
-});
+}); // <-- Make sure this closing bracket is present
 
 function loadCandidates() {
-  fetch('/ubnhs-voting/php/candidate/display_candidate.php')
+  fetch('php/candidate/display_candidate.php')
     .then(res => res.json())
     .then(data => {
       if (data.success) {
@@ -55,7 +57,8 @@ function loadCandidates() {
           row.innerHTML = `
             <td>${candidate.committee}</td>
             <td>${candidate.name}</td>
-            <td><img src="/ubnhs-voting/${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
+            <td>${candidate.partylist_name || ''}</td>
+            <td><img src="../../${candidate.picture}" alt="Candidate" class="candidate-pic"></td>
             <td><button class="delete-btn" data-id="${candidate.id}">Delete</button></td>
           `;
           tableBody.appendChild(row);
@@ -75,7 +78,7 @@ function loadCandidates() {
               confirmButtonText: 'Yes, remove it!'
             }).then((result) => {
               if (result.isConfirmed) {
-                fetch('/ubnhs-voting/php/candidate/delete_candidate.php', {
+                fetch('php/candidate/delete_candidate.php', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                   body: 'id=' + encodeURIComponent(candidateId)
