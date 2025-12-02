@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBNHSelect - SSG Presidents History</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSG Presidents - School History</title>
     <link rel="stylesheet" href="assets/styles/nav.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages/ssg_history/styles.css">
 </head>
 <body class="has-top-nav">
+
 <!-- Enhanced Top Navigation Bar -->
 <nav class="top-nav">
   <!-- Floating background particles -->
@@ -92,6 +93,7 @@
   </div>
 </nav>
 
+<div id="main">
     <div class="container">
         <div class="header">
             <h1>SSG Presidents Hall of Fame</h1>
@@ -324,81 +326,83 @@
             </div>
         </div>
     </div>
+</div>
 
-    <script src="script.js"></script>
-    <script>
-        // ========================================
-        // ENHANCED NAVIGATION FUNCTIONALITY
-        // ========================================
+<script src="pages/ssg_history/script.js"></script>
+<script>
+// ========================================
+// ENHANCED NAVIGATION FUNCTIONALITY
+// ========================================
 
-        // Mobile menu toggle with smooth animation
-        function toggleMobileMenu() {
-          const mobileMenu = document.getElementById('mobileNavMenu');
-          const mobileBtn = document.getElementById('mobileMenuBtn');
-          const icon = mobileBtn.querySelector('i');
-          
-          mobileMenu.classList.toggle('active');
-          
-          // Animate hamburger to X
-          if (mobileMenu.classList.contains('active')) {
-            icon.classList.remove('fa-bars');
-            icon.classList.add('fa-times');
-            mobileBtn.style.transform = 'rotate(90deg)';
-          } else {
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
-            mobileBtn.style.transform = 'rotate(0deg)';
-          }
-        }
+// Mobile menu toggle with smooth animation
+function toggleMobileMenu() {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  const icon = mobileBtn.querySelector('i');
+  
+  mobileMenu.classList.toggle('active');
+  
+  // Animate hamburger to X
+  if (mobileMenu.classList.contains('active')) {
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-times');
+    mobileBtn.style.transform = 'rotate(90deg)';
+  } else {
+    icon.classList.remove('fa-times');
+    icon.classList.add('fa-bars');
+    mobileBtn.style.transform = 'rotate(0deg)';
+  }
+}
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-          const mobileMenu = document.getElementById('mobileNavMenu');
-          const mobileBtn = document.getElementById('mobileMenuBtn');
-          
-          if (!mobileMenu.contains(event.target) && 
-              !mobileBtn.contains(event.target) && 
-              mobileMenu.classList.contains('active')) {
-            toggleMobileMenu();
-          }
-        });
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(event) {
+  const mobileMenu = document.getElementById('mobileNavMenu');
+  const mobileBtn = document.getElementById('mobileMenuBtn');
+  
+  if (!mobileMenu.contains(event.target) && 
+      !mobileBtn.contains(event.target) && 
+      mobileMenu.classList.contains('active')) {
+    toggleMobileMenu();
+  }
+});
 
-        // Close mobile menu on window resize
-        window.addEventListener('resize', function() {
-          if (window.innerWidth > 768) {
-            const mobileMenu = document.getElementById('mobileNavMenu');
-            const mobileBtn = document.getElementById('mobileMenuBtn');
-            const icon = mobileBtn.querySelector('i');
-            
-            if (mobileMenu.classList.contains('active')) {
-              mobileMenu.classList.remove('active');
-              icon.classList.remove('fa-times');
-              icon.classList.add('fa-bars');
-              mobileBtn.style.transform = 'rotate(0deg)';
-            }
-          }
-        });
+// Close mobile menu on window resize
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 768) {
+    const mobileMenu = document.getElementById('mobileNavMenu');
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const icon = mobileBtn.querySelector('i');
+    
+    if (mobileMenu.classList.contains('active')) {
+      mobileMenu.classList.remove('active');
+      icon.classList.remove('fa-times');
+      icon.classList.add('fa-bars');
+      mobileBtn.style.transform = 'rotate(0deg)';
+    }
+  }
+});
 
-        // Set active navigation item based on current page
-        function setActiveNavItem() {
-          const urlParams = new URLSearchParams(window.location.search);
-          const currentPage = urlParams.get('page') || 'ssg_history';
-          const allNavItems = document.querySelectorAll('.nav-item');
-          
-          allNavItems.forEach(item => {
-            item.classList.remove('active');
-            const itemPage = item.getAttribute('data-page');
-            if (itemPage === currentPage) {
-              item.classList.add('active');
-            }
-          });
-        }
+// Set active navigation item based on current page
+function setActiveNavItem() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentPage = urlParams.get('page') || 'admin_dashboard';
+  const allNavItems = document.querySelectorAll('.nav-item');
+  
+  allNavItems.forEach(item => {
+    item.classList.remove('active');
+    const itemPage = item.getAttribute('data-page');
+    if (itemPage === currentPage) {
+      item.classList.add('active');
+    }
+  });
+}
 
-        // Initialize navigation when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-          setActiveNavItem();
-          console.log('SSG Presidents History Page initialized successfully!');
-        });
-    </script>
+// Initialize navigation when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  setActiveNavItem();
+  console.log('UBNHSelect SSG History Page initialized successfully!');
+});
+</script>
+
 </body>
 </html>
